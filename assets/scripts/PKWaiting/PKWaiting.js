@@ -24,7 +24,6 @@ cc.Class({
     onLoad() {
         //获取Home页点击Item数据
         this.stageId = DataUtil.getPkStageId();
-        console.log("888888", this.stageId);
 
         //获取浏览器url参数
         let page = this.getQueryString('page');
