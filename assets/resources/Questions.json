@@ -1,0 +1,118 @@
+{
+    "qs": [
+        {
+            "question": "驾驶机动车行经漫水路或者漫水桥时，应当停车察明水情，快速通过。",
+            "img": "",
+            "options": [
+                {"letter": "A", "item": "正确"},
+                {"letter": "B", "item": "错误"}
+            ],
+            "answers": ["B"],
+            "type": 2
+        },
+        {
+            "question": "如图所示，驾驶机动车行经该路段时，应减速慢行，避免因眩目导致的交通事故",
+            "img": "https://picobd-test.yunxuetang.cn/test/orgs/tyxt/lecai/userphotos/201705/aafffa6fd194469380cc7ad1919c05dc.jpg",
+            "options": [
+                {"letter": "A", "item": "正确"},
+                {"letter": "B", "item": "错误"}
+            ],
+            "answers": ["A"],
+            "type": 2
+        },
+        {
+            "question": "年龄在60周岁以上的驾驶人多长时间提交一次身体条件证明？",
+            "img": "",
+            "options": [
+                {"letter": "A", "item": "每3年"},
+                {"letter": "B", "item": "每2年"},
+                {"letter": "C", "item": "每1年"},
+                {"letter": "D", "item": "每6个月"}
+            ],
+            "answers": ["C"],
+            "type": 0
+        },
+        {
+            "question": "行车中驾驶人接打手机或发短信有什么危害？",
+            "img": "",
+            "options": [
+                {"letter": "A", "item": "影响乘车人休息"},
+                {"letter": "B", "item": "分散驾驶注意力"},
+                {"letter": "C", "item": "影响正常驾驶操作"},
+                {"letter": "D", "item": "遇紧急情况反应不及"}
+            ],
+            "answers": ["B","C","D"],
+            "type": 1
+        },
+        {
+            "question": "这个标志是何含义？",
+            "img": "https://picobd-test.yunxuetang.cn/test/orgs/tyxt/lecai/userphotos/201705/aafffa6fd194469380cc7ad1919c05dc.jpg",
+            "options": [
+                {"letter": "A", "item": "禁止借道"},
+                {"letter": "B", "item": "禁止变道"},
+                {"letter": "C", "item": "禁止超车"},
+                {"letter": "D", "item": "禁止掉头"}
+            ],
+            "answers": ["C"],
+            "type": 0
+        },
+        {
+            "question": "行车中遇列队横过道路的学生时，应怎样做？",
+            "img": "",
+            "options": [
+                {"letter": "A", "item": "提前加速抢行"},
+                {"letter": "B", "item": "停车让行"},
+                {"letter": "C", "item": "降低车速、缓慢通过"},
+                {"letter": "D", "item": "连续鸣喇叭催促"}
+            ],
+            "answers": ["B"],
+            "type": 0
+        },
+        {
+            "question": "驾驶机动车在道路上向左变更车道时如何使用灯光？",
+            "img": "",
+            "options": [
+                {"letter": "A", "item": "不用开启转向灯"},
+                {"letter": "B", "item": "提前开启右转向灯"},
+                {"letter": "C", "item": "提前开启左转向灯"},
+                {"letter": "D", "item": "提前开启近光灯"}
+            ],
+            "answers": ["C"],
+            "type": 0
+        },
+        {
+            "question": "车辆在通过山区道路弯道时，要做到“减速、鸣喇叭、靠右行”。",
+            "img": "",
+            "options": [
+                {"letter": "A", "item": "正确"},
+                {"letter": "B", "item": "错误"}
+            ],
+            "answers": ["A"],
+            "type": 2
+        },
+        {
+            "question": "驾驶机动车在道路上向左变更车道时如何使用灯光？",
+            "img": "",
+            "options": [
+                {"letter": "A", "item": "不用开启转向灯"},
+                {"letter": "B", "item": "提前开启右转向灯"},
+                {"letter": "C", "item": "提前开启左转向灯"},
+                {"letter": "D", "item": "提前开启近光灯"}
+            ],
+            "answers": ["C"],
+            "type": 0
+        },
+        {
+            "question": "这个小型客车驾车人有哪些违法行为？",
+            "img": "https://picobd-test.yunxuetang.cn/test/orgs/tyxt/lecai/userphotos/201705/aafffa6fd194469380cc7ad1919c05dc.jpg",
+            "options": [
+                {"letter": "A", "item": "接打手持电话"},
+                {"letter": "B", "item": "无证驾驶"},
+                {"letter": "C", "item": "酒后驾驶"},
+                {"letter": "D", "item": "未系安全带"}
+            ],
+            "answers": ["A","B","C","D"],
+            "type": 1
+        }
+    ]
+}
