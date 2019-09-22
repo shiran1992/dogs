@@ -22,7 +22,7 @@ cc.Class({
         list: cc.Node,
 
         itemPrefab: cc.Prefab, //题目选项
-
+        rule: cc.Prefab,
         chakan: cc.Node//查看奖励
     },
 
@@ -89,5 +89,13 @@ cc.Class({
             let itemScript = item.getComponent('PkRankItem');
             itemScript.initView(this._rank[i]);
         }
-    }
+    },
+
+    //查看奖励规则
+    onClickRule() {
+        let ruleNode = cc.instantiate(this.rule);
+        this.node.addChild(ruleNode);
+        let script = ruleNode.getComponent("PKRule");
+        script.setData(this._pkRoom);
+    },
 });

@@ -1156,7 +1156,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Backbg",
+    "_name": "btnBack",
     "_objFlags": 0,
     "_parent": {
       "__id__": 32
@@ -1748,7 +1748,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btnBack",
+    "_name": "btnClose",
     "_objFlags": 0,
     "_parent": {
       "__id__": 15
@@ -3145,7 +3145,7 @@
       "__uuid__": "f59a9ee5-0e60-44b3-9de2-750f516174c6"
     },
     "backBtn": {
-      "__id__": 53
+      "__id__": 33
     },
     "closeBtn": {
       "__id__": 53

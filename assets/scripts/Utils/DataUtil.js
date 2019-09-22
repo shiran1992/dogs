@@ -163,12 +163,12 @@ function getModel() {
 
 //设置本题的答题结果
 function setQuestionResult(r) {
-    this.curQuestionResult = r;
+    curQuestionResult = r;
 }
 
 //获取本题的答题结果
 function getQuestionResult() {
-    return this.curQuestionResult;
+    return curQuestionResult;
 }
 
 module.exports = {

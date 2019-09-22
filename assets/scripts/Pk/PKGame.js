@@ -81,7 +81,13 @@ cc.Class({
             } else if (ext.msgType == 3) {
                 cc.log("全军覆没：", message);
                 this.removeLastQuestion();
-
+                //判断是否是观众模式
+                let model = DataUtil.getModel();
+                if (model == 1) {
+                    this.model.active = false;
+                    //PK结束，还原成正常模式
+                    this.revertData();
+                }
                 this.backBtn.active = true;
                 this.banner.active = true;
                 this.qNum.node.active = false;
@@ -272,6 +278,8 @@ cc.Class({
 
     //数据统计的结果
     renderPKResult() {
+        //判断是否是最后一题
+        let isLast = DataUtil.getLastQuestion();
         let model = DataUtil.getModel();
         if (model == 0) {
             //关闭正确/错误弹窗之后，需要显示淘汰或者全军覆没，或者正常答下一题
@@ -282,8 +290,6 @@ cc.Class({
                 this.timer = setTimeout(() => {
                     //******************************************************************没有经过首页拿不到个人信息，所以没办法匹配个人ID
                     //判断淘汰
-                    //判断是否是最后一题
-                    let isLast = DataUtil.getLastQuestion();
                     let userData = DataUtil.getUserData();
                     for (let i = 0; i < outList.length; i++) {
                         //淘汰名单中有当前用户
@@ -296,22 +302,35 @@ cc.Class({
                             });
                             return;
                         }
-                    }
 
-                    //闯关成功
-                    if (isLast) {
-                        this.removeLastQuestion();
-                        this.banner.active = true;
-                        this.qNum.node.active = false;
-                        this.rightView.active = false;
-                        this.closeBtn.active = true;
-                        this.successNode = cc.instantiate(this.successPrefab);
-                        this.node.addChild(this.successNode);
+                        if (isLast) {
+                            //比赛结束，还原数据
+                            this.revertData();
+                            this.removeLastQuestion();
+                            this.model.active = false;
+                            this.backBtn.active = false;
+                            this.banner.active = true;
+                            this.qNum.node.active = false;
+                            this.rightView.active = false;
+                            this.closeBtn.active = true;
+                            this.successNode = cc.instantiate(this.successPrefab);
+                            this.node.addChild(this.successNode);
+                        }
                     }
                 }, 1500);
             }
         } else if (model == 1) {
-            console.log("统计结果，但是我是观众模式");
+            if (isLast) {
+                //比赛结束，还原数据
+                this.revertData();
+                this.removeLastQuestion();
+                this.banner.active = true;
+                this.qNum.node.active = false;
+                this.rightView.active = false;
+                this.closeBtn.active = true;
+                this.successNode = cc.instantiate(this.successPrefab);
+                this.node.addChild(this.successNode);
+            }
         }
     },
 
@@ -377,16 +396,11 @@ cc.Class({
         this.questionScript && this.questionScript.showBarResult(data);
     },
 
-    //将视图滑到最顶部
-    scrollToTop() {
-        this.scrollView.scrollToTop(0.001);
-    },
-
-    //将视图滑到最底部
-    scrollToBottom() {
-        if (this.content.height > this.centerView.height) {
-            this.scrollView.scrollToBottom(0.001);
-        }
+    //本局PK答题已经结束，需要将内存中数据进行还原
+    revertData() {
+        DataUtil.setModel(0);
+        DataUtil.setLastQuestion(false);
+        DataUtil.clearErrQuestions();
     },
 
     onDestroy() {
