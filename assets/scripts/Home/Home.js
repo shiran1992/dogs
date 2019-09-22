@@ -41,7 +41,6 @@ cc.Class({
     },
 
     onLoad() {
-        this.scroll5.scrollToTop(0.1);
         //1.加载域名
         cc.loader.loadRes("DomainConfig.json", (err, data) => {
             if (data && data.domain) {
@@ -326,7 +325,6 @@ cc.Class({
             itemRoot = this.scroll5.content;
         }
         if (data && data.length > 0) {
-            data.reverse();
             let itemH = 0
             for (let i = 0; i < data.length; i++) {
                 let itemData = data[i];

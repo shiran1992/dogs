@@ -16,10 +16,6 @@ cc.Class({
         this.timer = setTimeout(() => {
             this._callback && this._callback();
             this.node.destroy();
-            // //增加一个即将进入观众模式的prefab
-            // let gameNode = cc.find('Canvas');
-            // let gameScript = gameNode.getComponent("PKGame");
-            // gameScript && gameScript.inAudienceModel();
         }, 2000);
     },
 

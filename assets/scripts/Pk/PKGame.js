@@ -71,7 +71,7 @@ cc.Class({
                 this.initView();
             } else if (ext.msgType == 1) {
                 cc.log("统计试题：", message);
-                this.result = JSON.parse(message.data);
+                this.result = message;
                 this.showCountPerAction();
                 this.renderPKResult();
             } else if (ext.msgType == 2) {
@@ -154,6 +154,7 @@ cc.Class({
             if (index == 1) {
                 this.renderQuestion();
             } else {
+                this.curLabel.string = this.question.orderIndex || 1;
                 this.renderDisplayQuestion(index, () => {
                     this.renderQuestion();
                 }, 1000);
@@ -171,7 +172,6 @@ cc.Class({
 
         let index = this.question.orderIndex || 1;//当前第几题
         let allNum = this._pkRoom.pondQuestionCount || 10;//总题目数量
-        this.curLabel.string = index;
         this.qNum.node.active = true;
         this.qNum.string = "第 " + index + " 题"
         this.allLabel.string = "/" + allNum;
@@ -200,7 +200,7 @@ cc.Class({
             this.greyBar = cc.instantiate(this.greyBarPrefab);
             this.barContain.addChild(this.greyBar);
             this.greyBar.setLocalZOrder(2);
-            let barScript = this.bar.getComponent("GreyProgressBar");
+            let barScript = this.greyBar.getComponent("GreyProgressBar");
             barScript.setEndCallback(() => {
                 //隐藏进度条，显示统计数据字样
                 this.greyBar.active = false;
@@ -272,39 +272,46 @@ cc.Class({
 
     //数据统计的结果
     renderPKResult() {
-        //关闭正确/错误弹窗之后，需要显示淘汰或者全军覆没，或者正常答下一题
-        if (this.result) {
-            let ext = this.result.ext || {};
-            let outList = ext.weedOutList || [];
-            //******************************************************************没有经过首页拿不到个人信息，所以没办法匹配个人ID
+        let model = DataUtil.getModel();
+        if (model == 0) {
+            //关闭正确/错误弹窗之后，需要显示淘汰或者全军覆没，或者正常答下一题
+            if (this.result) {
+                let ext = this.result.ext || {};
+                let outList = ext.weedOutList || [];
+                //做延迟的目的是为了等了，进度条显示完之后，显示淘汰或者城管称概念股
+                this.timer = setTimeout(() => {
+                    //******************************************************************没有经过首页拿不到个人信息，所以没办法匹配个人ID
+                    //判断淘汰
+                    //判断是否是最后一题
+                    let isLast = DataUtil.getLastQuestion();
+                    let userData = DataUtil.getUserData();
+                    for (let i = 0; i < outList.length; i++) {
+                        //淘汰名单中有当前用户
+                        if (outList[i] == userData.userId) {
+                            let outPop = cc.instantiate(this.outPrefab);
+                            this.node.addChild(outPop);
+                            let outScript = outPop.getComponent("PkOutPop");
+                            outScript.setCallback(() => {
+                                !isLast && this.inAudienceModel();
+                            });
+                            return;
+                        }
+                    }
 
-            //判断淘汰
-            let userData = DataUtil.getUserData();
-            console.log("个人资料：", userData);
-            for (let i = 0; i < outList.length; i++) {
-                //淘汰名单中有当前用户
-                if (outList[i] == userData.userId) {
-                    let outPop = cc.instantiate(this.outPrefab);
-                    this.node.addChild(outPop);
-                    let outScript = outPop.getComponent("PkOutPop");
-                    outScript.setCallback(()=>{
-                        this.inAudienceModel();
-                    });
-                    break;
-                }
+                    //闯关成功
+                    if (isLast) {
+                        this.removeLastQuestion();
+                        this.banner.active = true;
+                        this.qNum.node.active = false;
+                        this.rightView.active = false;
+                        this.closeBtn.active = true;
+                        this.successNode = cc.instantiate(this.successPrefab);
+                        this.node.addChild(this.successNode);
+                    }
+                }, 1500);
             }
-
-            //判断是否闯关成功
-            let isLast = DataUtil.getLastQuestion();
-            if (isLast) {
-                this.removeLastQuestion();
-                this.banner.active = true;
-                this.qNum.node.active = false;
-                this.rightView.active = false;
-                this.closeBtn.active = true;
-                this.successNode = cc.instantiate(this.successPrefab);
-                this.node.addChild(this.successNode);
-            }
+        } else if (model == 1) {
+            console.log("统计结果，但是我是观众模式");
         }
     },
 
@@ -366,7 +373,8 @@ cc.Class({
 
     //显示回答每个答案的进度条数量统计
     showCountPerAction() {
-        this.questionScript && this.questionScript.showBarResult(this.result);
+        let data = JSON.parse(this.result.data);
+        this.questionScript && this.questionScript.showBarResult(data);
     },
 
     //将视图滑到最顶部
