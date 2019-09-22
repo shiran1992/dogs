@@ -2005,9 +2005,7 @@
     },
     "pkRanking": {
       "__uuid__": "9457f7e9-3b01-4a1c-abcf-5d2c146aeb4e"
-    },
-    "_pkStage": null,
-    "_pkRoom": null
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
