@@ -251,7 +251,7 @@ cc.Class({
             item.active = true;
             this.itemList[i] = item;
 
-            scp.setIdx(i);
+            scp.setIdx(i, i == 0);
 
             itemH += (item.height + 15);
             //如果除第一个其它不显示头
@@ -284,7 +284,7 @@ cc.Class({
         item.active = true;
     },
 
-    oadBlankItem2() {
+    loadBlankItem2() {
         let pItem = this.node.getChildByName("blankItem2");
         let itemRoot = this.scroll.content.getChildByName("itemNode");
         let item = cc.instantiate(pItem);

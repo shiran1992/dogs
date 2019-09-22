@@ -35,10 +35,12 @@ cc.Class({
        vine2: cc.SpriteFrame,
        title1: cc.Label,
        stage1: cc.Label,
+       cord: cc.Node,
        //config:[cc.Sprite]
     },
 
     onLoad () {
+        this.cord.setLocalZOrder(100);
         this.config = [
             {board:this.item1,leaf:this.leaf1,vine:this.vine1},
             {board:this.item2,leaf:this.leaf2,vine:this.vine2},
@@ -83,7 +85,6 @@ cc.Class({
         this.node.on(cc.Node.EventType.TOUCH_CANCEL,(event)=>{
             //this.light.node.runAction(cc.fadeOut(0.1));
         },this);
-        this.node
     },
     
     setData(data){
@@ -95,7 +96,8 @@ cc.Class({
         this.stage1.string = data.gameStageNum + "个关卡";
     },
 
-    setIdx(idx){
+    setIdx(idx, isLast){
+        this.cord.active = !isLast;
         if(idx > 0){
             this.head.node.active = false;
         }else{
