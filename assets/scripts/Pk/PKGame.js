@@ -142,7 +142,7 @@ cc.Class({
         if (this.question) {
             //清除之前的题目
             this.removeLastQuestion();
-            this.qNum.active = false;
+            this.qNum.node.active = false;
             //头部数据
             let index = this.question.orderIndex || 1;//当前第几题
             let allNum = this._pkRoom.pondQuestionCount || 10;//总题目数量
@@ -172,7 +172,7 @@ cc.Class({
         let index = this.question.orderIndex || 1;//当前第几题
         let allNum = this._pkRoom.pondQuestionCount || 10;//总题目数量
         this.curLabel.string = index;
-        this.qNum.active = true;
+        this.qNum.node.active = true;
         this.qNum.string = "第 " + index + " 题"
         this.allLabel.string = "/" + allNum;
 
@@ -276,21 +276,20 @@ cc.Class({
         if (this.result) {
             let ext = this.result.ext || {};
             let outList = ext.weedOutList || [];
-            //没有经过首页拿不到个人信息，所以没办法匹配个人ID
-
-
-
-
-
-
+            //******************************************************************没有经过首页拿不到个人信息，所以没办法匹配个人ID
 
             //判断淘汰
             let userData = DataUtil.getUserData();
+            console.log("个人资料：", userData);
             for (let i = 0; i < outList.length; i++) {
                 //淘汰名单中有当前用户
                 if (outList[i] == userData.userId) {
                     let outPop = cc.instantiate(this.outPrefab);
                     this.node.addChild(outPop);
+                    let outScript = outPop.getComponent("PkOutPop");
+                    outScript.setCallback(()=>{
+                        this.inAudienceModel();
+                    });
                     break;
                 }
             }
