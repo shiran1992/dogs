@@ -624,7 +624,9 @@
     "title": {
       "__id__": 3
     },
-    "_pkStage": null
+    "desc": {
+      "__id__": 11
+    }
   },
   {
     "__type__": "cc.PrefabInfo",

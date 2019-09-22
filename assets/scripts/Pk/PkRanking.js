@@ -10,7 +10,7 @@ cc.Class({
     properties: {
         title: cc.Label,
         head: cc.Sprite,
-        
+
         nick: cc.Label,
         score: cc.Label,
 
@@ -79,7 +79,7 @@ cc.Class({
         if (this._self) {
             Helper.loadHttpImg(this.head0, this._self.avatar);
             this.num.string = this._self.orderIndex ? this._self.orderIndex : "淘汰";
-            this.name0.string = this._self.cName;
+            this.name0.string = this._self.cName.length > 6 ? (this._self.cName.substr(0, 6) + "...") : this._self.cName;
             this.right0.string = this._self.totalRightNum + "题";
             this.score0.string = this._self.getScore;
         }
