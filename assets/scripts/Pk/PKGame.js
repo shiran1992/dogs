@@ -288,12 +288,11 @@ cc.Class({
                 let outList = ext.weedOutList || [];
                 //做延迟的目的是为了等了，进度条显示完之后，显示淘汰或者城管称概念股
                 this.timer = setTimeout(() => {
-                    //******************************************************************没有经过首页拿不到个人信息，所以没办法匹配个人ID
                     //判断淘汰
-                    let userData = DataUtil.getUserData();
+                    let userId = this._pkRoom.userId;
                     for (let i = 0; i < outList.length; i++) {
                         //淘汰名单中有当前用户
-                        if (outList[i] == userData.userId) {
+                        if (outList[i] == userId) {
                             let outPop = cc.instantiate(this.outPrefab);
                             this.node.addChild(outPop);
                             let outScript = outPop.getComponent("PkOutPop");
