@@ -42,10 +42,6 @@ cc.Class({
         this.rank = null;//排行榜数据
         this._pkRoom = null;
         this.questionScript = null;//题目的脚本
-
-        WebIMManager.setCallback((message) => {
-            this.onReceive(message);
-        });
     },
 
     onLoad() {
@@ -57,6 +53,10 @@ cc.Class({
         DataUtil.setLastQuestion(false);
 
         this.renderDisplayQuestion(1);
+
+        WebIMManager.setCallback((message) => {
+            this.onReceive(message);
+        });
     },
 
     //消息接受
@@ -354,6 +354,7 @@ cc.Class({
     barTimeoutCallback() {
         cc.log("时间用完了哦");
         let curQuestionResult = DataUtil.getQuestionResult();
+        this.questionScript && this.questionScript.setSelectable(false);
         //说明之前答过题
         if (!curQuestionResult) {
             curQuestionResult = { type: 0, text: '哎呦~答错了' };

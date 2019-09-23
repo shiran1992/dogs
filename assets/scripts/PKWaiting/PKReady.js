@@ -36,7 +36,7 @@ cc.Class({
     },
 
     onLoad() {
-        this.sendIMMessage();
+        //this.sendIMMessage();
 
         cc.game.on(cc.game.EVENT_SHOW, (event) => {
             cc.log('emit cc.game.EVENT_SHOW!');
@@ -114,6 +114,7 @@ cc.Class({
         let pkRoom = DataUtil.getPkRoom();
         var id = WebIM.conn.getUniqueId(); // 生成本地消息id
         var msg = new WebIM.message('txt', id); // 创建文本消息
+
         var option = {
             msg: 'refresh_data',          // 消息内容
             to: pkRoom.chatRoomId,               // 接收消息对象(聊天室id)

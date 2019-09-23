@@ -117,7 +117,7 @@ cc.Class({
         // this.vine.spriteFrame = new cc.SpriteFrame(tex);
 
         this.board.spriteFrame = cfg.board;
-        this.leaf.spriteFrame = cfg.leaf;
+        //this.leaf.spriteFrame = cfg.leaf;
         this.vine.spriteFrame = cfg.vine;
     },
 

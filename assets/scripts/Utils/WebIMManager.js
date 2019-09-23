@@ -49,7 +49,7 @@ function initWebIM(callback) {
         },
         //收到文本消息
         onTextMessage: function (message) {
-            cc.log("###############################onTextMessage:", message);
+            cc.log("###############################onTextMessage:", message, cb);
             cb && cb(message);
         },
         onEmojiMessage: function (message) { },   //收到表情消息

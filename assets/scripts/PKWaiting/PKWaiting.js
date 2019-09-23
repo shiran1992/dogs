@@ -78,15 +78,14 @@ cc.Class({
                 let systemTime = data.systemTime; //服务器当前系统时间
                 let startTime = data.startTime; //服务器指定的比赛开始时间
                 if (gameStatus == 0) {//PK还没有开始
+                    //初始化
+                    WebIMManager.initWebIM((message) => { this.onReceive(message); });
+                    this.startWebIM();
                     let offTime = startTime - systemTime;
                     if (offTime > 0) {
                         if (offTime > 1000 * 60 * 60 * 24 * 3) {//大于三天
                             this.renderAfterView();
                         } else {//小于三天
-                            //初始化
-                            WebIMManager.initWebIM((message) => { this.onReceive(message); });
-                            this.startWebIM();
-
                             this.renderSoonView();
                         }
                     } else {//比赛时间已经到，到等待界面
@@ -180,7 +179,7 @@ cc.Class({
                 let userStatusType = data.userStatusType;//用户参与状态（0正常参加;1之前未参加过.目前正在进行中.直接进观战;2之前参加过,目前正在进行中,且超过了错误次数）
                 if (userStatusType == 0) {//正常参加Pk,------------------------------------------------------------------------------不知道当前正在答得是第几题
                     //初始化
-                    WebIMManager.initWebIM((message) => { this.onReceive(message); });
+                    WebIMManager.initWebIM();
                     this.startWebIM(() => {
                         cc.director.loadScene("PKGame");
                     });
@@ -250,8 +249,8 @@ cc.Class({
         }
     },
 
-     //显示即将进入观众模式
-     inAudienceModel() {
+    //显示即将进入观众模式
+    inAudienceModel() {
         this.audienceNode = cc.instantiate(this.inAudiencePrefab);
         this.node.addChild(this.audienceNode);
     },
