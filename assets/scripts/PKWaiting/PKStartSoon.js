@@ -46,30 +46,6 @@ cc.Class({
 
     //点击马上开始
     onClickStart() {
-        this.sendIMMessage();
         this._callback && this._callback();
     },
-
-    // 聊天室发送文本消息
-    sendIMMessage() {
-        let pkRoom = DataUtil.getPkRoom();
-        var id = WebIM.conn.getUniqueId(); // 生成本地消息id
-        console.log("1111111", id);
-        var msg = new WebIM.message('txt', id); // 创建文本消息
-        var option = {
-            msg: 'refresh_data',          // 消息内容
-            to: pkRoom.chatRoomId,               // 接收消息对象(聊天室id)
-            roomType: true,
-            chatType: 'chatRoom',
-            success: function () {
-                console.log('send room text success');
-            },
-            fail: function () {
-                console.log('failed');
-            }
-        };
-        msg.set(option);
-        msg.setGroup('groupchat');
-        WebIM.conn.send(msg.body);
-    }
 });

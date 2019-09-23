@@ -36,6 +36,8 @@ cc.Class({
     },
 
     onLoad() {
+        this.sendIMMessage();
+        
         cc.game.on(cc.game.EVENT_SHOW, (event) => {
             cc.log('emit cc.game.EVENT_SHOW!');
             this.loadData();
@@ -107,45 +109,72 @@ cc.Class({
         });
     },
 
+    // 聊天室发送文本消息
+    sendIMMessage() {
+        let pkRoom = DataUtil.getPkRoom();
+        var id = WebIM.conn.getUniqueId(); // 生成本地消息id
+        console.log("1111111", id);
+        var msg = new WebIM.message('txt', id); // 创建文本消息
+        var option = {
+            msg: 'refresh_data',          // 消息内容
+            to: pkRoom.chatRoomId,               // 接收消息对象(聊天室id)
+            roomType: true,
+            chatType: 'chatRoom',
+            success: function () {
+                console.log('send room text success');
+            },
+            fail: function () {
+                console.log('failed');
+            }
+        };
+        msg.set(option);
+        msg.setGroup('groupchat');
+        WebIM.conn.send(msg.body);
+    }
+
     //显示时间倒计时
     showTimeDown(offTime) {
-        let time = Math.floor(offTime / 1000);
-        this.timer1 = setInterval(() => {
-            if (time >= 0) {
-                let s = time % 60;
-                let m = ((time - s) / 60) % 60;
-                let h = Math.floor(((time - s) / 60) / 60);
-                //小时
-                if (h < 10) {
-                    this.hour0.string = "0";
-                    this.hour1.string = h + "";
-                } else {
-                    this.hour0.string = Math.floor(h / 10) + "";
-                    this.hour1.string = h % 10 + "";
-                }
-                //分钟
-                if (m < 10) {
-                    this.minute0.string = "0";
-                    this.minute1.string = m + "";
-                } else {
-                    this.minute0.string = Math.floor(m / 10) + "";
-                    this.minute1.string = m % 10 + "";
-                }
-                //秒
-                if (s < 10) {
-                    this.second0.string = "0";
-                    this.second1.string = s + "";
-                } else {
-                    this.second0.string = Math.floor(s / 10) + "";
-                    this.second1.string = s % 10 + "";
-                }
+        try {
+            let time = Math.floor(offTime / 1000);
+            this.timer1 = setInterval(() => {
+                if (time >= 0) {
+                    let s = time % 60;
+                    let m = ((time - s) / 60) % 60;
+                    let h = Math.floor(((time - s) / 60) / 60);
+                    //小时
+                    if (h < 10) {
+                        this.hour0.string = "0";
+                        this.hour1.string = h + "";
+                    } else {
+                        this.hour0.string = Math.floor(h / 10) + "";
+                        this.hour1.string = h % 10 + "";
+                    }
+                    //分钟
+                    if (m < 10) {
+                        this.minute0.string = "0";
+                        this.minute1.string = m + "";
+                    } else {
+                        this.minute0.string = Math.floor(m / 10) + "";
+                        this.minute1.string = m % 10 + "";
+                    }
+                    //秒
+                    if (s < 10) {
+                        this.second0.string = "0";
+                        this.second1.string = s + "";
+                    } else {
+                        this.second0.string = Math.floor(s / 10) + "";
+                        this.second1.string = s % 10 + "";
+                    }
 
-                time--;
-            } else {
-                this.timer1 && clearInterval(this.timer1);
-                this.timer1 = null;
-            }
-        }, 1 * 1000);
+                    time--;
+                } else {
+                    this.timer1 && clearInterval(this.timer1);
+                    this.timer1 = null;
+                }
+            }, 1 * 1000);
+        } catch (e) {
+
+        }
     },
 
     onDestroy() {
