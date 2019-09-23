@@ -37,7 +37,7 @@ cc.Class({
 
     onLoad() {
         this.sendIMMessage();
-        
+
         cc.game.on(cc.game.EVENT_SHOW, (event) => {
             cc.log('emit cc.game.EVENT_SHOW!');
             this.loadData();
@@ -130,7 +130,7 @@ cc.Class({
         msg.set(option);
         msg.setGroup('groupchat');
         WebIM.conn.send(msg.body);
-    }
+    },
 
     //显示时间倒计时
     showTimeDown(offTime) {
