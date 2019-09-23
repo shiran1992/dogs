@@ -378,15 +378,7 @@ cc.Class({
         //隐藏进度条，显示统计数据字样
         this.bar.active = false;
         this.managerData.active = true;
-    },
-
-    //停止进度条动画(已废弃)
-    stopProgressBar() {
-        this.bar.getComponent("PkProgressBar").stopAllActions();
-
-        //隐藏进度条，显示统计数据字样
-        this.bar.active = false;
-        this.managerData.active = true;
+        this.qNum.node.active = false;
     },
 
     //显示回答每个答案的进度条数量统计

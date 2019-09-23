@@ -120,12 +120,8 @@ cc.Class({
 
     //选择答案之后，显示正确还是错误
     doSubmit() {
-        // cc.log("提交答案喽~");
-
-        // let gameScript = cc.find('Canvas').getComponent('PKGame');
-        // //关闭进度条
-        // gameScript.stopProgressBar();
-
+        cc.log("提交答案喽~");
+        
         let arr = [];
         this.selects.forEach((element, i) => {
             element && element.letter && arr.push(element.letter);
