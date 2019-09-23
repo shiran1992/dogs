@@ -14,10 +14,10 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        questionLabel: cc.RichText, //题目内容
+        questionTitle: cc.Prefab, //标题
         pkOptionPrefab: cc.Prefab, //题目选项
         pkIBPrefab: cc.Prefab, //查看图片组件
-        submitPrefab: cc.Prefab,//实际占位置用的
+        submitPrefab: cc.Prefab,//实际占位置用的 
     },
 
     ctor() {
@@ -47,18 +47,11 @@ cc.Class({
         this.answers = [];
         //第几题
         this.index = obj.index || 0;
-        //题目标题
-        // var temp = document.createElement("div");
-        // temp.innerHTML = title;
-        // let output = temp.innerText || temp.textContent;
-        // let richText = "<img src='" + QuestionType[this.type] + "'/> <size=36><b>" + output + "<b/></size>";
-        // this.questionLabel.string = richText;
-        //可能暂时都是单选题
-        this.questionLabel.string = title;
-        if (!title) {
-            //this.questionLabel.height = 0;
-            this.node.removeChild(this.questionLabel);
-            this.node.y -= 180;
+        if (title) {
+            let titleNode = cc.instantiate(this.questionTitle);
+            this.node.addChild(titleNode);
+            let script = titleNode.getComponent("QuestionTitle");
+            script.setData(this.question);
         }
         //判断是否需要显示图片
         if (obj.imageUrl) {

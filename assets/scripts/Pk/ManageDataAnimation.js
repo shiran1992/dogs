@@ -17,7 +17,7 @@ cc.Class({
             for (let i = 0; i < num; i++) {
                 this["dot" + i].active = true;
             }
-        }, 1000);
+        }, 400);
     },
 
     onDestroy() {

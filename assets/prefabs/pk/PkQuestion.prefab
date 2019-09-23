@@ -49,7 +49,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 750,
-      "height": 180
+      "height": -40
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -69,14 +69,14 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "question",
+    "_name": "questionTitle",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 3
@@ -148,7 +148,7 @@
     "asset": {
       "__uuid__": "a2caa643-3c3c-4df7-b960-11a735a72a29"
     },
-    "fileId": "48XTnRYI9LUr4hz9+GKZgI",
+    "fileId": "ecAv0MWR1M6JqNSyiAZ09D",
     "sync": false
   },
   {
@@ -162,7 +162,7 @@
     "_layoutSize": {
       "__type__": "cc.Size",
       "width": 750,
-      "height": 180
+      "height": -40
     },
     "_resize": 1,
     "_N$layoutType": 2,
@@ -190,20 +190,14 @@
       "__id__": 1
     },
     "_enabled": true,
-    "questionLabel": {
-      "__id__": 3
+    "questionTitle": {
+      "__uuid__": "b900bd46-03d2-4e55-b207-a77907004c09"
     },
     "pkOptionPrefab": {
       "__uuid__": "8dd434e0-edbb-4b84-85e7-17e225edc665"
     },
     "pkIBPrefab": {
       "__uuid__": "23744e19-0d61-44fe-8071-091fc7341b39"
-    },
-    "resultPopPrefab": {
-      "__uuid__": "1aa5e3fb-8a84-40f9-aba4-28e2a92753a9"
-    },
-    "outPrefab": {
-      "__uuid__": "a564ac08-eaa1-4283-873b-29247717d0db"
     },
     "submitPrefab": {
       "__uuid__": "22d37db5-8940-4ab3-b5de-f75808c38e66"

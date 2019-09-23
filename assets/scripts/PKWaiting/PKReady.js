@@ -113,7 +113,6 @@ cc.Class({
     sendIMMessage() {
         let pkRoom = DataUtil.getPkRoom();
         var id = WebIM.conn.getUniqueId(); // 生成本地消息id
-        console.log("1111111", id);
         var msg = new WebIM.message('txt', id); // 创建文本消息
         var option = {
             msg: 'refresh_data',          // 消息内容
@@ -134,6 +133,8 @@ cc.Class({
 
     //显示时间倒计时
     showTimeDown(offTime) {
+        this.timer1 && clearInterval(this.timer1);
+        this.timer1 = null;
         try {
             let time = Math.floor(offTime / 1000);
             this.timer1 = setInterval(() => {
@@ -182,5 +183,7 @@ cc.Class({
         this.timer1 && clearInterval(this.timer1);
         this.timer0 = null;
         this.timer1 = null;
+        cc.game.off(cc.game.EVENT_SHOW);
+        cc.game.off(cc.game.EVENT_HIDE);
     }
 });
