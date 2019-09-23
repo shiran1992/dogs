@@ -244,6 +244,8 @@ cc.Class({
                         cc.director.loadScene("PKGame");
                     });
                 }
+            } else {
+                console.log("********************************************");
             }
         }
     },

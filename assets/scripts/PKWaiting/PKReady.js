@@ -35,6 +35,17 @@ cc.Class({
         this.timer1 = null;//事件定时器（时间翻牌）
     },
 
+    onLoad() {
+        cc.game.on(cc.game.EVENT_SHOW, (event) => {
+            cc.log('emit cc.game.EVENT_SHOW!');
+            this.loadData();
+        });
+
+        cc.game.on(cc.game.EVENT_HIDE, (event) => {
+            cc.log('emit cc.game.EVENT_HIDE!');
+        });
+    },
+
     setData(pkRoom = {}) {
         this._pkRoom = pkRoom;
 
