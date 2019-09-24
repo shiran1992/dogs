@@ -162,10 +162,6 @@ cc.Class({
         this.node.addChild(readyNode);
         this.scriptReady = readyNode.getComponent("PKReady");
         this.scriptReady.setData(this._pkRoom);
-
-        this.scriptReady.startAnimation(() => {
-            
-        });
     },
 
     //比赛正在进行

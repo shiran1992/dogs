@@ -36,10 +36,13 @@ cc.Class({
         this.num.node.opacity = 255;
         let scaleTo = cc.scaleTo(0.3, 0.8).easing(cc.easeQuarticActionIn());
         let fadeTo = cc.fadeTo(0.3, this._num > 0 ? 0 : 255);
-        this.num.node.runAction(cc.sequence(scaleTo, fadeTo));
-        this.smog.node.scale = 4;
-        let animation = this.smog.getComponent(cc.Animation);
-        animation.play("smog");
+        this.num.node.runAction(cc.sequence(scaleTo, cc.callFunc(() => {
+            if (this._num < 0) {
+                this.smog.node.scale = 4;
+                let animation = this.smog.getComponent(cc.Animation);
+                animation.play("smog");
+            }
+        }), fadeTo));
     },
 
     onDestroy() {
