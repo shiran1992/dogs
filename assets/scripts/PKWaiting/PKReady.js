@@ -29,15 +29,14 @@ cc.Class({
     ctor() {
         this._pkRoom = null;
         this._pkJoin = null;
-        this._users = [];
+        this._users = [];//所有用户
 
         this.timer0 = null;//事件定时器（两分钟调一次接口）
-        this.timer1 = null;//事件定时器（时间翻牌）
+        this.timer1 = null;//事件定时器（时间倒计时翻牌）
+        this.timer2 = null;//事件定时器（等待发聊天室消息延迟）
     },
 
     onLoad() {
-        //this.sendIMMessage();
-
         cc.game.on(cc.game.EVENT_SHOW, (event) => {
             cc.log('emit cc.game.EVENT_SHOW!');
             this.loadData();
@@ -46,6 +45,10 @@ cc.Class({
         cc.game.on(cc.game.EVENT_HIDE, (event) => {
             cc.log('emit cc.game.EVENT_HIDE!');
         });
+
+        this.timer2 = setTimeout(() => {
+            this.sendIMMessage();
+        }, 1000)
     },
 
     setData(pkRoom = {}) {
@@ -97,16 +100,22 @@ cc.Class({
                     this.timer1 && clearInterval(this.timer1);
                 }
                 this.num.string = data.waitUserCount + "人正在等待";
-                this.userlist.childrenCount && this.userlist.removeAllChildren();
-                for (let i = 0; i < USER_HEAD_NUM; i++) {
-                    let headNode = cc.instantiate(this.userHead);
-                    this.userlist.addChild(headNode);
-                    let script = headNode.getComponent("PkHeadNode");
-                    let user = i < this._users.length ? this._users[i] : {};
-                    script.setData(user);
-                }
+
+                this.renderUserHeader();
             }
         });
+    },
+
+    //渲染下面的头像框
+    renderUserHeader() {
+        this.userlist.childrenCount && this.userlist.removeAllChildren();
+        for (let i = 0; i < USER_HEAD_NUM; i++) {
+            let headNode = cc.instantiate(this.userHead);
+            this.userlist.addChild(headNode);
+            let script = headNode.getComponent("PkHeadNode");
+            let user = i < this._users.length ? this._users[i] : {};
+            script.setData(user);
+        }
     },
 
     // 聊天室发送文本消息
@@ -114,12 +123,16 @@ cc.Class({
         let pkRoom = DataUtil.getPkRoom();
         var id = WebIM.conn.getUniqueId(); // 生成本地消息id
         var msg = new WebIM.message('txt', id); // 创建文本消息
-
         var option = {
-            msg: 'refresh_data',          // 消息内容
+            msg: "refresh_data",          // 消息内容
             to: pkRoom.chatRoomId,               // 接收消息对象(聊天室id)
             roomType: true,
             chatType: 'chatRoom',
+            ext: {
+                msgType: 5,
+                userId: pkRoom.userId,
+                avatar: pkRoom.avatar
+            },
             success: function () {
                 console.log('send room text success');
             },
@@ -179,11 +192,29 @@ cc.Class({
         }
     },
 
+    //新人加入聊天室
+    addChatRoom(user) {
+        console.log("-------等待玩家：", this._users);
+        if (user) {
+            for (let i = 0; i < this._users.length; i++) {
+                if(user.userId == this._users[i].userId){
+                    return;
+                }
+            }
+
+            this._users.push(user);
+
+            console.log("增加等待玩家：", this._users);
+        }
+    },
+
     onDestroy() {
         this.timer0 && clearInterval(this.timer0);
         this.timer1 && clearInterval(this.timer1);
+        this.timer2 && clearTimeout(this.timer2);
         this.timer0 = null;
         this.timer1 = null;
+        this.timer2 = null;
         cc.game.off(cc.game.EVENT_SHOW);
         cc.game.off(cc.game.EVENT_HIDE);
     }

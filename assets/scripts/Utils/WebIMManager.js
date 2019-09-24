@@ -34,7 +34,7 @@ function initWebIM(callback) {
             if (pkRoom.chatRoomId) {
                 WebIM.conn.joinChatRoom({
                     roomId: pkRoom.chatRoomId, // 聊天室id
-                    success: function (m) {
+                    success: function () {
                         cc.log("##########################joinChatRoom m:" + m);
                     },
                     error: function () {
@@ -49,7 +49,7 @@ function initWebIM(callback) {
         },
         //收到文本消息
         onTextMessage: function (message) {
-            cc.log("###############################onTextMessage:", message, cb);
+            cc.log("###############################onTextMessage:", message);
             cb && cb(message);
         },
         onEmojiMessage: function (message) { },   //收到表情消息

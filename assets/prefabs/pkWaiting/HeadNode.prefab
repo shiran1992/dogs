@@ -260,8 +260,7 @@
     "_enabled": true,
     "head": {
       "__id__": 4
-    },
-    "_userInfo": null
+    }
   },
   {
     "__type__": "cc.PrefabInfo",

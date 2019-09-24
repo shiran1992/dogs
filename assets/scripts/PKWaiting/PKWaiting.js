@@ -232,7 +232,7 @@ cc.Class({
     onReceive(message) {
         if (message && message.ext) {
             let ext = message.ext;
-            if (ext.msgType == 4) {//0-试题信息   1-答题统计信息   2-排行榜信息   3-全进覆没   4-比赛开始
+            if (ext.msgType == 4) {//0-试题信息   1-答题统计信息   2-排行榜信息   3-全进覆没   4-比赛开始   5-加入聊天室
                 cc.log("开始答题：", message);
                 //此时收到开始答题的通知，提前预加载下面答题页的场景数据
                 cc.director.preloadScene("PKGame", function () {
@@ -243,8 +243,15 @@ cc.Class({
                         cc.director.loadScene("PKGame");
                     });
                 }
-            } else {
-                console.log("********************************************");
+            } else if (ext.msgType == 5) {
+                //有新人加入聊天室
+                if (this.scriptReady) {
+                    this.scriptReady.addChatRoom({
+                        avatar: ext.avatar,
+                        cName: "",
+                        userId: ext.userId
+                    });
+                }
             }
         }
     },
