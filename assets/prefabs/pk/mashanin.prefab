@@ -198,12 +198,8 @@
     "_N$normalSprite": {
       "__uuid__": "4adc554d-c405-4563-ab61-26db1ef06b57"
     },
-    "_N$pressedSprite": {
-      "__uuid__": "3ffd626a-d200-4d96-b449-2327eb82af34"
-    },
-    "pressedSprite": {
-      "__uuid__": "3ffd626a-d200-4d96-b449-2327eb82af34"
-    },
+    "_N$pressedSprite": null,
+    "pressedSprite": null,
     "_N$hoverSprite": null,
     "hoverSprite": null,
     "_N$disabledSprite": null,
