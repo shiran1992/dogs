@@ -30,6 +30,8 @@ cc.Class({
         this._pkRoom = null;
         this._pkJoin = null;
         this._users = [];//所有用户
+        this._curUsers = [];//当前正在显示用户
+        this._tempUsers = [];//过度使用的容器，防止一次性加入多个用户
 
         this.timer0 = null;//事件定时器（两分钟调一次接口）
         this.timer1 = null;//事件定时器（时间倒计时翻牌）
@@ -48,7 +50,7 @@ cc.Class({
 
         this.timer2 = setTimeout(() => {
             this.sendIMMessage();
-        }, 1000)
+        }, 1500)
     },
 
     setData(pkRoom = {}) {
@@ -57,14 +59,12 @@ cc.Class({
         this.initView();
 
         this.loadData();
-        this.timer0 = setInterval(() => {//十分钟轮询一次
-            this.loadData();
-        }, 10 * 60 * 1000);
     },
 
     //开始倒计时
     startAnimation(callback) {
         this.head.active = false;
+        this.delay.active = false;
         let threeNode = cc.instantiate(this.threeSecond);
         this.timeDown.addChild(threeNode);
         let script = threeNode.getComponent("ReadyThreeSecond");
@@ -88,6 +88,7 @@ cc.Class({
                 DataUtil.setPkJoin(data);
                 this._pkJoin = data;
                 this._users = data.userList || [];
+                this._curUsers = this._users.concat([]).splice(0, USER_HEAD_NUM);
 
                 let systemTime = this._pkJoin.systemTime; //服务器当前系统时间
                 let startTime = this._pkJoin.startTime; //服务器指定的比赛开始时间
@@ -111,9 +112,10 @@ cc.Class({
         this.userlist.childrenCount && this.userlist.removeAllChildren();
         for (let i = 0; i < USER_HEAD_NUM; i++) {
             let headNode = cc.instantiate(this.userHead);
+            headNode.setTag("HEAD" + i);
             this.userlist.addChild(headNode);
             let script = headNode.getComponent("PkHeadNode");
-            let user = i < this._users.length ? this._users[i] : {};
+            let user = i < this._curUsers.length ? this._curUsers[i] : {};
             script.setData(user);
         }
     },
@@ -194,24 +196,69 @@ cc.Class({
 
     //新人加入聊天室
     addChatRoom(user) {
-        console.log("-------等待玩家：", this._users);
         if (user) {
             for (let i = 0; i < this._users.length; i++) {
-                if(user.userId == this._users[i].userId){
+                if (user.userId == this._users[i].userId) {
                     return;
                 }
             }
 
             this._users.push(user);
-
-            console.log("增加等待玩家：", this._users);
+            this.num.string = this._users.length + "人正在等待";
+            if (this._users.length <= 30) {//直接显示
+                this._curUsers = this._users;
+                let headNode = this.userlist.getChildByTag("HEAD" + (this._curUsers.length - 1));
+                let script = headNode.getComponent("PkHeadNode");
+                script.setData(user);
+            } else if (this._users.length > 30 && this._users.length <= 60) {//规则：5秒翻动一次（每行随机翻取），这个做不到
+                //现在做的是：一秒换一个头像，随机抽选
+                this._tempUsers.push(user);
+                if (!this.timer3) {
+                    this.timer3 = setInterval(() => {
+                        this.changeRandomUserHead();
+                    }, 1000);
+                }
+            } else if (this._users.length > 60) {//规则：5秒翻动一次（每行随机翻取），这个做不到
+                //现在做的是：0.6秒换一个，随机抽选
+                this._tempUsers.push(user);
+                if (!this.timer4) {
+                    this.timer3 && clearInterval(this.timer3);
+                    this.timer4 = setInterval(() => {
+                        this.changeRandomUserHead();
+                    }, 600);
+                }
+            }
         }
+    },
+
+    //随机抽一个头像进行替换
+    changeRandomUserHead() {
+        let random = Math.floor(Math.random() * USER_HEAD_NUM);
+        let headNode = this.userlist.getChildByTag("HEAD" + random);
+        let script = headNode.getComponent("PkHeadNode");
+        let user = {};
+        if (this._tempUsers.length) {
+            user = this._tempUsers.shift();
+        } else {
+            [JSON.stringify({id: 2, name: "2222"}),JSON.stringify({id: 3, name: "3333"}),JSON.stringify({id: 6, name: "66666"})].concat(
+                [JSON.stringify({id: 2, name: "2222"})]
+                ).filter(function(v, i, arr) {
+             
+                return arr.indexOf(v) === arr.lastIndexOf(v);
+                });  
+        }
+       
+        script.setData(this._tempUsers.shift(), true, () => {
+            this._curUsers.splice(1, random, user);
+        });
     },
 
     onDestroy() {
         this.timer0 && clearInterval(this.timer0);
         this.timer1 && clearInterval(this.timer1);
         this.timer2 && clearTimeout(this.timer2);
+        this.timer3 && clearInterval(this.timer3);
+        this.timer4 && clearInterval(this.timer4);
         this.timer0 = null;
         this.timer1 = null;
         this.timer2 = null;

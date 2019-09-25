@@ -42,6 +42,8 @@ cc.Class({
         this.rank = null;//排行榜数据
         this._pkRoom = null;
         this.questionScript = null;//题目的脚本
+
+        this.questionOrder = 1;//进来的第一题的编号
     },
 
     onLoad() {
@@ -52,7 +54,8 @@ cc.Class({
         DataUtil.clearErrQuestions();
         DataUtil.setLastQuestion(false);
 
-        this.renderDisplayQuestion(1);
+        this.questionOrder = this._pkRoom.questionOrder + 1;
+        this.renderDisplayQuestion(this.questionOrder);
 
         WebIMManager.setCallback((message) => {
             this.onReceive(message);
@@ -107,6 +110,7 @@ cc.Class({
         if (num == -1) {
             text = "最后一题";
         }
+        this.curLabel.string = this.question.orderIndex || this.questionOrder || 1;
         let script = this.numQuestionNode.getComponent("NumQuestion");
         script.initView(text);
         time && callback && script.setCallback(callback, time);
@@ -150,17 +154,16 @@ cc.Class({
             this.removeLastQuestion();
             this.qNum.node.active = false;
             //头部数据
-            let index = this.question.orderIndex || 1;//当前第几题
+            let index = this.question.orderIndex || this.questionOrder || 1;//当前第几题
             let allNum = this._pkRoom.pondQuestionCount || 10;//总题目数量
             //设置最后一题
             DataUtil.setLastQuestion(index == allNum);
             index = (index == allNum) ? -1 : index;
 
             //第一题提示已经提前展示出来了，所以不需要再去展示了，就等着第一题发题通知了
-            if (index == 1) {
+            if (index == this.questionOrder) {
                 this.renderQuestion();
             } else {
-                this.curLabel.string = this.question.orderIndex || 1;
                 this.renderDisplayQuestion(index, () => {
                     this.renderQuestion();
                 }, 1000);
@@ -176,7 +179,7 @@ cc.Class({
             this.numQuestionNode = null;
         }
 
-        let index = this.question.orderIndex || 1;//当前第几题
+        let index = this.question.orderIndex || this.questionOrder || 1;//当前第几题
         let allNum = this._pkRoom.pondQuestionCount || 10;//总题目数量
         this.qNum.node.active = true;
         this.qNum.string = "第 " + index + " 题"
