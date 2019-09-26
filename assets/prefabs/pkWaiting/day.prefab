@@ -302,7 +302,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 348,
+      "width": 306,
       "height": 94
     },
     "_rotationX": 0,
@@ -365,7 +365,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -72,
+      "x": -51,
       "y": -5
     },
     "_skewX": 0,
@@ -445,7 +445,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 84,
+      "width": 42,
       "height": 70
     },
     "_rotationX": 0,
@@ -482,7 +482,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "20",
+    "_N$string": "0",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 2,
     "_N$fontFamily": "Arial",
@@ -543,7 +543,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 144,
+      "x": 123,
       "y": -5
     },
     "_skewX": 0,
@@ -598,7 +598,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 348,
+      "width": 306,
       "height": 94
     },
     "_resize": 1,
@@ -675,7 +675,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 227,
+      "width": 210,
       "height": 94
     },
     "_rotationX": 0,
@@ -738,7 +738,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -59.5,
+      "x": -51,
       "y": -5
     },
     "_skewX": 0,
@@ -818,7 +818,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 59,
+      "width": 42,
       "height": 70
     },
     "_rotationX": 0,
@@ -855,7 +855,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "12",
+    "_N$string": "0",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 2,
     "_N$fontFamily": "Arial",
@@ -916,7 +916,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 83.5,
+      "x": 75,
       "y": -5
     },
     "_skewX": 0,
@@ -971,7 +971,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 227,
+      "width": 210,
       "height": 94
     },
     "_resize": 1,
@@ -1726,9 +1726,7 @@
     },
     "rule": {
       "__uuid__": "291bfb7a-f63a-483b-983b-0bbfb63b415e"
-    },
-    "_pkStage": null,
-    "_pkRoom": null
+    }
   },
   {
     "__type__": "cc.PrefabInfo",

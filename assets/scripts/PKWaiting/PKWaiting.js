@@ -74,13 +74,14 @@ cc.Class({
                     return;
                 }
 
+                //初始化
+                WebIMManager.initWebIM((message) => { this.onReceive(message); });
+                this.startWebIM();
+
                 let gameStatus = data.gameStatus; //游戏状态0:未开始   1:进行中    2已结束
                 let systemTime = data.systemTime; //服务器当前系统时间
                 let startTime = data.startTime; //服务器指定的比赛开始时间
                 if (gameStatus == 0) {//PK还没有开始
-                    //初始化
-                    WebIMManager.initWebIM((message) => { this.onReceive(message); });
-                    this.startWebIM();
                     let offTime = startTime - systemTime;
                     if (offTime > 0) {
                         if (offTime > 1000 * 60 * 60 * 24 * 3) {//大于三天
@@ -187,13 +188,10 @@ cc.Class({
                     DataUtil.setModel(1);
                     let outPop = cc.instantiate(this.outPrefab);
                     this.node.addChild(outPop);
-                    // let outScript = outPop.getComponent("PkOutPop");
-                    // outScript.setCallback(() => {
-                    //     this.inAudienceModel();
-                    //     this.timer = setTimeout(()=>{
-                    //         cc.director.loadScene("PKGame");
-                    //     }, 1000);
-                    // });
+                    let outScript = outPop.getComponent("PkOutPop");
+                    outScript.setCallback(() => {
+                        cc.director.loadScene("PKGame");
+                    });
                 }
             }
         });

@@ -308,7 +308,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 321,
+      "width": 306,
       "height": 94
     },
     "_rotationX": 0,
@@ -371,7 +371,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -58.5,
+      "x": -51,
       "y": -5
     },
     "_skewX": 0,
@@ -451,7 +451,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 57,
+      "width": 42,
       "height": 70
     },
     "_rotationX": 0,
@@ -488,7 +488,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "15",
+    "_N$string": "0",
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 0,
     "_N$fontFamily": "Arial",
@@ -549,7 +549,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 130.5,
+      "x": 123,
       "y": -5
     },
     "_skewX": 0,
@@ -604,7 +604,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 321,
+      "width": 306,
       "height": 94
     },
     "_resize": 1,
@@ -824,7 +824,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 59,
+      "width": 42,
       "height": 70
     },
     "_rotationX": 0,
@@ -861,7 +861,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "10",
+    "_N$string": "0",
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 0,
     "_N$fontFamily": "Arial",
@@ -1135,7 +1135,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 326,
+      "width": 270,
       "height": 56
     },
     "_rotationX": 0,
@@ -1172,7 +1172,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "1301人等你来战",
+    "_N$string": "0人等你来战",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -2065,10 +2065,7 @@
     },
     "rule": {
       "__uuid__": "291bfb7a-f63a-483b-983b-0bbfb63b415e"
-    },
-    "_pkStage": null,
-    "_pkRoom": null,
-    "_callback": null
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
