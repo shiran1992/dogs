@@ -303,7 +303,7 @@ cc.Class({
             if (this.result) {
                 let ext = this.result.ext || {};
                 let outList = ext.weedOutList || [];
-                //做延迟的目的是为了等了，进度条显示完之后，显示淘汰或者城管称概念股
+                //做延迟的目的是为了等进度条显示完之后，显示淘汰或者成功
                 this.timer = setTimeout(() => {
                     //判断淘汰
                     let userId = this._pkRoom.userId;
@@ -318,20 +318,19 @@ cc.Class({
                             });
                             return;
                         }
-
-                        if (isLast) {
-                            //比赛结束，还原数据
-                            this.revertData();
-                            this.removeLastQuestion();
-                            this.model.active = false;
-                            this.backBtn.active = false;
-                            this.banner.active = true;
-                            this.qNum.node.active = false;
-                            this.rightView.active = false;
-                            this.closeBtn.active = true;
-                            this.successNode = cc.instantiate(this.successPrefab);
-                            this.node.addChild(this.successNode);
-                        }
+                    }
+                    if (isLast) {
+                        //比赛结束，还原数据
+                        this.revertData();
+                        this.removeLastQuestion();
+                        this.model.active = false;
+                        this.backBtn.active = false;
+                        this.banner.active = true;
+                        this.qNum.node.active = false;
+                        this.rightView.active = false;
+                        this.closeBtn.active = true;
+                        this.successNode = cc.instantiate(this.successPrefab);
+                        this.node.addChild(this.successNode);
                     }
                 }, 1500);
             }
