@@ -44,6 +44,10 @@ cc.Class({
         this.questionScript = null;//题目的脚本
 
         this.questionOrder = 1;//进来的第一题的编号
+
+        WebIMManager.setCallback((message) => {
+            this.onReceive(message);
+        });
     },
 
     onLoad() {
@@ -110,7 +114,11 @@ cc.Class({
         if (num == -1) {
             text = "最后一题";
         }
-        this.curLabel.string = this.question.orderIndex || this.questionOrder || 1;
+        let index = this.questionOrder || 1;//当前第几题
+        if (this.question) {
+            index = this.question.orderIndex || 1;
+        }
+        this.curLabel.string = index + "";
         let script = this.numQuestionNode.getComponent("NumQuestion");
         script.initView(text);
         time && callback && script.setCallback(callback, time);
@@ -154,7 +162,10 @@ cc.Class({
             this.removeLastQuestion();
             this.qNum.node.active = false;
             //头部数据
-            let index = this.question.orderIndex || this.questionOrder || 1;//当前第几题
+            let index = this.questionOrder || 1;//当前第几题
+            if (this.question) {
+                index = this.question.orderIndex || 1;
+            }
             let allNum = this._pkRoom.pondQuestionCount || 10;//总题目数量
             //设置最后一题
             DataUtil.setLastQuestion(index == allNum);
@@ -179,7 +190,10 @@ cc.Class({
             this.numQuestionNode = null;
         }
 
-        let index = this.question.orderIndex || this.questionOrder || 1;//当前第几题
+        let index = this.questionOrder || 1;//当前第几题
+        if (this.question) {
+            index = this.question.orderIndex || 1;
+        }
         let allNum = this._pkRoom.pondQuestionCount || 10;//总题目数量
         this.qNum.node.active = true;
         this.qNum.string = "第 " + index + " 题"

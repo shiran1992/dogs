@@ -88,6 +88,7 @@ cc.Class({
                 DataUtil.setPkJoin(data);
                 this._pkJoin = data;
                 this._users = data.userList || [];
+                this._users.reverse();
                 this._curUsers = this._users.concat([]).splice(0, USER_HEAD_NUM);
 
                 let systemTime = this._pkJoin.systemTime; //服务器当前系统时间
