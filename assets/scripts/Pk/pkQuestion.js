@@ -140,10 +140,10 @@ cc.Class({
         //答题情况对象
         let obj = { type: 0, text: '哎呦~答错了' };
         if (selectsStr == answersStr) {//答对
-            Helper.playRightMusic();
+            //Helper.playRightMusic();
             obj = { type: 1, text: '恭喜你！答对啦' };
         } else {//答错
-            Helper.playErrorMusic();
+            //Helper.playErrorMusic();
             obj = { type: 0, text: '哎呦~答错了' };
             //记录错题
             DataUtil.setErrQuestions(this.question);

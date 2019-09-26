@@ -166,7 +166,7 @@ cc.Class({
         let tag = { offTime: offTime };
         let obj = { type: 0, text: '哎呦~答错了' };
         if (selectsStr == answersStr) {//答对
-            Helper.playRightMusic();
+            //Helper.playRightMusic();
             let flag = this.handleCorrect();
             if (flag == 0) {
                 tag.brainValue = 5;
@@ -178,7 +178,7 @@ cc.Class({
             tag.state = true;
             obj = { type: 1, text: '恭喜你！答对啦', flag: flag };
         } else {//答错
-            Helper.playErrorMusic();
+            //Helper.playErrorMusic();
             tag.state = false;
             tag.brainValue = 0;
             obj = { type: 0, text: '哎呦~答错了', flag: -1 };
