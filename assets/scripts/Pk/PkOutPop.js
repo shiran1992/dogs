@@ -12,10 +12,6 @@ cc.Class({
         this._callback = null;
     },
 
-    onLoad() {
-        DataUtil.setModel(1);
-    },
-
     initView(type) {
         if (type == 1) {//错过
             this.desc0.active = false;

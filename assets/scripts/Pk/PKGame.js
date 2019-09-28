@@ -60,10 +60,19 @@ cc.Class({
 
         let joinStatus = DataUtil.getJoinStatus();//进入答题页的方式
         if (joinStatus == 1 || joinStatus == 2) {//已经被淘汰了
+            DataUtil.setModel(1);
+            //因为这个时候进来，肯定是要等待下一题的
+            this.qNum.node.active = false;
+            this.banner.active = true;
+            this.rightView.active = false;
+            this.waitQuestionNode = cc.instantiate(this.waitQuestion);
+            this.node.addChild(this.waitQuestionNode);
+            //显示淘汰界面
             let outPop = cc.instantiate(this.outPrefab);
             this.node.addChild(outPop);
             let outScript = outPop.getComponent("PkOutPop");
             outScript.initView(joinStatus);
+            outPop.setLocalZOrder(100);
         } else if (joinStatus == 3) {//退出去又重新进来的
             this.qNum.node.active = false;
             this.banner.active = true;
@@ -103,13 +112,6 @@ cc.Class({
             } else if (ext.msgType == 3) {
                 cc.log("全军覆没：", message);
                 this.removeLastQuestion();
-                //判断是否是观众模式
-                let model = DataUtil.getModel();
-                if (model == 1) {
-                    this.model.active = false;
-                    //PK结束，还原成正常模式
-                    this.revertData();
-                }
                 this.backBtn.active = true;
                 this.banner.active = true;
                 this.qNum.node.active = false;
@@ -117,6 +119,13 @@ cc.Class({
                 this.node.addChild(this.allDeadNode);
                 this.allDeadScript = this.allDeadNode.getComponent('AllDead');
                 this.allDeadScript.setData(message.data);
+                //判断是否是观众模式
+                let model = DataUtil.getModel();
+                if (model == 1) {
+                    this.model.active = false;
+                    //PK结束，还原成正常模式
+                    this.revertData();
+                }
             }
         }
     },
@@ -240,6 +249,10 @@ cc.Class({
                 //隐藏进度条，显示统计数据字样
                 this.greyBar.active = false;
                 this.managerData.active = true;
+                if (this.managerData) {
+                    let script = this.managerData.getComponent("ManageDataAnimation");
+                    script && script.startAnimation();
+                }
             });
         }
     },
@@ -257,6 +270,7 @@ cc.Class({
 
     //点击关闭
     onClickClose() {
+        console.log("排行榜关闭按钮");
         cc.director.loadScene("Home", () => {
             let pkRoom = DataUtil.getPkRoom();
             WebIM.conn && WebIM.conn.quitChatRoom({
@@ -293,12 +307,6 @@ cc.Class({
         }
     },
 
-    //显示即将进入观众模式
-    inAudienceModel() {
-        this.audienceNode = cc.instantiate(this.inAudiencePrefab);
-        this.node.addChild(this.audienceNode);
-    },
-
     //退出观众模式
     outAudienceModel() {
         this.outAudienceNode = cc.instantiate(this.outAudiencePrefab);
@@ -322,18 +330,14 @@ cc.Class({
                     for (let i = 0; i < outList.length; i++) {
                         //淘汰名单中有当前用户
                         if (outList[i] == userId) {
+                            DataUtil.setModel(1);
                             let outPop = cc.instantiate(this.outPrefab);
                             this.node.addChild(outPop);
-                            let outScript = outPop.getComponent("PkOutPop");
-                            outScript.setCallback(() => {
-                                !isLast && this.inAudienceModel();
-                            });
+                            outPop.setLocalZOrder(100);
                             return;
                         }
                     }
                     if (isLast) {
-                        //比赛结束，还原数据
-                        this.revertData();
                         this.removeLastQuestion();
                         this.model.active = false;
                         this.backBtn.active = false;
@@ -343,13 +347,13 @@ cc.Class({
                         this.closeBtn.active = true;
                         this.successNode = cc.instantiate(this.successPrefab);
                         this.node.addChild(this.successNode);
+                        //比赛结束，还原数据
+                        this.revertData();
                     }
                 }, 1500);
             }
         } else if (model == 1) {
             if (isLast) {
-                //比赛结束，还原数据
-                this.revertData();
                 this.removeLastQuestion();
                 this.model.active = false;
                 this.banner.active = true;
@@ -358,6 +362,8 @@ cc.Class({
                 this.closeBtn.active = true;
                 this.successNode = cc.instantiate(this.successPrefab);
                 this.node.addChild(this.successNode);
+                //比赛结束，还原数据
+                this.revertData();
             }
         }
     },
@@ -395,6 +401,12 @@ cc.Class({
         //gameNode.setTag("RESULT_POP");
         let resultPopScript = resultPop.getComponent('ResultPop');
         resultPopScript.initView(curQuestionResult);
+        //播放声音
+        if (curQuestionResult.type) {
+            Helper.playRightMusic();
+        } else {
+            Helper.playErrorMusic();
+        }
         resultPopScript.setCallback(() => {
             this.showDataManager();
         });
@@ -408,6 +420,10 @@ cc.Class({
         //隐藏进度条，显示统计数据字样
         this.bar.active = false;
         this.managerData.active = true;
+        if (this.managerData) {
+            let script = this.managerData.getComponent("ManageDataAnimation");
+            script && script.startAnimation();
+        }
         this.qNum.node.active = false;
     },
 
@@ -415,11 +431,16 @@ cc.Class({
     showCountPerAction() {
         let data = JSON.parse(this.result.data);
         this.questionScript && this.questionScript.showBarResult(data);
+        if (this.managerData) {
+            let script = this.managerData.getComponent("ManageDataAnimation");
+            script && script.stopAnimation();
+        }
     },
 
     //本局PK答题已经结束，需要将内存中数据进行还原
     revertData() {
         DataUtil.setModel(0);
+        DataUtil.setJoinStatus(0);
         DataUtil.setLastQuestion(false);
         DataUtil.clearErrQuestions();
     },

@@ -1248,8 +1248,12 @@
       "__id__": 1
     },
     "_enabled": true,
-    "desc0": null,
-    "desc1": null
+    "desc0": {
+      "__id__": 14
+    },
+    "desc1": {
+      "__id__": 17
+    }
   },
   {
     "__type__": "cc.PrefabInfo",

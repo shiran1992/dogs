@@ -2952,7 +2952,9 @@
     "itemPrefab": {
       "__uuid__": "913dd197-1e21-4587-b722-5363d7deea31"
     },
-    "rule": null,
+    "rule": {
+      "__uuid__": "291bfb7a-f63a-483b-983b-0bbfb63b415e"
+    },
     "chakan": {
       "__id__": 49
     }

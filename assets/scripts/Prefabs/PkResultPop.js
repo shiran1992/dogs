@@ -19,11 +19,9 @@ cc.Class({
     initView(obj = {}) {
         let { type, text, flag } = obj;
         if (type) {
-            Helper.playRightMusic();
             this.icons[0].node.active = true;
             this.doIcon1Actions();
         } else {
-            Helper.playErrorMusic();
             this.icons[1].node.active = true;
             this.doIcon2Actions();
         }

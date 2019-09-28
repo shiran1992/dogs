@@ -8,7 +8,13 @@ cc.Class({
     },
 
     onLoad() {
+        this.startAnimation();
+    },
+
+    startAnimation() {
         let num = 0;
+        this.timer && clearInterval(this.timer);
+        this.timer = null;
         this.timer = setInterval(() => {
             this.dot0.active = false;
             this.dot1.active = false;
@@ -18,6 +24,14 @@ cc.Class({
                 this["dot" + i].active = true;
             }
         }, 400);
+    },
+
+    stopAnimation() {
+        this.timer && clearInterval(this.timer);
+        this.timer = null;
+        this.dot0.active = false;
+        this.dot1.active = false;
+        this.dot2.active = false;
     },
 
     onDestroy() {

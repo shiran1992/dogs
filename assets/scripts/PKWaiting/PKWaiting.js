@@ -45,6 +45,12 @@ cc.Class({
         } else {
             this.loadPKStatus();
         }
+
+        //清理内存数据
+        DataUtil.setModel(0);
+        DataUtil.setJoinStatus(0);
+        DataUtil.setLastQuestion(false);
+        DataUtil.clearErrQuestions();
     },
 
     getQueryString(name) {
@@ -150,8 +156,23 @@ cc.Class({
 
     //----------马上开始
     onClickStarQuick() {
-        this.node.removeChildByTag("SOON_NODE");
-        this.renderReadyView();
+        Http.getInstance().httpGet("pk/stage/" + this.stageId + "/join", (json) => {
+            if (json && json.code == 0) {
+                let data = json.data || {};
+                DataUtil.setPkJoin(data);
+                this._pkJoin = data;
+
+                let userStatusType = data.userStatusType;//用户参与状态（0正常参加;1之前未参加过.目前正在进行中.直接进观战;2之前参加过,目前正在进行中,且超过了错误次数）
+                if (userStatusType == 0) {//正常参加Pk
+                    this.node.removeChildByTag("SOON_NODE");
+                    this.renderReadyView();
+                } else if (userStatusType == 1 || userStatusType == 2) {
+                    //1之前未参加过.目前正在进行中.直接进观战;2之前参加过,目前正在进行中,且超过了错误次数
+                    DataUtil.setJoinStatus(userStatusType);
+                    cc.director.loadScene("PKGame");
+                }
+            }
+        });
     },
 
     //比赛已经开始，到等待界面(这个时候有可能PK已经开始了，但是管理员没有发题)

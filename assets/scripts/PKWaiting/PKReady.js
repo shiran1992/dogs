@@ -33,7 +33,7 @@ cc.Class({
         this._curUsers = [];//当前正在显示用户
         this._tempUsers = [];//过度使用的容器，防止一次性加入多个用户
 
-        this.timer0 = null;//事件定时器（两分钟调一次接口）
+        this.timer0 = null;//事件定时器（10分钟调一次接口）
         this.timer1 = null;//事件定时器（时间倒计时翻牌）
         this.timer2 = null;//事件定时器（等待发聊天室消息延迟）
     },
@@ -59,6 +59,9 @@ cc.Class({
         this.initView();
 
         this.loadData();
+        this.timer0 = setInterval(() => {//十分钟轮询一次
+            this.loadData();
+        }, 10 * 60 * 1000);
     },
 
     //开始倒计时
