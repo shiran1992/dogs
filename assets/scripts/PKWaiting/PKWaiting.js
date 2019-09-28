@@ -225,14 +225,13 @@ cc.Class({
             WebIM.conn && WebIM.conn.quitChatRoom({
                 roomId: pkRoom.chatRoomId, // 聊天室id
                 success: function (m) {
+                    WebIM.conn.close();
                     cc.log("##########################joinChatRoom m:" + m);
                 },
                 error: function () {
                     cc.log("##########################joinChatRoom error:");
                 }
-            });
-
-            WebIM.conn.close();
+            }); 
         });
     },
 

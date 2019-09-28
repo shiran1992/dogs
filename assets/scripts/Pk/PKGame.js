@@ -25,6 +25,7 @@ cc.Class({
         allLabel: cc.Label, //右上角一共多少题
         scrollView: cc.ScrollView,
         content: cc.Node,
+        rankCon: cc.Node,//排行榜容器
 
         waitQuestion: cc.Prefab,//等待管理员下发题目
         resultPopPrefab: cc.Prefab, //选择答案之后的结果框（对/错）
@@ -276,14 +277,13 @@ cc.Class({
             WebIM.conn && WebIM.conn.quitChatRoom({
                 roomId: pkRoom.chatRoomId, // 聊天室id
                 success: function (m) {
+                    WebIM.conn.close();
                     cc.log("##########################joinChatRoom m:" + m);
                 },
                 error: function () {
                     cc.log("##########################joinChatRoom error:");
                 }
             });
-
-            WebIM.conn.close();
         });
     },
 
@@ -373,15 +373,15 @@ cc.Class({
         this.banner.active = false;
         //如果闯关成功界面存在
         if (this.successNode) {
-            this.node.removeChild(this.successNode);
+            let script = this.successNode.getComponent("PKSuccess");
+            script && script.doDestroy();
             this.successNode = null;
         }
         if (this.rank) {
             cc.log("排行：", this.rank);
             this.rankNode = cc.instantiate(this.rankPrefab);
-            this.node.addChild(this.rankNode);
-            // let script = this.rankNode.getComponent("PkRanking");
-            // script && script.setData(this.rank);
+            this.rankCon.addChild(this.rankNode);
+            this.centerView.active = false;
         }
     },
 
