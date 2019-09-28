@@ -14,6 +14,7 @@ let pkRoom = null;//房间数据
 let pkJoin = null;//准备页数据
 let errQuestions = [];//错题
 let model = 0;//模式（0--正常模式   1--观众模式）
+let joinStatus = 0;//0--正常加入   1--已经错过答题被淘汰   2--错题达到数量被淘汰  3--中途退出又进来可以正常答题的
 let isLast = false;//是否是最后一题
 let curQuestionResult = null;//本次答题结果
 
@@ -161,6 +162,16 @@ function getModel() {
     return model;
 }
 
+//设置是否已经被淘汰
+function setJoinStatus(f) {
+    joinStatus = f;
+}
+
+//获取是否已经被淘汰
+function getJoinStatus() {
+    return joinStatus;
+}
+
 //设置本题的答题结果
 function setQuestionResult(r) {
     curQuestionResult = r;
@@ -183,6 +194,8 @@ module.exports = {
     getErrQuestions,
     setModel,
     getModel,
+    setJoinStatus,
+    getJoinStatus,
     setLastQuestion,
     getLastQuestion,
     setQuestionResult,

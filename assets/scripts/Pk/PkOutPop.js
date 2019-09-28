@@ -4,7 +4,8 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-
+        desc0: cc.Node,//已被淘汰
+        desc1: cc.Node,//已经错过
     },
 
     ctor() {
@@ -13,6 +14,16 @@ cc.Class({
 
     onLoad() {
         DataUtil.setModel(1);
+    },
+
+    initView(type) {
+        if (type == 1) {//错过
+            this.desc0.active = false;
+            this.desc1.active = true;
+        } else {//淘汰
+            this.desc0.active = true;
+            this.desc1.active = false;
+        }
     },
 
     setCallback(callback) {

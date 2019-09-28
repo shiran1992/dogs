@@ -14,9 +14,6 @@ cc.Class({
         startAfter: cc.Prefab,//以后开始
         pkReady: cc.Prefab,//准备页
         pkOver: cc.Prefab,//比赛已经结束
-
-        outPrefab: cc.Prefab,//淘汰
-        inAudiencePrefab: cc.Prefab,//即将进入观众模式
     },
 
     ctor() {
@@ -178,20 +175,13 @@ cc.Class({
                 this._pkJoin = data;
 
                 let userStatusType = data.userStatusType;//用户参与状态（0正常参加;1之前未参加过.目前正在进行中.直接进观战;2之前参加过,目前正在进行中,且超过了错误次数）
-                if (userStatusType == 0) {//正常参加Pk,------------------------------------------------------------------------------不知道当前正在答得是第几题
-                    //初始化
-                    WebIMManager.initWebIM();
-                    this.startWebIM(() => {
-                        cc.director.loadScene("PKGame");
-                    });
-                } else if (userStatusType == 1 || userStatusType == 2) {//1之前未参加过.目前正在进行中.直接进观战;2之前参加过,目前正在进行中,且超过了错误次数
-                    DataUtil.setModel(1);
-                    let outPop = cc.instantiate(this.outPrefab);
-                    this.node.addChild(outPop);
-                    let outScript = outPop.getComponent("PkOutPop");
-                    outScript.setCallback(() => {
-                        cc.director.loadScene("PKGame");
-                    });
+                if (userStatusType == 0) {//正常参加Pk
+                    DataUtil.setJoinStatus(3);
+                    cc.director.loadScene("PKGame");
+                } else if (userStatusType == 1 || userStatusType == 2) {
+                    //1之前未参加过.目前正在进行中.直接进观战;2之前参加过,目前正在进行中,且超过了错误次数
+                    DataUtil.setJoinStatus(userStatusType);
+                    cc.director.loadScene("PKGame");
                 }
             }
         });
@@ -252,12 +242,6 @@ cc.Class({
                 }
             }
         }
-    },
-
-    //显示即将进入观众模式
-    inAudienceModel() {
-        this.audienceNode = cc.instantiate(this.inAudiencePrefab);
-        this.node.addChild(this.audienceNode);
     },
 
     onDestroy() {

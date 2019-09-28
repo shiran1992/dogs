@@ -211,47 +211,8 @@ cc.Class({
                 let headNode = this.userlist.getChildByTag("HEAD" + (this._curUsers.length - 1));
                 let script = headNode.getComponent("PkHeadNode");
                 script.setData(user);
-            } else if (this._users.length > 30 && this._users.length <= 60) {//规则：5秒翻动一次（每行随机翻取），这个做不到
-                //现在做的是：一秒换一个头像，随机抽选
-                this._tempUsers.push(user);
-                if (!this.timer3) {
-                    this.timer3 = setInterval(() => {
-                        this.changeRandomUserHead();
-                    }, 1000);
-                }
-            } else if (this._users.length > 60) {//规则：5秒翻动一次（每行随机翻取），这个做不到
-                //现在做的是：0.6秒换一个，随机抽选
-                this._tempUsers.push(user);
-                if (!this.timer4) {
-                    this.timer3 && clearInterval(this.timer3);
-                    this.timer4 = setInterval(() => {
-                        this.changeRandomUserHead();
-                    }, 600);
-                }
             }
         }
-    },
-
-    //随机抽一个头像进行替换
-    changeRandomUserHead() {
-        let random = Math.floor(Math.random() * USER_HEAD_NUM);
-        let headNode = this.userlist.getChildByTag("HEAD" + random);
-        let script = headNode.getComponent("PkHeadNode");
-        let user = {};
-        if (this._tempUsers.length) {
-            user = this._tempUsers.shift();
-        } else {
-            [JSON.stringify({id: 2, name: "2222"}),JSON.stringify({id: 3, name: "3333"}),JSON.stringify({id: 6, name: "66666"})].concat(
-                [JSON.stringify({id: 2, name: "2222"})]
-                ).filter(function(v, i, arr) {
-             
-                return arr.indexOf(v) === arr.lastIndexOf(v);
-                });  
-        }
-       
-        script.setData(this._tempUsers.shift(), true, () => {
-            this._curUsers.splice(1, random, user);
-        });
     },
 
     onDestroy() {

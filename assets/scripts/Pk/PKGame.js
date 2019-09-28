@@ -26,10 +26,10 @@ cc.Class({
         scrollView: cc.ScrollView,
         content: cc.Node,
 
+        waitQuestion: cc.Prefab,//等待管理员下发题目
         resultPopPrefab: cc.Prefab, //选择答案之后的结果框（对/错）
         outPrefab: cc.Prefab,//淘汰
         allDeadPrefab: cc.Prefab,//全军覆没
-        inAudiencePrefab: cc.Prefab,//即将进入观众模式
         outAudiencePrefab: cc.Prefab,//退出观众模式
         successPrefab: cc.Prefab,//闯关成功
         rankPrefab: cc.Prefab,//排行榜
@@ -58,8 +58,23 @@ cc.Class({
         DataUtil.clearErrQuestions();
         DataUtil.setLastQuestion(false);
 
-        this.questionOrder = this._pkRoom.questionOrder + 1;
-        this.renderDisplayQuestion(this.questionOrder);
+        let joinStatus = DataUtil.getJoinStatus();//进入答题页的方式
+        if (joinStatus == 1 || joinStatus == 2) {//已经被淘汰了
+            let outPop = cc.instantiate(this.outPrefab);
+            this.node.addChild(outPop);
+            let outScript = outPop.getComponent("PkOutPop");
+            outScript.initView(joinStatus);
+        } else if (joinStatus == 3) {//退出去又重新进来的
+            this.qNum.node.active = false;
+            this.banner.active = true;
+            this.rightView.active = false;
+            this.waitQuestionNode = cc.instantiate(this.waitQuestion);
+            this.node.addChild(this.waitQuestionNode);
+        } else {//正常进入答题页
+            this.qNum.node.active = false;
+            this.rightView.active = false;
+            this.renderDisplayQuestion(1);
+        }
 
         WebIMManager.setCallback((message) => {
             this.onReceive(message);
@@ -114,11 +129,6 @@ cc.Class({
         if (num == -1) {
             text = "最后一题";
         }
-        let index = this.questionOrder || 1;//当前第几题
-        if (this.question) {
-            index = this.question.orderIndex || 1;
-        }
-        this.curLabel.string = index + "";
         let script = this.numQuestionNode.getComponent("NumQuestion");
         script.initView(text);
         time && callback && script.setCallback(callback, time);
@@ -128,6 +138,13 @@ cc.Class({
     removeLastQuestion() {
         // this.node.removeChildByTag("RESULT_POP");
         this.managerData.active = false;
+        this.qNum.node.active = false;
+        this.rightView.active = false;
+        //中途进入显示的等待发题存在
+        if (this.waitQuestionNode) {
+            this.waitQuestionNode.getComponent("WaitQuestion").doDestroy();
+            this.waitQuestionNode = null;
+        }
         //如果发提前的提示存在
         if (this.numQuestionNode) {
             this.numQuestionNode.getComponent("NumQuestion").doDestroy();
@@ -160,21 +177,18 @@ cc.Class({
         if (this.question) {
             //清除之前的题目
             this.removeLastQuestion();
-            this.qNum.node.active = false;
             //头部数据
-            let index = this.questionOrder || 1;//当前第几题
-            if (this.question) {
-                index = this.question.orderIndex || 1;
-            }
+            let index = this.question.orderIndex || 1;//当前第几题
             let allNum = this._pkRoom.pondQuestionCount || 10;//总题目数量
             //设置最后一题
             DataUtil.setLastQuestion(index == allNum);
             index = (index == allNum) ? -1 : index;
 
             //第一题提示已经提前展示出来了，所以不需要再去展示了，就等着第一题发题通知了
-            if (index == this.questionOrder) {
+            if (index == 1) {
                 this.renderQuestion();
             } else {
+                this.curLabel.string = this.question.orderIndex || 1;
                 this.renderDisplayQuestion(index, () => {
                     this.renderQuestion();
                 }, 1000);
@@ -189,12 +203,10 @@ cc.Class({
             this.numQuestionNode.getComponent("NumQuestion").doDestroy();
             this.numQuestionNode = null;
         }
-
-        let index = this.questionOrder || 1;//当前第几题
-        if (this.question) {
-            index = this.question.orderIndex || 1;
-        }
+        let index = this.question.orderIndex || 1;//当前第几题
         let allNum = this._pkRoom.pondQuestionCount || 10;//总题目数量
+        this.rightView.active = true;
+        this.banner.active = false;
         this.qNum.node.active = true;
         this.qNum.string = "第 " + index + " 题"
         this.allLabel.string = "/" + allNum;

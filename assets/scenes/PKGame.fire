@@ -3430,6 +3430,9 @@
     "content": {
       "__id__": 94
     },
+    "waitQuestion": {
+      "__uuid__": "0ea7d97f-1441-411b-a2fd-9754ef5a99b0"
+    },
     "resultPopPrefab": {
       "__uuid__": "1aa5e3fb-8a84-40f9-aba4-28e2a92753a9"
     },
@@ -3438,9 +3441,6 @@
     },
     "allDeadPrefab": {
       "__uuid__": "2804ed35-e497-4594-a87d-a48cc1d95dbc"
-    },
-    "inAudiencePrefab": {
-      "__uuid__": "fa8949b8-c1d7-4722-ad9f-8bda092a2334"
     },
     "outAudiencePrefab": {
       "__uuid__": "e0c3c3bb-0a1e-4302-a3c3-5c98ad2e0bc9"
