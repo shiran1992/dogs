@@ -15,18 +15,18 @@ cc.Class({
     //点击确定
     onClickOK() {
         cc.director.loadScene("Home", () => {
-            // let pkRoom = DataUtil.getPkRoom();
-            // WebIM.conn && WebIM.conn.quitChatRoom({
-            //     roomId: pkRoom.chatRoomId, // 聊天室id
-            //     success: function (m) {
-            //         cc.log("##########################joinChatRoom m:" + m);
-            //     },
-            //     error: function () {
-            //         cc.log("##########################joinChatRoom error:");
-            //     }
-            // });
+            let pkRoom = DataUtil.getPkRoom();
+            WebIM.conn && WebIM.conn.quitChatRoom({
+                roomId: pkRoom.chatRoomId, // 聊天室id
+                success: function (m) {
+                    cc.log("##########################joinChatRoom m:" + m);
+                },
+                error: function () {
+                    cc.log("##########################joinChatRoom error:");
+                }
+            });
 
-            // WebIM.conn.close();
+            WebIM.conn.close();
         });
     },
 });
