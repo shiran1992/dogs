@@ -49,7 +49,7 @@ cc.Class({
         temp.innerHTML = question;
         let output = temp.innerText || temp.textContent;
 
-        let richText = "<img src='" + QuestionType[this.type] + "'/> <size=36><b>" + output + "<b/></size>";
+        let richText = "<img src='" + QuestionType[this.type] + "'/> " + output;
         this.questionLabel.string = richText;
         //判断是否需要显示图片
         if (obj.imageUrl) {
