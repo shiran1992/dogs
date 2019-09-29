@@ -142,7 +142,7 @@
     "_actualFontSize": 48,
     "_fontSize": 48,
     "_lineHeight": 56,
-    "_enableWrapText": false,
+    "_enableWrapText": true,
     "_N$file": {
       "__uuid__": "d554cec3-955d-40f2-bf90-bf9e5867f374"
     },
