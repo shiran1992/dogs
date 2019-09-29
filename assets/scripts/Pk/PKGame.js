@@ -373,8 +373,8 @@ cc.Class({
         this.banner.active = false;
         //如果闯关成功界面存在
         if (this.successNode) {
-            let script = this.successNode.getComponent("PKSuccess");
-            script && script.doDestroy();
+            this.successNode.opacity = 0;
+            this.successNode.getComponent("PKSuccess").doDestroy();
             this.successNode = null;
         }
         if (this.rank) {
