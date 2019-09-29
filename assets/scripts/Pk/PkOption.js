@@ -93,22 +93,37 @@ cc.Class({
         //是否答案0:否,1:是
         if (item.isAnswer == 1) {
             this.blueLine.active = true;
-            this.bbar.width = +item.proportion * 2;
             this.bdata.string = item.totalNum + "人" + " (" + (+item.proportion) + "%)";
             // 1s过度动画
-            this.bbar.scaleX = 0.01;
-            this.bbar.runAction(cc.scaleTo(1, 1, 1));
+            this.bbar.width = 200;
+
+            this.timer = setInterval(() => {
+                if (this.bbar.width <= (200 - +item.proportion * 2)) {
+                    clearInterval(this.timer);
+                    this.timer = null;
+                } else {
+                    this.bbar.width -= 4;
+                }
+            }, 20);
         } else {
             this.yellowLine.active = true;
-            this.ybar.width = +item.proportion * 2;
             this.ydata.string = item.totalNum + "人" + " (" + (+item.proportion) + "%)";
             // 1s过度动画
-            this.ybar.scaleX = 0.01;
-            this.ybar.runAction(cc.scaleTo(1, 1, 1));
-        }
+            this.ybar.width = 200;
 
-        // this.node.height = parseInt(this.node.height, 10) + 80;
-        // this.bg.height = parseInt(this.bg.height, 10) + 80;
-        // this.xuanzhon.height = parseInt(this.xuanzhon.height, 10) + 80;
+            this.timer = setInterval(() => {
+                if (this.ybar.width <= (200 - +item.proportion * 2)) {
+                    clearInterval(this.timer);
+                    this.timer = null;
+                } else {
+                    this.ybar.width -= 4;
+                }
+            }, 20);
+        }
     },
+
+    onDestroy() {
+        this.timer && clearInterval(this.timer);
+        this.timer = null;
+    }
 });
