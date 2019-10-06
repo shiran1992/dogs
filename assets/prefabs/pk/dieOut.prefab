@@ -704,8 +704,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 346,
-      "height": 96
+      "width": 348,
+      "height": 98
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -732,7 +732,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "3c0a7f25-ba9b-4b82-87f8-378c2aecf567"
+      "__uuid__": "9684f18a-603f-4e0e-8b97-1d06aba6e2a1"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -747,7 +747,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "28fc4692-138d-403a-88fa-12cb927f5afb"
+    }
   },
   {
     "__type__": "cc.Button",
@@ -796,13 +798,13 @@
       "a": 255
     },
     "_N$normalSprite": {
-      "__uuid__": "3c0a7f25-ba9b-4b82-87f8-378c2aecf567"
+      "__uuid__": "9684f18a-603f-4e0e-8b97-1d06aba6e2a1"
     },
     "_N$pressedSprite": {
-      "__uuid__": "2dfa8d87-68ec-4610-9e04-11231b61fd0f"
+      "__uuid__": "33077b25-a1f2-4110-a2cd-448a60e42343"
     },
     "pressedSprite": {
-      "__uuid__": "2dfa8d87-68ec-4610-9e04-11231b61fd0f"
+      "__uuid__": "33077b25-a1f2-4110-a2cd-448a60e42343"
     },
     "_N$hoverSprite": null,
     "hoverSprite": null,
