@@ -18,10 +18,10 @@ cc.Class({
         }
     },
 
-    //点击查看大图
+    //点击查看大图(暂时去掉)
     onClickImg() {
-        let gameNode = cc.find('Canvas');
-        let gameScript = gameNode.getComponent('PKGame');
-        gameScript.showBigImage(this.url);
+        // let gameNode = cc.find('Canvas');
+        // let gameScript = gameNode.getComponent('PKGame');
+        // gameScript.showBigImage(this.url);
     }
 });

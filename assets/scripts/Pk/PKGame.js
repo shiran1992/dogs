@@ -1,4 +1,3 @@
-const Http = require('Http');
 const Helper = require('Helper');
 const DataUtil = require('DataUtil');
 const WebIMManager = require("WebIMManager");
@@ -20,6 +19,7 @@ cc.Class({
         iBPrefab: cc.Prefab, //图片预览
         backBtn: cc.Node, //返回键
         closeBtn: cc.Node,//关闭键
+        musicBtn: cc.Node,//音乐声音
         rightView: cc.Node, //右上角显示容器
         curLabel: cc.Label, //右上角当前第几题
         allLabel: cc.Label, //右上角一共多少题
@@ -27,6 +27,7 @@ cc.Class({
         content: cc.Node,
         rankCon: cc.Node,//排行榜容器
 
+        pkReady: cc.Prefab,//准备页
         waitQuestion: cc.Prefab,//等待管理员下发题目
         resultPopPrefab: cc.Prefab, //选择答案之后的结果框（对/错）
         outPrefab: cc.Prefab,//淘汰
@@ -45,15 +46,12 @@ cc.Class({
         this.questionScript = null;//题目的脚本
 
         this.questionOrder = 1;//进来的第一题的编号
-
-        WebIMManager.setCallback((message) => {
-            this.onReceive(message);
-        });
     },
 
     onLoad() {
         //隐藏返回键
         this.backBtn.active = false;
+        this.musicBtn.active = false;
 
         this._pkRoom = DataUtil.getPkRoom();
         DataUtil.clearErrQuestions();
@@ -83,12 +81,50 @@ cc.Class({
         } else {//正常进入答题页
             this.qNum.node.active = false;
             this.rightView.active = false;
-            this.renderDisplayQuestion(1);
+            this.backBtn.active = true;
+            this.musicBtn.active = true;
+            this.banner.active = true;
+
+            this.renderReadyView();
         }
 
-        WebIMManager.setCallback((message) => {
-            this.onReceive(message);
-        });
+        //初始化
+        WebIMManager.initWebIM((message) => { this.onReceive(message); });
+        this.startWebIM();
+    },
+
+    //比赛已经开始，到等待界面(这个时候有可能PK已经开始了，但是管理员没有发题)
+    renderReadyView() {
+        let readyNode = cc.instantiate(this.pkReady);
+        this.node.addChild(readyNode);
+        this.scriptReady = readyNode.getComponent("PKReady");
+        this.scriptReady.setData(this._pkRoom);
+    },
+
+    //IM开始接受消息
+    startWebIM(callback) {
+        let pkRoom = DataUtil.getPkRoom();
+        //环信用户名
+        let hxUserName = pkRoom.hxUserName || "";
+        //环信密码
+        let hxPassword = pkRoom.hxPassword || "";
+        let options = {
+            apiUrl: WebIM.config.apiURL,
+            user: hxUserName,
+            pwd: hxPassword,
+            appKey: WebIM.config.appkey,
+            success: (token) => {
+                cc.log("---------------success:", token);
+                callback && callback();
+            },
+            error: () => {
+                cc.log("##########################error:");
+                //如果没连上环信，则继续连接，直到连上为止
+                this.startWebIM();
+            }
+        };
+
+        WebIM.conn.open(options);
     },
 
     //消息接受
@@ -96,7 +132,7 @@ cc.Class({
         if (message && message.ext) {
             this.message = message || {};
             let ext = message.ext;
-            //0-试题信息   1-答题统计信息   2-排行榜信息   3-全军覆没   4-比赛开始
+            //0-试题信息   1-答题统计信息   2-排行榜信息   3-全军覆没   4-比赛开始   5-加入聊天室
             if (ext.msgType == 0) {
                 cc.log("试题：", message);
                 this.question = JSON.parse(message.data);
@@ -126,6 +162,25 @@ cc.Class({
                     this.model.active = false;
                     //PK结束，还原成正常模式
                     this.revertData();
+                }
+            } else if (ext.msgType == 4) {
+                cc.log("开始答题：", message);
+                this.musicBtn.active = false;
+                this.backBtn.active = false;
+                if (this.scriptReady) {
+                    this.scriptReady.startAnimation(() => {
+                        this.scriptReady.doDestroy();
+                        this.renderDisplayQuestion(1);
+                    });
+                }
+            } else if (ext.msgType == 5) {
+                //有新人加入聊天室
+                if (this.scriptReady) {
+                    this.scriptReady.addChatRoom({
+                        avatar: ext.avatar,
+                        cName: "",
+                        userId: ext.userId
+                    });
                 }
             }
         }
@@ -345,10 +400,12 @@ cc.Class({
                         this.qNum.node.active = false;
                         this.rightView.active = false;
                         this.closeBtn.active = true;
-                        this.successNode = cc.instantiate(this.successPrefab);
-                        this.node.addChild(this.successNode);
-                        //比赛结束，还原数据
-                        this.revertData();
+                        if (!this.successNode) {
+                            this.successNode = cc.instantiate(this.successPrefab);
+                            this.node.addChild(this.successNode);
+                            //比赛结束，还原数据
+                            this.revertData();
+                        }
                     }
                 }, 1500);
             }
@@ -356,14 +413,17 @@ cc.Class({
             if (isLast) {
                 this.removeLastQuestion();
                 this.model.active = false;
+                this.backBtn.active = false;
                 this.banner.active = true;
                 this.qNum.node.active = false;
                 this.rightView.active = false;
                 this.closeBtn.active = true;
-                this.successNode = cc.instantiate(this.successPrefab);
-                this.node.addChild(this.successNode);
-                //比赛结束，还原数据
-                this.revertData();
+                if (!this.successNode) {
+                    this.successNode = cc.instantiate(this.successPrefab);
+                    this.node.addChild(this.successNode);
+                    //比赛结束，还原数据
+                    this.revertData();
+                }
             }
         }
     },
@@ -379,9 +439,11 @@ cc.Class({
         }
         if (this.rank) {
             cc.log("排行：", this.rank);
-            this.rankNode = cc.instantiate(this.rankPrefab);
-            this.rankCon.addChild(this.rankNode);
-            this.centerView.active = false;
+            if (!this.rankNode) {
+                this.rankNode = cc.instantiate(this.rankPrefab);
+                this.rankCon.addChild(this.rankNode);
+                this.centerView.active = false;
+            }
         }
     },
 

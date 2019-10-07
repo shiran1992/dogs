@@ -1,9 +1,11 @@
 const DataUtil = require("DataUtil");
 
+let mid = "";
 let cb = null;
 function setCallback(callback) {
     cb = callback;
 }
+
 
 //初始化WebIM
 function initWebIM(callback) {
@@ -50,7 +52,10 @@ function initWebIM(callback) {
         //收到文本消息
         onTextMessage: function (message) {
             cc.log("###############################onTextMessage:", message);
-            cb && cb(message);
+            if (mid != message.id) {
+                mid = message.id;
+                cb && cb(message);
+            }
         },
         onEmojiMessage: function (message) { },   //收到表情消息
         onPictureMessage: function (message) { }, //收到图片消息

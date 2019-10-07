@@ -218,7 +218,7 @@ cc.Class({
         }
     },
 
-    onDestroy() {
+    clear() {
         this.timer0 && clearInterval(this.timer0);
         this.timer1 && clearInterval(this.timer1);
         this.timer2 && clearTimeout(this.timer2);
@@ -229,5 +229,14 @@ cc.Class({
         this.timer2 = null;
         cc.game.off(cc.game.EVENT_SHOW);
         cc.game.off(cc.game.EVENT_HIDE);
+    },
+
+    doDestroy() {
+        this.clear();
+        this.node && this.node.destroy();
+    },
+
+    onDestroy() {
+        this.clear();
     }
 });

@@ -143,8 +143,8 @@ cc.Class({
         gameScript.hideBigImage();
         //关闭进度条
         gameScript.stopProgressBar();
-        //滑到视图最下面
-        gameScript.scrollToBottom();
+        //滑到视图最下面(产品说不要这个效果)
+        //gameScript.scrollToBottom();
         let arr = [];
         this.selects.forEach((element, i) => {
             arr.push(element.letter);

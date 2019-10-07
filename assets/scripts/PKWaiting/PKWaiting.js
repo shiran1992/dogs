@@ -1,7 +1,6 @@
 const Http = require('Http');
 const DataUtil = require("DataUtil");
 const Helper = require("Helper");
-const WebIMManager = require("WebIMManager");
 
 const MAX_LIMIT_NUM = 500;//限制最多五百人
 
@@ -12,7 +11,6 @@ cc.Class({
         maxLimit: cc.Prefab,//最多500人
         startSoon: cc.Prefab,//马上开始
         startAfter: cc.Prefab,//以后开始
-        pkReady: cc.Prefab,//准备页
         pkOver: cc.Prefab,//比赛已经结束
     },
 
@@ -65,7 +63,7 @@ cc.Class({
     //获取PK擂台的状态
     loadPKStatus() {
         Http.getInstance().httpGet("pk/stage/" + this.stageId + "/prepare", (json) => {
-            cc.log("JSON:", json);
+            cc.log("JSON11111:", json);
             if (json && json.code == 0) {
                 let data = json.data || {};
                 DataUtil.setPkRoom(data);
@@ -76,10 +74,6 @@ cc.Class({
                     this.renderMaxLimitView();
                     return;
                 }
-
-                //初始化
-                WebIMManager.initWebIM((message) => { this.onReceive(message); });
-                this.startWebIM();
 
                 let gameStatus = data.gameStatus; //游戏状态0:未开始   1:进行中    2已结束
                 let systemTime = data.systemTime; //服务器当前系统时间
@@ -93,7 +87,8 @@ cc.Class({
                             this.renderSoonView();
                         }
                     } else {//比赛时间已经到，到等待界面
-                        this.renderReadyView();
+                        DataUtil.setJoinStatus(0);
+                        cc.director.loadScene("PKGame");
                     }
                 } else if (gameStatus == 1) {//比赛已经开始
                     this.renderDoingView();
@@ -102,32 +97,6 @@ cc.Class({
                 }
             }
         });
-    },
-
-    //IM开始接受消息
-    startWebIM(callback) {
-        let pkRoom = DataUtil.getPkRoom();
-        //环信用户名
-        let hxUserName = pkRoom.hxUserName || "";
-        //环信密码
-        let hxPassword = pkRoom.hxPassword || "";
-        let options = {
-            apiUrl: WebIM.config.apiURL,
-            user: hxUserName,
-            pwd: hxPassword,
-            appKey: WebIM.config.appkey,
-            success: (token) => {
-                cc.log("---------------success:", token);
-                callback && callback();
-            },
-            error: () => {
-                cc.log("##########################error:");
-                //如果没连上环信，则继续连接，直到连上为止
-                this.startWebIM();
-            }
-        };
-
-        WebIM.conn.open(options);
     },
 
     //加载人数超出500页面
@@ -165,7 +134,8 @@ cc.Class({
                 let userStatusType = data.userStatusType;//用户参与状态（0正常参加;1之前未参加过.目前正在进行中.直接进观战;2之前参加过,目前正在进行中,且超过了错误次数）
                 if (userStatusType == 0) {//正常参加Pk
                     this.node.removeChildByTag("SOON_NODE");
-                    this.renderReadyView();
+                    DataUtil.setJoinStatus(0);
+                    cc.director.loadScene("PKGame");
                 } else if (userStatusType == 1 || userStatusType == 2) {
                     //1之前未参加过.目前正在进行中.直接进观战;2之前参加过,目前正在进行中,且超过了错误次数
                     DataUtil.setJoinStatus(userStatusType);
@@ -173,14 +143,6 @@ cc.Class({
                 }
             }
         });
-    },
-
-    //比赛已经开始，到等待界面(这个时候有可能PK已经开始了，但是管理员没有发题)
-    renderReadyView() {
-        let readyNode = cc.instantiate(this.pkReady);
-        this.node.addChild(readyNode);
-        this.scriptReady = readyNode.getComponent("PKReady");
-        this.scriptReady.setData(this._pkRoom);
     },
 
     //比赛正在进行

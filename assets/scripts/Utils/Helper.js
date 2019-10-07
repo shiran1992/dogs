@@ -103,6 +103,9 @@ function loadHttpImg(sprite, url, config) {
 
                 texture.width = sw;
                 texture.height = il * sw;
+
+                // sprite.node.width = sw;
+                // sprite.node.height = il * sw;
             } else if (config && config.type == 'display') {
                 let sw = sprite.node.width;
 
