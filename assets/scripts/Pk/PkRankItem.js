@@ -25,7 +25,7 @@ cc.Class({
             this.num.node.active = true;
             this.num.string = num;
         }
-        if (obj.cName.length >= 5) {
+        if (obj.cName.length > 4) {
             this.nick.string = obj.cName.substr(0, 4) + "...";
         } else {
             this.nick.string = obj.cName;
