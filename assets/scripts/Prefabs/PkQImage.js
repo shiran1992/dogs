@@ -3,7 +3,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        imgSprite: cc.Sprite,
+        container: cc.Sprite,
     },
 
     ctor() {
@@ -14,7 +14,7 @@ cc.Class({
     initView(url) {
         if (url) {
             this.url = url;
-            Helper.loadHttpImg(this.imgSprite, url, { type: 'zoom' });
+            Helper.loadHttpImg(this.container, url, { type: 'zoom' });
         }
     },
 
