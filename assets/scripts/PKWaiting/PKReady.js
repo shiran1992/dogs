@@ -35,7 +35,6 @@ cc.Class({
 
         this.timer0 = null;//事件定时器（10分钟调一次接口）
         this.timer1 = null;//事件定时器（时间倒计时翻牌）
-        this.timer2 = null;//事件定时器（等待发聊天室消息延迟）
     },
 
     onLoad() {
@@ -47,10 +46,6 @@ cc.Class({
         cc.game.on(cc.game.EVENT_HIDE, (event) => {
             cc.log('emit cc.game.EVENT_HIDE!');
         });
-
-        this.timer2 = setTimeout(() => {
-            this.sendIMMessage();
-        }, 1500)
     },
 
     setData(pkRoom = {}) {
@@ -124,33 +119,6 @@ cc.Class({
         }
     },
 
-    // 聊天室发送文本消息
-    sendIMMessage() {
-        let pkRoom = DataUtil.getPkRoom();
-        var id = WebIM.conn.getUniqueId(); // 生成本地消息id
-        var msg = new WebIM.message('txt', id); // 创建文本消息
-        var option = {
-            msg: "refresh_data",          // 消息内容
-            to: pkRoom.chatRoomId,               // 接收消息对象(聊天室id)
-            roomType: true,
-            chatType: 'chatRoom',
-            ext: {
-                msgType: 5,
-                userId: pkRoom.userId,
-                avatar: pkRoom.avatar
-            },
-            success: function () {
-                console.log('send room text success');
-            },
-            fail: function () {
-                console.log('failed');
-            }
-        };
-        msg.set(option);
-        msg.setGroup('groupchat');
-        WebIM.conn.send(msg.body);
-    },
-
     //显示时间倒计时
     showTimeDown(offTime) {
         this.timer1 && clearInterval(this.timer1);
@@ -198,22 +166,16 @@ cc.Class({
         }
     },
 
-    //新人加入聊天室
-    addChatRoom(user) {
-        if (user) {
-            for (let i = 0; i < this._users.length; i++) {
-                if (user.userId == this._users[i].userId) {
-                    return;
-                }
-            }
-
-            this._users.push(user);
-            this.num.string = this._users.length + "人正在等待";
-            if (this._users.length <= 30) {//直接显示
-                this._curUsers = this._users;
-                let headNode = this.userlist.getChildByTag("HEAD" + (this._curUsers.length - 1));
+    //更新聊天室等待人数
+    addChatRoom(data) {
+        if (data) {
+            let waitUserCount = data.waitUserCount || 0;
+            let users = data.userList || [];
+            this.num.string = waitUserCount + "人正在等待";
+            for (let i = 0; i < USER_HEAD_NUM; i++) {
+                let headNode = this.userlist.getChildByTag("HEAD" + i);
                 let script = headNode.getComponent("PkHeadNode");
-                script.setData(user);
+                script.setData(users[i]);
             }
         }
     },
@@ -221,12 +183,10 @@ cc.Class({
     clear() {
         this.timer0 && clearInterval(this.timer0);
         this.timer1 && clearInterval(this.timer1);
-        this.timer2 && clearTimeout(this.timer2);
         this.timer3 && clearInterval(this.timer3);
         this.timer4 && clearInterval(this.timer4);
         this.timer0 = null;
         this.timer1 = null;
-        this.timer2 = null;
         cc.game.off(cc.game.EVENT_SHOW);
         cc.game.off(cc.game.EVENT_HIDE);
     },

@@ -132,7 +132,7 @@ cc.Class({
         if (message && message.ext) {
             this.message = message || {};
             let ext = message.ext;
-            //0-试题信息   1-答题统计信息   2-排行榜信息   3-全军覆没   4-比赛开始   5-加入聊天室
+            //0-试题信息   1-答题统计信息   2-排行榜信息   3-全军覆没   4-比赛开始   5-更新等待页
             if (ext.msgType == 0) {
                 cc.log("试题：", message);
                 this.question = JSON.parse(message.data);
@@ -174,13 +174,11 @@ cc.Class({
                     });
                 }
             } else if (ext.msgType == 5) {
-                //有新人加入聊天室
+                console.log("更新等待人数：", message);
+                //更新聊天室等待人数
                 if (this.scriptReady) {
-                    this.scriptReady.addChatRoom({
-                        avatar: ext.avatar,
-                        cName: "",
-                        userId: ext.userId
-                    });
+                    let data = JSON.parse(message.data);
+                    this.scriptReady.addChatRoom(data);
                 }
             }
         }
