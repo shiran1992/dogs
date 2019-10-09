@@ -95,9 +95,9 @@ cc.Class({
 
     //比赛已经开始，到等待界面(这个时候有可能PK已经开始了，但是管理员没有发题)
     renderReadyView() {
-        let readyNode = cc.instantiate(this.pkReady);
-        this.node.addChild(readyNode);
-        this.scriptReady = readyNode.getComponent("PKReady");
+        this.readyNode = cc.instantiate(this.pkReady);
+        this.node.addChild(this.readyNode);
+        this.scriptReady = this.readyNode.getComponent("PKReady");
         this.scriptReady.setData(this._pkRoom);
     },
 
@@ -203,6 +203,10 @@ cc.Class({
         this.managerData.active = false;
         this.qNum.node.active = false;
         this.rightView.active = false;
+        if(this.readyNode){
+            this.scriptReady.doDestroy();
+            this.readyNode = null;
+        }
         //中途进入显示的等待发题存在
         if (this.waitQuestionNode) {
             this.waitQuestionNode.getComponent("WaitQuestion").doDestroy();
