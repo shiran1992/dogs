@@ -127,57 +127,6 @@ let httpUtils = cc.Class({
         xhr.send(this.doEncryption(pString));
     },
 
-    httpPut: function (url, param, config, callback) {
-        let token = this.getLocalToken();
-        let tmd = {
-            "title": "put请求",
-            "message": "url:" + url + "|token:" + token,
-            "date": Helper.dateFormat("yyyy-MM-dd hh:mm:ss", new Date())
-        };
-        this.httpNoTokenPost(tmd, token);
-
-        config = config || {};
-        let xhr = cc.loader.getXMLHttpRequest();
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4) {
-                //401直接返回登录界面
-                if (xhr.status == 401) {
-                    this.goBackLogin();
-                    return;
-                }
-                let json = {};
-                let respone = {};
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    respone = JSON.parse(xhr.response);
-                    json.code = 0;
-                    json.data = respone;
-                } else {
-                    //服务器异常
-                    if (xhr.status == 404) {
-                        json.code = 404;
-                        json.message = '服务器未响应，请稍后再试。';
-                    } else if (xhr.status == 0) {//本地网络断了
-                        json.code = xhr.status || -1;
-                        json.message = '您的网络开小差了，请稍后再试。';
-                    } else {
-                        respone = JSON.parse(xhr.response);
-                        let error = respone.error || {};
-                        json.message = error.message || '网络异常';
-                        json.code = xhr.status || -1;
-                    }
-                }
-                callback && callback(json);
-            }
-        };
-        url = this.domain + url;
-        xhr.open("PUT", url, true);
-        xhr.setRequestHeader("Token", token);
-        xhr.setRequestHeader("content-Type", "application/json");
-        xhr.timeout = 10000;
-        let pString = JSON.stringify(param);
-        xhr.send(this.doEncryption(pString));
-    },
-
     //加密
     doEncryption(word) {
         let key1 = 'OWSFPAHHTNOZHLXC';
