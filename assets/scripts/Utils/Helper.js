@@ -190,6 +190,11 @@ function playAccountMusic() {
     }
 }
 
+//加载错误弹窗
+function loadErrorPop() {
+    cc.loader.loadRes("ErrorPop", function (err, prefab) { });
+}
+
 module.exports = {
     setToken,
     getToken,
@@ -216,4 +221,5 @@ module.exports = {
     playFailMusic,
     playCloudMusic,
     playAccountMusic,
+    loadErrorPop
 };

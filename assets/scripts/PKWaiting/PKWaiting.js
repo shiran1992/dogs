@@ -44,6 +44,8 @@ cc.Class({
             this.loadPKStatus();
         }
 
+        Helper.loadErrorPop();
+
         //清理内存数据
         DataUtil.setModel(0);
         DataUtil.setJoinStatus(0);
@@ -141,6 +143,21 @@ cc.Class({
                     DataUtil.setJoinStatus(userStatusType);
                     cc.director.loadScene("PKGame");
                 }
+            } else {
+                cc.loader.loadRes("ErrorPop", function (err, prefab) {
+                    let errorPop = cc.instantiate(prefab);
+                    errorPop.setTag("ERROR");
+                    let errorPopScript = errorPop.getComponent('ErrorPop');
+                    errorPopScript.initView(json);
+                    errorPopScript.setCallBack(() => {
+                        errorPop.destroy();
+                        if (json.code != -1) {//本地断网只需要关闭弹窗
+                            cc.director.loadScene('Home');
+                        }
+                    });
+                    let node = cc.find("Canvas");
+                    node.addChild(errorPop);
+                });
             }
         });
     },
@@ -193,7 +210,7 @@ cc.Class({
                 error: function () {
                     cc.log("##########################joinChatRoom error:");
                 }
-            }); 
+            });
         });
     },
 

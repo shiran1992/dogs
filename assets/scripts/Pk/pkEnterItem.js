@@ -41,7 +41,6 @@ cc.Class({
     //获取PK擂台的状态
     loadPKStatus() {
         Http.getInstance().httpGet("pk/stage/" + this._itemData.stageId + "/prepare", (json) => {
-            cc.log("JSON00000:", json);
             let scene = "PKWaiting";
             if (json && json.code == 0) {
                 let data = json.data || {};
@@ -72,9 +71,23 @@ cc.Class({
                 } else if (gameStatus == 2) {//比赛已经结束
                     scene = "PKWaiting";
                 }
+                cc.director.loadScene(scene);
+            } else {
+                cc.loader.loadRes("ErrorPop", function (err, prefab) {
+                    let errorPop = cc.instantiate(prefab);
+                    errorPop.setTag("ERROR");
+                    let errorPopScript = errorPop.getComponent('ErrorPop');
+                    errorPopScript.initView(json);
+                    errorPopScript.setCallBack(() => {
+                        errorPop.destroy();
+                        if (json.code != -1) {//本地断网只需要关闭弹窗
+                            cc.director.loadScene('Home');
+                        }
+                    });
+                    let node = cc.find("Canvas");
+                    node.addChild(errorPop);
+                });
             }
-
-            cc.director.loadScene(scene);
         });
     },
 

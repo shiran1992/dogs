@@ -70,6 +70,8 @@ cc.Class({
                 }
             }
         });
+
+        Helper.loadErrorPop();
     },
 
     sendRequst() {
@@ -254,10 +256,6 @@ cc.Class({
             scp.setIdx(i, i == 0);
 
             itemH += (item.height + 15);
-            //如果除第一个其它不显示头
-            //if (i > 0) {
-            //    this.item.bg4.active = false;
-            //}
         }
         itemRoot.height = itemH;
 

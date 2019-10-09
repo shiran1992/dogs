@@ -82,10 +82,24 @@ function initWebIM(callback) {
         //本机网络连接成功
         onOnline: function () {
             cc.log("#########################onOnline:连接成功");
+            let node = cc.find("Canvas");
+            node.removeChildByTag("ERROR");
         },
         //本机网络掉线
         onOffline: function () {
             cc.log("#########################onOffline:本机网络掉线");
+            cc.loader.loadRes("ErrorPop", function (err, prefab) {
+                let errorPop = cc.instantiate(prefab);
+                errorPop.setTag("ERROR");
+                let errorPopScript = errorPop.getComponent('ErrorPop');
+                errorPopScript.initView();
+                errorPopScript.setCallBack(() => {
+                    errorPop.destroy();
+                    cc.director.loadScene('Home');
+                });
+                let node = cc.find("Canvas");
+                node.addChild(errorPop);
+            });
         },
         //失败回调
         onError: function (message) {
