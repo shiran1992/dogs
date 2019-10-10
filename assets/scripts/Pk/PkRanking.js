@@ -64,8 +64,6 @@ cc.Class({
     },
 
     initView() {
-        this.node.runAction(cc.sequence(cc.delayTime(0.08), cc.scaleTo(0.1, 1.05)));
-
         let name = this._pkRoom.name || "";
         this.title.string = name.length > MAX_LIMIT_STRING ? (name.substr(0, MAX_LIMIT_STRING) + "...") : name;
         cc.log("排行榜数据：", this._rank);

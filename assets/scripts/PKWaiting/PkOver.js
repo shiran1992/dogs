@@ -11,16 +11,20 @@ cc.Class({
         passNum: cc.Label,//过关人数
         rightNum: cc.Label,//答对题数
         rankDesc: cc.Label,//获得名次
-        pkRanking: cc.Prefab,//排行榜
     },
 
     ctor() {
         this._pkRoom = null;
+        this._callback = null;
     },
 
     setData(pkRoom = {}) {
         this._pkRoom = pkRoom;
         this.initView();
+    },
+
+    setCallBack(callback) {
+        this._callback = callback;
     },
 
     initView() {
@@ -36,7 +40,10 @@ cc.Class({
     },
 
     onClickRanking() {
-        let rankNode = cc.instantiate(this.pkRanking);
-        this.node.addChild(rankNode);
-    }
+        this._callback && this._callback();
+    },
+
+    doDestroy() {
+        this.node && this.node.destroy();
+    },
 });

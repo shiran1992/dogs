@@ -16,7 +16,7 @@ let httpUtils = cc.Class({
 
     //获取缓存Token
     getLocalToken: function () {
-        //return "ucloud--cluster--AAAAAAkS03EB_9va7kkDKVMUpArYJZbGfa6ZnO04bkUUBGSQrc6CFCeJSz8Hs4ImcEOHP8A5VYFsu6sVhekeQmtWInWENro877uem73WNyYYBrDffmXKXcpHRBdX3Y_BnfKnMgUx6J0kujdsTGkglMJJ140";
+        return "ucloud--cluster--AAAAAIwHTZZ7mINovNwBUiUugLadA_CbXrWGgP3zEipIDW-6WKy3k7Sp9Ed7pFyjgTPAcbmvg3b5uuo3RY66zNvgahUc9nta-1DBpl3CzDVy2BJY5tRIcyqaiX3ZOCHyC-BZk1QnWY5TKxwpmFCMwvlKeGg";
         let t = cc.sys.localStorage.getItem("token");
         if (!t) {
             this.goBackLogin();

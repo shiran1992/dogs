@@ -203,7 +203,7 @@ cc.Class({
         this.managerData.active = false;
         this.qNum.node.active = false;
         this.rightView.active = false;
-        if(this.readyNode){
+        if (this.readyNode) {
             this.scriptReady.doDestroy();
             this.readyNode = null;
         }
@@ -439,13 +439,12 @@ cc.Class({
             this.successNode.getComponent("PKSuccess").doDestroy();
             this.successNode = null;
         }
-        if (this.rank) {
-            cc.log("排行：", this.rank);
-            if (!this.rankNode) {
-                this.rankNode = cc.instantiate(this.rankPrefab);
-                this.rankCon.addChild(this.rankNode);
-                this.centerView.active = false;
-            }
+
+        cc.log("排行：", this.rank);
+        if (!this.rankNode) {
+            this.rankNode = cc.instantiate(this.rankPrefab);
+            this.rankCon.addChild(this.rankNode);
+            this.centerView.active = false;
         }
     },
 

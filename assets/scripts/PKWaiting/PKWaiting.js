@@ -12,6 +12,8 @@ cc.Class({
         startSoon: cc.Prefab,//马上开始
         startAfter: cc.Prefab,//以后开始
         pkOver: cc.Prefab,//比赛已经结束
+        pkRanking: cc.Prefab,//排行榜
+        rankCon: cc.Node,//排行榜容器
     },
 
     ctor() {
@@ -193,6 +195,11 @@ cc.Class({
         this.node.addChild(overNode);
         let script = overNode.getComponent("PkOver");
         script.setData(this._pkRoom);
+        script.setCallBack(() => {
+            let rankNode = cc.instantiate(this.pkRanking);
+            this.rankCon.addChild(rankNode);
+            script.doDestroy();
+        });
     },
 
     /************************************点击事件**************************************/
@@ -212,35 +219,6 @@ cc.Class({
                 }
             });
         });
-    },
-
-    /************************************回调事件**************************************/
-    //消息接受
-    onReceive(message) {
-        if (message && message.ext) {
-            let ext = message.ext;
-            if (ext.msgType == 4) {//0-试题信息   1-答题统计信息   2-排行榜信息   3-全进覆没   4-比赛开始   5-加入聊天室
-                cc.log("开始答题：", message);
-                //此时收到开始答题的通知，提前预加载下面答题页的场景数据
-                cc.director.preloadScene("PKGame", function () {
-                    cc.log('预加载答题场景已完成');
-                });
-                if (this.scriptReady) {
-                    this.scriptReady.startAnimation(() => {
-                        cc.director.loadScene("PKGame");
-                    });
-                }
-            } else if (ext.msgType == 5) {
-                //有新人加入聊天室
-                if (this.scriptReady) {
-                    this.scriptReady.addChatRoom({
-                        avatar: ext.avatar,
-                        cName: "",
-                        userId: ext.userId
-                    });
-                }
-            }
-        }
     },
 
     onDestroy() {

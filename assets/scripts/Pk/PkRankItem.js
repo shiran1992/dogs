@@ -14,7 +14,6 @@ cc.Class({
     },
 
     initView(obj = {}) {
-        this.node.runAction(cc.sequence(cc.delayTime(0.08), cc.scaleTo(0.1, 1.05)));
         let num = parseInt(obj.orderIndex, 10);
         if (num < 4) {
             this.icon.node.active = true;
@@ -25,10 +24,10 @@ cc.Class({
             this.num.node.active = true;
             this.num.string = num;
         }
-        if (obj.cName.length > 4) {
+        if (obj.cName && obj.cName.length > 4) {
             this.nick.string = obj.cName.substr(0, 4) + "...";
         } else {
-            this.nick.string = obj.cName;
+            this.nick.string = obj.cName || "";
         }
         this.score.string = obj.getScore + "分";
         this.tishu.string = obj.totalRightNum + "题";

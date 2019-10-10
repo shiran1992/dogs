@@ -246,8 +246,10 @@
     },
     "_enabled": true,
     "isAlignOnce": true,
-    "_target": null,
-    "_alignFlags": 0,
+    "_target": {
+      "__id__": 1
+    },
+    "_alignFlags": 16,
     "_left": 0,
     "_right": 0,
     "_top": 192,

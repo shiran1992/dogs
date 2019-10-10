@@ -157,6 +157,8 @@ cc.Class({
 
                     time--;
                 } else {
+                    this.delay.active = true;
+                    this.head.active = false;
                     this.timer1 && clearInterval(this.timer1);
                     this.timer1 = null;
                 }
@@ -172,7 +174,7 @@ cc.Class({
             let waitUserCount = data.waitUserCount || 0;
             let users = data.userList || [];
             this.num.string = waitUserCount + "人正在等待";
-            for (let i = 0; i < USER_HEAD_NUM; i++) {
+            for (let i = 0; i < users.length; i++) {
                 let headNode = this.userlist.getChildByTag("HEAD" + i);
                 let script = headNode.getComponent("PkHeadNode");
                 script.setData(users[i]);
