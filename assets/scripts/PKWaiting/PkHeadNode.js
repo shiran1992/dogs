@@ -18,7 +18,7 @@ cc.Class({
 
     initView() {
         if (this._userInfo) {
-            this._userInfo.avatar && Helper.loadHttpImg(this.head, this._userInfo.avatar);
+            Helper.loadHttpImg(this.head, this._userInfo.avatar);
         }
     },
 });
