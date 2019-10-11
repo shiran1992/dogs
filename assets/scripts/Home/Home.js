@@ -41,13 +41,12 @@ cc.Class({
     },
 
     onLoad() {
+        //2.加载字体
+        cc.loader.loadRes("font/zzgfxy.ttf");
         //1.加载域名
         cc.loader.loadRes("DomainConfig.json", (err, data) => {
             if (data && data.domain) {
                 Helper.setDomain(data.domain);
-
-                //2.加载字体
-                cc.loader.loadRes("font/zzgfxy.ttf");
 
                 //3.加载index数据接口
                 this.sendRequst();
