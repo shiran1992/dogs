@@ -232,7 +232,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 166,
+      "width": 132,
       "height": 166
     },
     "_rotationX": 0,
@@ -260,7 +260,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "2a444077-3ae2-43a3-88ab-944eed467b30"
+      "__uuid__": "8b007d13-e85d-4585-8efd-2a8e0b681ff0"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -275,7 +275,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "a64ded77-83aa-471f-ad82-d643049a38a7"
+    }
   },
   {
     "__type__": "cc.Widget",
@@ -291,7 +293,7 @@
     },
     "_alignFlags": 33,
     "_left": 0,
-    "_right": -22,
+    "_right": -5,
     "_top": -9,
     "_bottom": 0,
     "_verticalCenter": 0,
@@ -382,7 +384,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "10eae489-a2bf-40f3-9414-c6503eca0654"
+      "__uuid__": "0ee7b7a3-1e65-421c-bc49-ed4d071a677d"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -397,7 +399,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "a64ded77-83aa-471f-ad82-d643049a38a7"
+    }
   },
   {
     "__type__": "cc.Widget",
@@ -479,19 +483,19 @@
     },
     "selectFrame": [
       {
-        "__uuid__": "2a444077-3ae2-43a3-88ab-944eed467b30"
+        "__uuid__": "8b007d13-e85d-4585-8efd-2a8e0b681ff0"
       },
       {
-        "__uuid__": "aa8139a4-06ee-4880-b1f0-d471750b2cb5"
+        "__uuid__": "8ba44859-c5e1-48a4-82e1-f02a272f51e0"
       },
       {
-        "__uuid__": "c0cbd503-929b-4393-aa5d-cb795182254c"
+        "__uuid__": "e0c277cb-1b68-49f1-b4e5-af9bf8021bed"
       },
       {
-        "__uuid__": "b73fba5d-c3b5-4071-bd84-bdb4977f8822"
+        "__uuid__": "e9d33724-e535-4018-a8b3-64b1c78039af"
       },
       {
-        "__uuid__": "d87e4847-5153-482b-8a6a-51cfd5d182e5"
+        "__uuid__": "f4745acc-cc32-435d-a223-d4811a309f66"
       }
     ],
     "_itemData": null,
