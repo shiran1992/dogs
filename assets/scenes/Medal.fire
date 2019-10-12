@@ -1723,8 +1723,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 750,
-      "height": 220
+      "width": 752,
+      "height": 222
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1808,7 +1808,7 @@
     "defaultSkin": "",
     "defaultAnimation": "animation",
     "loop": true,
-    "premultipliedAlpha": true,
+    "_premultipliedAlpha": true,
     "_N$skeletonData": {
       "__uuid__": "ac7388d0-0395-4393-aa7b-186dba39f294"
     },
@@ -1950,7 +1950,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "b4a29ed5-1a0b-4e18-bebb-98aab58a9c2c"
+      "__uuid__": "9da5e01a-a0fd-453a-a5cc-8d19c885319e"
     },
     "_type": 1,
     "_sizeMode": 2,
@@ -1965,7 +1965,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "89964af6-e03d-4cae-96d5-59f82a0a1dc7"
+    }
   },
   {
     "__type__": "cc.Button",
@@ -2088,8 +2090,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 45,
-      "height": 51
+      "width": 46,
+      "height": 52
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -2116,7 +2118,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "1d5e02d2-849d-4f23-9659-bc41621f810b"
+      "__uuid__": "82f68aab-9714-448c-9495-6cbb81b4d206"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -2131,7 +2133,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "89964af6-e03d-4cae-96d5-59f82a0a1dc7"
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2282,7 +2286,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "f10d9cfd-8468-4647-8f89-f992dcc95c74"
+      "__uuid__": "9f33e53d-bca4-4877-99ed-ab2ce1c026bb"
     },
     "_type": 1,
     "_sizeMode": 2,
@@ -2297,7 +2301,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "89964af6-e03d-4cae-96d5-59f82a0a1dc7"
+    }
   },
   {
     "__type__": "cc.Button",
@@ -2438,7 +2444,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "585ad302-a32e-4b14-9296-25a6c41cb493"
+      "__uuid__": "a3999cc3-e1ab-4e3c-a3b2-f6c59a8a24c6"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -2453,7 +2459,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "89964af6-e03d-4cae-96d5-59f82a0a1dc7"
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2475,10 +2483,10 @@
     },
     "_enabled": true,
     "open": {
-      "__uuid__": "585ad302-a32e-4b14-9296-25a6c41cb493"
+      "__uuid__": "a3999cc3-e1ab-4e3c-a3b2-f6c59a8a24c6"
     },
     "close": {
-      "__uuid__": "1b4c5636-4a18-4d71-898b-4107a9c78d6d"
+      "__uuid__": "8b56a2c0-1ec1-44d8-8d98-1e0ba820b400"
     },
     "musicIcon": {
       "__id__": 71
@@ -2530,8 +2538,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 750,
-      "height": 109
+      "width": 752,
+      "height": 111
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -2558,7 +2566,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "0faec243-8b8b-4b49-a73c-570502fa6bd5"
+      "__uuid__": "7bf996b6-c7ee-4c26-8064-54b2f8c34df5"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -2573,7 +2581,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "6f903891-9b7c-4412-ae28-26b1f8a8634d"
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2595,7 +2605,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "8fdd7ab6-52f2-43ad-9fea-4164ac8753b3"
+      "__uuid__": "e5b39010-4f6b-4533-baa9-b5eb8f5dc54b"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -2610,7 +2620,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "6f903891-9b7c-4412-ae28-26b1f8a8634d"
+    }
   },
   {
     "__type__": "cc.Widget",
@@ -2625,7 +2637,7 @@
     "_alignFlags": 1,
     "_left": 0,
     "_right": 0,
-    "_top": 0,
+    "_top": -1,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,

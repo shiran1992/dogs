@@ -230,7 +230,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "b04d9346-d956-4eeb-a193-ab88fa87e333"
+      "__uuid__": "05832792-ed06-413f-b852-943eccf73ba3"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -245,7 +245,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "133a8f64-d360-4141-83ed-0b0793b2aa56"
+    }
   },
   {
     "__type__": "cc.ProgressBar",
@@ -428,8 +430,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 524,
-      "height": 54
+      "width": 526,
+      "height": 56
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -456,7 +458,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "f8d71652-8bcc-41e2-9bb5-e8d792a33a92"
+      "__uuid__": "0e8bc6af-4aff-4741-a7cb-d4e550f2756e"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -471,7 +473,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "133a8f64-d360-4141-83ed-0b0793b2aa56"
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -519,8 +523,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 524,
-      "height": 54
+      "width": 526,
+      "height": 56
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -547,7 +551,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "5e724317-f01b-401a-8d2d-18d91d20f888"
+      "__uuid__": "33c7665f-8611-41f1-9bdb-2bca03df0aee"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -562,7 +566,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "133a8f64-d360-4141-83ed-0b0793b2aa56"
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -586,7 +592,7 @@
     "_type": 2,
     "_segements": 64,
     "_N$spriteFrame": {
-      "__uuid__": "9d069b32-29ea-436f-87b5-5a6ae63d915e"
+      "__uuid__": "1d87042f-d757-4310-8873-220210696b59"
     },
     "_N$alphaThreshold": 1,
     "_N$inverted": false
