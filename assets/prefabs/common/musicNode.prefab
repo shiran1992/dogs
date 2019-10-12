@@ -132,7 +132,9 @@
       "__id__": 2
     },
     "_enabled": true,
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "9f33e53d-bca4-4877-99ed-ab2ce1c026bb"
+    },
     "_type": 1,
     "_sizeMode": 2,
     "_fillType": 0,
@@ -146,7 +148,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "89964af6-e03d-4cae-96d5-59f82a0a1dc7"
+    }
   },
   {
     "__type__": "cc.Button",
@@ -286,7 +290,9 @@
       "__id__": 7
     },
     "_enabled": true,
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "a3999cc3-e1ab-4e3c-a3b2-f6c59a8a24c6"
+    },
     "_type": 0,
     "_sizeMode": 1,
     "_fillType": 0,
@@ -300,7 +306,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "89964af6-e03d-4cae-96d5-59f82a0a1dc7"
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -321,9 +329,11 @@
       "__id__": 1
     },
     "_enabled": true,
-    "open": null,
+    "open": {
+      "__uuid__": "a3999cc3-e1ab-4e3c-a3b2-f6c59a8a24c6"
+    },
     "close": {
-      "__uuid__": "1b4c5636-4a18-4d71-898b-4107a9c78d6d"
+      "__uuid__": "8b56a2c0-1ec1-44d8-8d98-1e0ba820b400"
     },
     "musicIcon": {
       "__id__": 8
