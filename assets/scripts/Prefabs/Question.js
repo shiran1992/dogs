@@ -15,7 +15,7 @@ cc.Class({
     properties: {
         questionLabel: cc.RichText, //题目内容
         optionPrefab: cc.Prefab, //题目选项
-        iBPrefab: cc.Prefab, //查看图片组件
+        pkIBPrefab: cc.Prefab, //查看图片组件
         submitPrefab: cc.Prefab, //提交答案按钮
         resultPopPrefab: cc.Prefab, //选择答案之后的结果框
         resultHintPrefab: cc.Prefab, //回答问题之后下面的提示信息
@@ -53,9 +53,9 @@ cc.Class({
         this.questionLabel.string = richText;
         //判断是否需要显示图片
         if (obj.imageUrl) {
-            let imgBrowser = cc.instantiate(this.iBPrefab);
+            let imgBrowser = cc.instantiate(this.pkIBPrefab);
             this.node.addChild(imgBrowser);
-            let imgBrowserScript = imgBrowser.getComponent('QImage');
+            let imgBrowserScript = imgBrowser.getComponent('PkQImage');
             imgBrowserScript.initView(obj.imageUrl);
         }
         //创建选项
