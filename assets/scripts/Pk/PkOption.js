@@ -95,7 +95,7 @@ cc.Class({
             this.blueLine.active = true;
             this.bdata.string = item.totalNum + "人" + " (" + (+item.proportion) + "%)";
             // 1s过度动画
-            this.bbar.width = 200;
+            this.bbar.width = 0;
 
             this.timer = setInterval(() => {
                 if (this.bbar.width <= (200 - +item.proportion * 2)) {
@@ -109,7 +109,7 @@ cc.Class({
             this.yellowLine.active = true;
             this.ydata.string = item.totalNum + "人" + " (" + (+item.proportion) + "%)";
             // 1s过度动画
-            this.ybar.width = 200;
+            this.ybar.width = 0;
 
             this.timer = setInterval(() => {
                 if (this.ybar.width <= (200 - +item.proportion * 2)) {
