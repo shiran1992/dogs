@@ -2,16 +2,16 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        spriteNode: cc.Sprite,
         dot0: cc.Node,
         dot1: cc.Node,
         dot2: cc.Node,
-    },
-
-    onLoad() {
-        this.startAnimation();
+        imgs: [cc.SpriteFrame]
     },
 
     startAnimation() {
+        this.spriteNode.spriteFrame = this.imgs[0];
+
         let num = 0;
         this.timer && clearInterval(this.timer);
         this.timer = null;
@@ -27,6 +27,8 @@ cc.Class({
     },
 
     stopAnimation() {
+        this.spriteNode.spriteFrame = this.imgs[1];
+        
         this.timer && clearInterval(this.timer);
         this.timer = null;
         this.dot0.active = false;

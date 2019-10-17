@@ -480,9 +480,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 133,
-      "g": 48,
-      "b": 48,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -493,8 +493,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 46,
-      "height": 60
+      "width": 45,
+      "height": 45
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -503,7 +503,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0
+      "y": 15
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -526,11 +526,11 @@
     "_lineHeight": 60,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "d554cec3-955d-40f2-bf90-bf9e5867f374"
+      "__uuid__": "0dc5b392-c46a-4014-b93c-1a8101d3c54f"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "-",
+    "_N$string": "0",
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 0,
     "_N$fontFamily": "Arial",
@@ -666,9 +666,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 133,
-      "g": 48,
-      "b": 48,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -679,8 +679,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 46,
-      "height": 60
+      "width": 45,
+      "height": 45
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -689,7 +689,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 2
+      "y": 15
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -712,11 +712,11 @@
     "_lineHeight": 60,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "d554cec3-955d-40f2-bf90-bf9e5867f374"
+      "__uuid__": "0dc5b392-c46a-4014-b93c-1a8101d3c54f"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "-",
+    "_N$string": "0",
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 0,
     "_N$fontFamily": "Arial",
@@ -852,9 +852,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 133,
-      "g": 48,
-      "b": 48,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -865,8 +865,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 46,
-      "height": 60
+      "width": 45,
+      "height": 45
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -875,7 +875,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 2
+      "y": 15
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -898,11 +898,11 @@
     "_lineHeight": 60,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "d554cec3-955d-40f2-bf90-bf9e5867f374"
+      "__uuid__": "0dc5b392-c46a-4014-b93c-1a8101d3c54f"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "-",
+    "_N$string": "0",
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 0,
     "_N$fontFamily": "Arial",
@@ -1038,9 +1038,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 133,
-      "g": 48,
-      "b": 48,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -1051,8 +1051,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 46,
-      "height": 60
+      "width": 45,
+      "height": 45
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1061,7 +1061,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 2
+      "y": 15
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1084,11 +1084,11 @@
     "_lineHeight": 60,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "d554cec3-955d-40f2-bf90-bf9e5867f374"
+      "__uuid__": "0dc5b392-c46a-4014-b93c-1a8101d3c54f"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "-",
+    "_N$string": "0",
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 0,
     "_N$fontFamily": "Arial",
@@ -1224,9 +1224,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 133,
-      "g": 48,
-      "b": 48,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -1237,8 +1237,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 46,
-      "height": 60
+      "width": 45,
+      "height": 45
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1247,7 +1247,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 3
+      "y": 15
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1270,11 +1270,11 @@
     "_lineHeight": 60,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "d554cec3-955d-40f2-bf90-bf9e5867f374"
+      "__uuid__": "0dc5b392-c46a-4014-b93c-1a8101d3c54f"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "-",
+    "_N$string": "0",
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 0,
     "_N$fontFamily": "Arial",
@@ -1410,9 +1410,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 133,
-      "g": 48,
-      "b": 48,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -1423,8 +1423,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 46,
-      "height": 60
+      "width": 45,
+      "height": 45
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1433,7 +1433,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 2
+      "y": 15
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1456,11 +1456,11 @@
     "_lineHeight": 60,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "d554cec3-955d-40f2-bf90-bf9e5867f374"
+      "__uuid__": "0dc5b392-c46a-4014-b93c-1a8101d3c54f"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "-",
+    "_N$string": "0",
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 0,
     "_N$fontFamily": "Arial",

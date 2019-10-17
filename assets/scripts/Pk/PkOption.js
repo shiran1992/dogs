@@ -98,11 +98,11 @@ cc.Class({
             this.bbar.width = 0;
 
             this.timer = setInterval(() => {
-                if (this.bbar.width <= (200 - +item.proportion * 2)) {
+                if (this.bbar.width >= +item.proportion * 2) {
                     clearInterval(this.timer);
                     this.timer = null;
                 } else {
-                    this.bbar.width -= 4;
+                    this.bbar.width += 4;
                 }
             }, 20);
         } else {
@@ -112,11 +112,11 @@ cc.Class({
             this.ybar.width = 0;
 
             this.timer = setInterval(() => {
-                if (this.ybar.width <= (200 - +item.proportion * 2)) {
+                if (this.ybar.width >= +item.proportion * 2) {
                     clearInterval(this.timer);
                     this.timer = null;
                 } else {
-                    this.ybar.width -= 4;
+                    this.ybar.width += 4;
                 }
             }, 20);
         }

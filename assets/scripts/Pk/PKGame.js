@@ -433,6 +433,7 @@ cc.Class({
     //显示排行榜
     renderRankView() {
         this.banner.active = false;
+        this.managerData.active = false;
         //如果闯关成功界面存在
         if (this.successNode) {
             this.successNode.opacity = 0;
