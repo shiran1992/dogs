@@ -28,9 +28,9 @@ cc.Class({
     onClickBtn() {
         let obj = {
             stageId: DataUtil.getPkStageId(),
-            records: JSON.stringify(DataUtil.getRecords() || [])
+            records: DataUtil.getRecords() || []
         };
-        Http.getInstance().httpPost("log", obj, { encryt: true }, (json) => {
+        Http.getInstance().httpPost("log", obj, { encryt: false }, (json) => {
             DataUtil.clearRecords();
             alert("感谢您的提交");
         });

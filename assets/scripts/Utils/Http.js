@@ -124,7 +124,7 @@ let httpUtils = cc.Class({
         xhr.setRequestHeader("content-Type", "application/json");
         xhr.timeout = 10000;
         let pString = JSON.stringify(param);
-        xhr.send(this.doEncryption(pString));
+        xhr.send(config.encryt ? this.doEncryption(pString) : pString);
     },
 
     //加密

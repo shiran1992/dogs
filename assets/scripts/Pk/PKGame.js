@@ -396,6 +396,7 @@ cc.Class({
                             return;
                         }
                     }
+
                     if (isLast) {
                         this.removeLastQuestion();
                         this.model.active = false;
@@ -411,7 +412,7 @@ cc.Class({
                             this.revertData();
                         }
                     }
-                }, 1500);
+                }, 3500);
             }
         } else if (model == 1) {
             if (isLast) {
