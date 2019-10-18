@@ -40,10 +40,12 @@ cc.Class({
     onLoad() {
         cc.game.on(cc.game.EVENT_SHOW, (event) => {
             cc.log('emit cc.game.EVENT_SHOW!');
+            DataUtil.setRecords({eName: "屏幕获得焦点", time: new Date(), data: null});
             this.loadData();
         });
 
         cc.game.on(cc.game.EVENT_HIDE, (event) => {
+            DataUtil.setRecords({eName: "屏幕失去焦点", time: new Date(), data: null});
             cc.log('emit cc.game.EVENT_HIDE!');
         });
     },
@@ -81,6 +83,7 @@ cc.Class({
         let stageId = DataUtil.getPkStageId();
         Http.getInstance().httpGet("pk/stage/" + stageId + "/join", (json) => {
             cc.log("准备信息：", json);
+            DataUtil.setRecords({eName: "拿到join接口数据", time: new Date(), data: json});
             if (json && json.code == 0) {
                 let data = json.data || {};
                 DataUtil.setPkJoin(data);

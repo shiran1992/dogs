@@ -14,6 +14,7 @@ cc.Class({
 
     //点击确定
     onClickOK() {
+        DataUtil.setRecords({eName: "退出观众模式", time: new Date(), data: null});
         cc.director.loadScene("Home", () => {
             let pkRoom = DataUtil.getPkRoom();
             WebIM.conn && WebIM.conn.quitChatRoom({

@@ -46,6 +46,7 @@ cc.Class({
 
     //点击马上开始
     onClickStart() {
+        DataUtil.setRecords({eName: "点击马上开始", time: new Date(), data: null});
         this._callback && this._callback();
     },
 });

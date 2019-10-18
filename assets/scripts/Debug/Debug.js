@@ -7,15 +7,33 @@ cc.Class({
 
     properties: {
         submitBtn: cc.Button,
-        textLabel: cc.Label
+        textLabel: cc.Label,
+        content: cc.Node,
     },
 
     onLoad() {
-        this.textLabel.string = "dfhdfbsdjfsbndjfnsdjfnsdjfnsdjdjdjnfffj当局东方酒店房间内的附加功能的附加功能的附加功能"
+        let records = DataUtil.getRecords() || [];
+        for (let i = 0; i < records.length; i++) {
+            let node = new cc.Node();
+            let label = node.addComponent(cc.Label);
+            node.color = new cc.Color(0, 0, 0);
+            label.string = "-----" + JSON.stringify(records[i]);
+            label.fontSize = 20;
+            node.parent = this.content;
+            label.overflow = cc.Label.Overflow.RESIZE_HEIGHT;
+            node.width = 720;
+        }
     },
 
     onClickBtn() {
-        alert("点击提交");
+        let obj = {
+            stageId: DataUtil.getPkStageId(),
+            records: JSON.stringify(DataUtil.getRecords() || [])
+        };
+        Http.getInstance().httpPost("log", obj, { encryt: true }, (json) => {
+            DataUtil.clearRecords();
+            alert("感谢您的提交");
+        });
     },
 
     onclickBack() {

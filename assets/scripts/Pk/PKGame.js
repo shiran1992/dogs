@@ -114,6 +114,7 @@ cc.Class({
             pwd: hxPassword,
             appKey: WebIM.config.appkey,
             success: (token) => {
+                DataUtil.setRecords({ eName: "连接环信成功", time: new Date(), data: null });
                 cc.log("---------------success:", token);
                 callback && callback();
             },
@@ -329,6 +330,7 @@ cc.Class({
     //点击关闭
     onClickClose() {
         console.log("排行榜关闭按钮");
+        DataUtil.setRecords({ eName: "点击关闭按钮", time: new Date(), data: null });
         cc.director.loadScene("Home", () => {
             let pkRoom = DataUtil.getPkRoom();
             WebIM.conn && WebIM.conn.quitChatRoom({
@@ -511,5 +513,11 @@ cc.Class({
 
     onDestroy() {
         this.timer && clearTimeout(this.timer);
+    },
+
+    renderRecord() {
+        WebIMManager.setCallback(null);
+        this.timer && clearTimeout(this.timer);
+        cc.director.loadScene("Debug", () => {});
     }
 });

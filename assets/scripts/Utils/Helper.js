@@ -91,39 +91,42 @@ function loadHttpImg(sprite, url, config) {
     if (!url) {
         return;
     }
+    try {
+        cc.loader.load({ url: url, type: "png" || "jpg" || "jpeg" }, (err, texture) => {
+            if (!err) {
+                if (config && config.type == 'zoom') {
+                    let sw = sprite.node.width;
 
-    cc.loader.load({ url: url, type: "png" || "jpg" || "jpeg" }, (err, texture) => {
-        if (!err) {
-            if (config && config.type == 'zoom') {
-                let sw = sprite.node.width;
+                    let iw = texture.width;
+                    let ih = texture.height;
+                    let il = ih / iw;
 
-                let iw = texture.width;
-                let ih = texture.height;
-                let il = ih / iw;
+                    texture.width = sw;
+                    texture.height = il * sw;
 
-                texture.width = sw;
-                texture.height = il * sw;
+                    sprite.node.width = sw;
+                    sprite.node.height = il * sw;
+                } else if (config && config.type == 'display') {
+                    let sw = sprite.node.width;
 
-                sprite.node.width = sw;
-                sprite.node.height = il * sw;
-            } else if (config && config.type == 'display') {
-                let sw = sprite.node.width;
+                    let iw = texture.width;
+                    let ih = texture.height;
+                    let il = ih / iw;
 
-                let iw = texture.width;
-                let ih = texture.height;
-                let il = ih / iw;
+                    texture.width = sw;
+                    texture.height = il * sw;
+                    sprite.node.height = il * sw;
+                } else if (config && config.type == 'limit') {
+                    sprite.node.width = config.width;
+                    sprite.node.height = config.width / texture.width * texture.height;
+                }
 
-                texture.width = sw;
-                texture.height = il * sw;
-                sprite.node.height = il * sw;
-            } else if (config && config.type == 'limit') {
-                sprite.node.width = config.width;
-                sprite.node.height = config.width / texture.width * texture.height;
+                sprite.spriteFrame = new cc.SpriteFrame(texture);
             }
-
-            sprite.spriteFrame = new cc.SpriteFrame(texture);
-        }
-    });
+        });
+    } catch (e) {
+        DataUtil.setRecords({eName: "加载题干中的题目有报错", time: new Date(), data: e});
+    }
 }
 
 //播放背景音乐
