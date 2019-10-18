@@ -7,7 +7,6 @@ cc.Class({
 
     properties: {
         submitBtn: cc.Button,
-        textLabel: cc.Label,
         content: cc.Node,
     },
 
