@@ -35,6 +35,7 @@ cc.Class({
         outAudiencePrefab: cc.Prefab,//退出观众模式
         successPrefab: cc.Prefab,//闯关成功
         rankPrefab: cc.Prefab,//排行榜
+        homeLoading: cc.Prefab,//加载home页loading
     },
 
     ctor() {
@@ -89,8 +90,10 @@ cc.Class({
         }
 
         //初始化
-        WebIMManager.initWebIM((message) => { this.onReceive(message); });
-        this.startWebIM();
+        if (WebIM.conn) {
+            WebIMManager.initWebIM((message) => { this.onReceive(message); });
+            this.startWebIM();
+        }
     },
 
     //比赛已经开始，到等待界面(这个时候有可能PK已经开始了，但是管理员没有发题)
@@ -329,21 +332,11 @@ cc.Class({
 
     //点击关闭
     onClickClose() {
-        console.log("排行榜关闭按钮");
         DataUtil.setRecords({ eName: "点击关闭按钮", time: new Date(), data: null });
-        cc.director.loadScene("Home", () => {
-            let pkRoom = DataUtil.getPkRoom();
-            WebIM.conn && WebIM.conn.quitChatRoom({
-                roomId: pkRoom.chatRoomId, // 聊天室id
-                success: function (m) {
-                    WebIM.conn.close();
-                    cc.log("##########################joinChatRoom m:" + m);
-                },
-                error: function () {
-                    cc.log("##########################joinChatRoom error:");
-                }
-            });
-        });
+        let loadingPre = cc.instantiate(this.homeLoading);
+        let scp = loadingPre.getComponent("HomeLoading");
+        scp.setPreLoadScene("Home");
+        loadingPre.parent = this.node;
     },
 
     //显示图片预览
@@ -370,6 +363,13 @@ cc.Class({
     outAudienceModel() {
         this.outAudienceNode = cc.instantiate(this.outAudiencePrefab);
         this.node.addChild(this.outAudienceNode);
+        let script = this.outAudienceNode.getComponent("BackAudienceModel");
+        script.setCallback(() => {
+            let loadingPre = cc.instantiate(this.homeLoading);
+            let scp = loadingPre.getComponent("HomeLoading");
+            scp.setPreLoadScene("Home");
+            loadingPre.parent = this.node;
+        });
     },
 
     //数据统计的结果
@@ -519,6 +519,6 @@ cc.Class({
     renderRecord() {
         WebIMManager.setCallback(null);
         this.timer && clearTimeout(this.timer);
-        cc.director.loadScene("Debug", () => {});
+        cc.director.loadScene("Debug", () => { });
     }
 });

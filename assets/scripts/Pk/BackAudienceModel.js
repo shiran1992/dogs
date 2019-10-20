@@ -3,8 +3,12 @@ const DataUtil = require('DataUtil');
 cc.Class({
     extends: cc.Component,
 
-    properties: {
+    ctor() {
+        this._callback = null;
+    },
 
+    setCallback(cb) {
+        this._callback = cb;
     },
 
     //点击取消
@@ -14,19 +18,7 @@ cc.Class({
 
     //点击确定
     onClickOK() {
-        DataUtil.setRecords({eName: "退出观众模式", time: new Date(), data: null});
-        cc.director.loadScene("Home", () => {
-            let pkRoom = DataUtil.getPkRoom();
-            WebIM.conn && WebIM.conn.quitChatRoom({
-                roomId: pkRoom.chatRoomId, // 聊天室id
-                success: function (m) {
-                    WebIM.conn.close();
-                    cc.log("##########################joinChatRoom m:" + m);
-                },
-                error: function () {
-                    cc.log("##########################joinChatRoom error:");
-                }
-            });
-        });
+        DataUtil.setRecords({ eName: "退出观众模式", time: new Date(), data: null });
+        this._callback && this._callback();
     },
 });

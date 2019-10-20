@@ -90,7 +90,7 @@ cc.Class({
                 this._pkJoin = data;
                 this._users = data.userList || [];
                 this._users.reverse();
-                this._curUsers = this._users.concat([]).splice(0, USER_HEAD_NUM);
+                this._curUsers = this._users.concat([]).slice(0, USER_HEAD_NUM);
 
                 let systemTime = this._pkJoin.systemTime; //服务器当前系统时间
                 let startTime = this._pkJoin.startTime; //服务器指定的比赛开始时间
@@ -176,6 +176,7 @@ cc.Class({
         if (data) {
             let waitUserCount = data.waitUserCount || 0;
             let users = data.userList || [];
+            users = users.slice(0, USER_HEAD_NUM);
             this.num.string = waitUserCount + "人正在等待";
             for (let i = 0; i < users.length; i++) {
                 let headNode = this.userlist.getChildByTag("HEAD" + i);
