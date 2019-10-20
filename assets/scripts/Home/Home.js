@@ -318,6 +318,7 @@ cc.Class({
             this.scrollViewNode4.active = true;
             itemRoot = this.scroll4.content;
         } else if (data.length >= 5) {
+            data = data.slice(0, 5);
             this.scrollViewNode5.active = true;
             itemRoot = this.scroll5.content;
         }
