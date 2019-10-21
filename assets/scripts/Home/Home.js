@@ -71,6 +71,18 @@ cc.Class({
         });
 
         Helper.loadErrorPop();
+
+        if (window.isApp) {
+            window.yxt.ui.message.post({
+                param: {
+                    name: 'keepLight'
+                },
+                onSuccess: () => {
+                },
+                onFail: () => {
+                }
+            })
+        }
     },
 
     sendRequst() {
