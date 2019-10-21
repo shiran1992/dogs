@@ -11,17 +11,18 @@ cc.Class({
     },
 
     onLoad() {
-        let records = DataUtil.getRecords() || [];
-        for (let i = 0; i < records.length; i++) {
+        //let records = DataUtil.getRecords() || [];
+        //for (let i = 0; i < records.length; i++) {
             let node = new cc.Node();
             let label = node.addComponent(cc.Label);
             node.color = new cc.Color(0, 0, 0);
-            label.string = "-----" + JSON.stringify(records[i]);
+            //label.string = "-----" + JSON.stringify(records[i]);
+            label.string = "点击提交即可"
             label.fontSize = 20;
             node.parent = this.content;
             label.overflow = cc.Label.Overflow.RESIZE_HEIGHT;
             node.width = 720;
-        }
+        //}
     },
 
     onClickBtn() {

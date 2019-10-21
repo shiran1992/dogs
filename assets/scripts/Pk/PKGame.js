@@ -435,6 +435,12 @@ cc.Class({
     renderRankView() {
         this.banner.active = false;
         this.managerData.active = false;
+        //中途进入显示的等待发题存在
+        if (this.waitQuestionNode) {
+            this.waitQuestionNode.getComponent("WaitQuestion").doDestroy();
+            this.waitQuestionNode = null;
+        }
+
         //如果闯关成功界面存在
         if (this.successNode) {
             this.successNode.opacity = 0;
