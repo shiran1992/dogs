@@ -10,17 +10,8 @@ cc.Class({
         bgNode: cc.Node,
         scroll: cc.ScrollView,
 
-        scrollViewNode1: cc.Node,
-        scrollViewNode2: cc.Node,
-        scrollViewNode3: cc.Node,
-        scrollViewNode4: cc.Node,
-        scrollViewNode5: cc.Node,
-
-        scroll1: cc.ScrollView,
-        scroll2: cc.ScrollView,
-        scroll3: cc.ScrollView,
-        scroll4: cc.ScrollView,
-        scroll5: cc.ScrollView,
+        pkItems: [cc.Node],
+        contents: [cc.Node],
 
         pItem: cc.Node,
         pkItem: cc.Prefab,//首页PK赛列表Item
@@ -71,7 +62,7 @@ cc.Class({
         });
 
         Helper.loadErrorPop();
-
+        //保证app中不息屏
         if (window.isApp) {
             window.yxt.ui.message.post({
                 param: {
@@ -87,8 +78,20 @@ cc.Class({
 
     sendRequst() {
         Http.getInstance().httpGet("index", (json) => {
-            //增加错误界面提示
-            if (json.code != 0) {
+            if (json && json.code == 0) {
+                let data = json.data || {};
+                let userInfo = data.userInfo;
+                let gameStages = data.gameStages || [];
+                let gamePKInfos = data.gamePKInfos || [];
+                gamePKInfos = gamePKInfos.slice(0, 5);
+                //3.1加载用户信息
+                this.setUserInfo(userInfo);
+                //3.2加载关卡信息
+                this.loadItems(gameStages, gamePKInfos);
+                this.loadPkItems(gamePKInfos);
+                //3.3加载背景
+                this.initBg();
+            } else {
                 let errorPop = cc.instantiate(this.errorPop);
                 let errorPopScript = errorPop.getComponent('ErrorPop');
                 errorPopScript.initView(json);
@@ -100,23 +103,6 @@ cc.Class({
                 });
                 this.node.addChild(errorPop);
             }
-
-            if (json) {
-                let data = json.data || {};
-                let userInfo = data.userInfo;
-                let gameStages = data.gameStages || [];
-                let gamePKInfos = data.gamePKInfos || [];
-                gamePKInfos = gamePKInfos.slice(0, 5);
-
-                //3.1加载用户信息
-                this.setUserInfo(userInfo);
-                //3.2加载关卡信息
-                this.loadItems(gameStages, gamePKInfos);
-                this.loadPkItem(gamePKInfos);
-                //3.3加载背景
-                this.initBg();
-            }
-
         });
     },
 
@@ -314,42 +300,20 @@ cc.Class({
     },
 
     //加载ＰＫ赛数据
-    loadPkItem(data) {
-        let itemRoot = null;
-        if (!data || data.length == 0) {
-            //不显示
-        } else if (data.length == 1) {
-            this.scrollViewNode1.active = true;
-            itemRoot = this.scroll1.content;
-        } else if (data.length == 2) {
-            this.scrollViewNode2.active = true;
-            itemRoot = this.scroll2.content;
-        } else if (data.length == 3) {
-            this.scrollViewNode3.active = true;
-            itemRoot = this.scroll3.content;
-        } else if (data.length == 4) {
-            this.scrollViewNode4.active = true;
-            itemRoot = this.scroll4.content;
-        } else if (data.length >= 5) {
-            this.scrollViewNode5.active = true;
-            itemRoot = this.scroll5.content;
+    loadPkItems(items) {
+        if (!items.length) {
+            return;
         }
-        if (data && data.length > 0) {
-            let itemH = 0
-            for (let i = 0; i < data.length; i++) {
-                let itemData = data[i];
-                let item = cc.instantiate(this.pkItem);
-                item.parent = itemRoot;
-                let scp = item.getComponent("pkEnterItem");
-                scp.setData(itemData, i);
-
-                item.active = true;
-                this.itemList[i] = item;
-                itemH += (item.height + 15);
-            }
-            if (itemRoot) {
-                itemRoot.height = itemH;
-            }
+        this.pkItems[items.length - 1].active = true;
+        let itemRoot = this.contents[items.length - 1];
+        for (let i = 0; i < items.length; i++) {
+            let itemData = items[i];
+            let item = cc.instantiate(this.pkItem);
+            item.parent = itemRoot;
+            let scp = item.getComponent("pkEnterItem");
+            scp.setData(itemData, i);
+            item.active = true;
+            this.itemList[i] = item;
         }
     },
 
