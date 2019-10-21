@@ -92,8 +92,9 @@ cc.Class({
             if (json) {
                 let data = json.data || {};
                 let userInfo = data.userInfo;
-                let gameStages = data.gameStages;
-                let gamePKInfos = data.gamePKInfos;
+                let gameStages = data.gameStages || [];
+                let gamePKInfos = data.gamePKInfos || [];
+                gamePKInfos = gamePKInfos.slice(0, 5);
 
                 //3.1加载用户信息
                 this.setUserInfo(userInfo);
@@ -318,7 +319,6 @@ cc.Class({
             this.scrollViewNode4.active = true;
             itemRoot = this.scroll4.content;
         } else if (data.length >= 5) {
-            data = data.slice(0, 5);
             this.scrollViewNode5.active = true;
             itemRoot = this.scroll5.content;
         }

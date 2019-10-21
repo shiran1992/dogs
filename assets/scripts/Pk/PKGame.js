@@ -412,7 +412,7 @@ cc.Class({
                             this.revertData();
                         }
                     }
-                }, 3500);
+                }, 4000);
             }
         } else if (model == 1) {
             if (isLast) {

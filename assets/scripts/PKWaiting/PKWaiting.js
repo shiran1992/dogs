@@ -14,6 +14,7 @@ cc.Class({
         pkOver: cc.Prefab,//比赛已经结束
         pkRanking: cc.Prefab,//排行榜
         homeLoading: cc.Prefab,//加载home页loading
+        errorPop: cc.Prefab,
 
         rankCon: cc.Node,//排行榜容器
     },
@@ -104,6 +105,18 @@ cc.Class({
                 } else if (gameStatus == 2) {//比赛已经结束
                     this.renderOverView();
                 }
+            } else {
+                //错误处理
+                let errorPop = cc.instantiate(this.errorPop);
+                let errorPopScript = errorPop.getComponent('ErrorPop');
+                errorPopScript.initView(json);
+                errorPopScript.setCallBack(() => {
+                    errorPop.destroy();
+                    if (json.code != -1) {//本地断网只需要关闭弹窗
+                        cc.director.loadScene('Home');
+                    }
+                });
+                this.node.addChild(errorPop);
             }
         });
     },
