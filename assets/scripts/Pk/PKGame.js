@@ -90,10 +90,8 @@ cc.Class({
         }
 
         //初始化
-        if (WebIM.conn) {
-            WebIMManager.initWebIM((message) => { this.onReceive(message); });
-            this.startWebIM();
-        }
+        WebIMManager.initWebIM((message) => { this.onReceive(message); });
+        this.startWebIM();
     },
 
     //比赛已经开始，到等待界面(这个时候有可能PK已经开始了，但是管理员没有发题)

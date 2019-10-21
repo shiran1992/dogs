@@ -721,7 +721,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 2,
+      "width": 0,
       "height": 0
     },
     "_rotationX": 0,
@@ -2257,6 +2257,9 @@
     },
     "homeLoading": {
       "__uuid__": "540c5b44-1c5d-4758-9028-6706903d2d35"
+    },
+    "errorPop": {
+      "__uuid__": "3aba64da-3bc3-40ff-8563-506d0fa41ccf"
     },
     "rankCon": {
       "__id__": 26
