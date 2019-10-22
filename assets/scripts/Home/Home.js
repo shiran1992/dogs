@@ -342,7 +342,7 @@ cc.Class({
     homeBack() {
         Helper.playButtonMusic();
 
-        if (window.isApp) {
+        if (yxt.client === 'yxtapp') {
             window.yxt.ui.navigation.back({
                 onSuccess: function (data) {
                     if (data.isback) {
