@@ -413,21 +413,24 @@ cc.Class({
                 }, 4000);
             }
         } else if (model == 1) {
-            if (isLast) {
-                this.removeLastQuestion();
-                this.model.active = false;
-                this.backBtn.active = false;
-                this.banner.active = true;
-                this.qNum.node.active = false;
-                this.rightView.active = false;
-                this.closeBtn.active = true;
-                if (!this.successNode) {
-                    this.successNode = cc.instantiate(this.successPrefab);
-                    this.node.addChild(this.successNode);
-                    //比赛结束，还原数据
-                    this.revertData();
+            //做延迟的目的是为了等进度条显示完之后，显示淘汰或者成功
+            this.timer = setTimeout(() => {
+                if (isLast) {
+                    this.removeLastQuestion();
+                    this.model.active = false;
+                    this.backBtn.active = false;
+                    this.banner.active = true;
+                    this.qNum.node.active = false;
+                    this.rightView.active = false;
+                    this.closeBtn.active = true;
+                    if (!this.successNode) {
+                        this.successNode = cc.instantiate(this.successPrefab);
+                        this.node.addChild(this.successNode);
+                        //比赛结束，还原数据
+                        this.revertData();
+                    }
                 }
-            }
+            }, 4000);
         }
     },
 
