@@ -12,6 +12,7 @@ cc.Class({
         startSoon: cc.Prefab,//马上开始
         startAfter: cc.Prefab,//以后开始
         pkOver: cc.Prefab,//比赛已经结束
+        pkAllOver: cc.Prefab,//查看排行榜，但是是全军覆没的
         pkRanking: cc.Prefab,//排行榜
         homeLoading: cc.Prefab,//加载home页loading
         errorPop: cc.Prefab,
@@ -215,13 +216,32 @@ cc.Class({
         let script = overNode.getComponent("PkOver");
         script.setData(this._pkRoom);
         script.setCallBack(() => {
-            let rankNode = cc.instantiate(this.pkRanking);
-            this.rankCon.addChild(rankNode);
+            this.showRankList();
             script.doDestroy();
         });
     },
 
     /************************************点击事件**************************************/
+    //查看获奖人员
+    showRankList() {
+        Http.getInstance().httpGet("pk/stage/" + this.stageId + "/rank", (json) => {
+            cc.log("排行数据:", json);
+            if (json && json.code == 0) {
+                let data = json.data || {};
+                let list = data.pkRanks || [];
+                if (list.length) {
+                    let rankNode = cc.instantiate(this.pkRanking);
+                    this.rankCon.addChild(rankNode);
+                } else {
+                    let allOverNode = cc.instantiate(this.pkAllOver);
+                    this.node.addChild(allOverNode);
+                    let script = allOverNode.getComponent("PkAllOver");
+                    script.setData(this._pkRoom);
+                }
+            }
+        });
+    },
+
     //点击返回
     onClickBack() {
         Helper.playButtonMusic();

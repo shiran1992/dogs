@@ -721,7 +721,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
+      "width": 2,
       "height": 0
     },
     "_rotationX": 0,
@@ -2251,6 +2251,9 @@
     },
     "pkOver": {
       "__uuid__": "e80b5fc4-be2c-49b9-9a88-7a1ec400fda5"
+    },
+    "pkAllOver": {
+      "__uuid__": "2373d238-4d57-4ef1-8db5-00acc27e8b93"
     },
     "pkRanking": {
       "__uuid__": "9457f7e9-3b01-4a1c-abcf-5d2c146aeb4e"
