@@ -289,8 +289,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 322,
-      "height": 205
+      "width": 347,
+      "height": 238
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -298,7 +298,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -14,
+      "x": 0,
       "y": 90
     },
     "_skewX": 0,
@@ -317,7 +317,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "0794c92e-6dac-47d0-9457-6ff3a1acb2ff"
+      "__uuid__": "3cd0be75-b716-4e0e-a80b-05e8073541e8"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -332,9 +332,7 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": {
-      "__uuid__": "e65f0534-4029-4b19-b0cf-e7ce58ca90d2"
-    }
+    "_atlas": null
   },
   {
     "__type__": "cc.PrefabInfo",
