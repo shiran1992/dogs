@@ -56,7 +56,10 @@ function initWebIM(callback) {
             if (mid != message.id) {
                 let stageId = DataUtil.getPkStageId();
                 if (message.ext && message.ext.stageId == stageId) {
-                    DataUtil.setRecords({eName: "环信消息", time: new Date(), data: message});
+                    DataUtil.setRecords({ eName: "环信消息", time: new Date(), data: message });
+                    if (message.ext.msgType == 0) {
+                        console.log("试题：", message);
+                    }
                     mid = message.id;
                     cb && cb(message);
                 }

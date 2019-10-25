@@ -176,7 +176,7 @@ cc.Class({
                     });
                 }
             } else if (ext.msgType == 5) {
-                console.log("更新等待人数：", message);
+                cc.log("更新等待人数：", message);
                 //更新聊天室等待人数
                 if (this.scriptReady) {
                     let data = JSON.parse(message.data);

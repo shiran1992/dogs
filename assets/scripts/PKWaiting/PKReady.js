@@ -31,7 +31,7 @@ cc.Class({
         this._pkJoin = null;
         this._users = [];//所有用户
         this._curUsers = [];//当前正在显示用户
-        this._tempUsers = [];//过度使用的容器，防止一次性加入多个用户
+        this.timeDowning = false;//正在倒计时
 
         this.timer0 = null;//事件定时器（10分钟调一次接口）
         this.timer1 = null;//事件定时器（时间倒计时翻牌）
@@ -40,12 +40,12 @@ cc.Class({
     onLoad() {
         cc.game.on(cc.game.EVENT_SHOW, (event) => {
             cc.log('emit cc.game.EVENT_SHOW!');
-            DataUtil.setRecords({eName: "屏幕获得焦点", time: new Date(), data: null});
+            DataUtil.setRecords({ eName: "屏幕获得焦点", time: new Date(), data: null });
             this.loadData();
         });
 
         cc.game.on(cc.game.EVENT_HIDE, (event) => {
-            DataUtil.setRecords({eName: "屏幕失去焦点", time: new Date(), data: null});
+            DataUtil.setRecords({ eName: "屏幕失去焦点", time: new Date(), data: null });
             cc.log('emit cc.game.EVENT_HIDE!');
         });
     },
@@ -69,6 +69,7 @@ cc.Class({
         this.timeDown.addChild(threeNode);
         let script = threeNode.getComponent("ReadyThreeSecond");
         script.startNumDown(() => {
+            this.timeDowning = false;
             callback && callback();
         });
     },
@@ -83,7 +84,7 @@ cc.Class({
         let stageId = DataUtil.getPkStageId();
         Http.getInstance().httpGet("pk/stage/" + stageId + "/join", (json) => {
             cc.log("准备信息：", json);
-            DataUtil.setRecords({eName: "拿到join接口数据", time: new Date(), data: json});
+            DataUtil.setRecords({ eName: "拿到join接口数据", time: new Date(), data: json });
             if (json && json.code == 0) {
                 let data = json.data || {};
                 DataUtil.setPkJoin(data);
@@ -97,10 +98,15 @@ cc.Class({
                 let offTime = startTime - systemTime;
                 if (offTime > 0) {//时间没到，进行倒计时
                     this.head.active = true;
+                    this.delay.active = false;
                     this.showTimeDown(offTime);
                 } else {//时间到了，管理员没发题
-                    this.delay.active = true;
+                    if (!this.timeDowning) {
+                        this.head.active = false;
+                        this.delay.active = true;
+                    }
                     this.timer1 && clearInterval(this.timer1);
+                    this.timer1 = null;
                 }
                 this.num.string = data.waitUserCount + "人正在等待";
 
@@ -189,8 +195,6 @@ cc.Class({
     clear() {
         this.timer0 && clearInterval(this.timer0);
         this.timer1 && clearInterval(this.timer1);
-        this.timer3 && clearInterval(this.timer3);
-        this.timer4 && clearInterval(this.timer4);
         this.timer0 = null;
         this.timer1 = null;
         cc.game.off(cc.game.EVENT_SHOW);
