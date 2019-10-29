@@ -115,7 +115,6 @@ cc.Class({
             pwd: hxPassword,
             appKey: WebIM.config.appkey,
             success: (token) => {
-                DataUtil.setRecords({ eName: "连接环信成功", time: new Date(), data: null });
                 cc.log("---------------success:", token);
                 callback && callback();
             },
@@ -330,7 +329,6 @@ cc.Class({
 
     //点击关闭
     onClickClose() {
-        DataUtil.setRecords({ eName: "点击关闭按钮", time: new Date(), data: null });
         let loadingPre = cc.instantiate(this.homeLoading);
         let scp = loadingPre.getComponent("HomeLoading");
         scp.setPreLoadScene("Home");

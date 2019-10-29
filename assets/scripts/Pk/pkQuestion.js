@@ -167,7 +167,6 @@ cc.Class({
 
     //提交数据
     submitData(obj) {
-        DataUtil.setRecords({ eName: "点击选项", time: new Date(), data: obj });
         let stageId = DataUtil.getPkStageId();
         Http.getInstance().httpPost("pk/stage/" + stageId + "/submit", obj, { encryt: true }, (json) => {
             cc.log("提交答案：", json);

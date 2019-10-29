@@ -17,7 +17,6 @@ let model = 0;//模式（0--正常模式   1--观众模式）
 let joinStatus = 0;//0--正常加入   1--已经错过答题被淘汰   2--错题达到数量被淘汰  3--中途退出又进来可以正常答题的
 let isLast = false;//是否是最后一题
 let curQuestionResult = null;//本次答题结果
-let records = [];//行为日志
 
 /********************************************一期功能*********************************************/
 //设置题库
@@ -183,21 +182,6 @@ function getQuestionResult() {
     return curQuestionResult;
 }
 
-//清空行为日志
-function clearRecords() {
-    records = [];
-}
-
-//记录行为日志
-function setRecords(re) {
-    records.push(re);
-}
-
-//获取行为日志
-function getRecords() {
-    return records;
-}
-
 module.exports = {
     setPkStageId,
     getPkStageId,
@@ -216,9 +200,6 @@ module.exports = {
     getLastQuestion,
     setQuestionResult,
     getQuestionResult,
-    setRecords,
-    getRecords,
-    clearRecords,
 
     setQuestions,
     getQuestions,

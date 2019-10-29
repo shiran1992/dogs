@@ -121,7 +121,7 @@ function loadHttpImg(sprite, url, config) {
             }
         });
     } catch (e) {
-        DataUtil.setRecords({eName: "加载题干中的题目有报错", time: new Date(), data: e});
+
     }
 }
 

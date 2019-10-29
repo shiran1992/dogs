@@ -37,7 +37,6 @@ function initWebIM(callback) {
                 WebIM.conn.joinChatRoom({
                     roomId: pkRoom.chatRoomId, // 聊天室id
                     success: function () {
-                        DataUtil.setRecords({ eName: "加入聊天室成功", time: new Date(), data: null });
                         cc.log("##########################joinChatRoom m:" + m);
                     },
                     error: function () {
@@ -56,7 +55,6 @@ function initWebIM(callback) {
             if (mid != message.id) {
                 let stageId = DataUtil.getPkStageId();
                 if (message.ext && message.ext.stageId == stageId) {
-                    DataUtil.setRecords({ eName: "环信消息", time: new Date(), data: message });
                     if (message.ext.msgType == 0) {
                         console.log("试题：", message);
                     }

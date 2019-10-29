@@ -33,7 +33,6 @@ cc.Class({
         let page = this.getQueryString('page');
         let id = this.getQueryString('stageId');
         if (!this.stageId && page == 'PKWaiting') {
-            DataUtil.setRecords({ eName: "扫描二维码进入的", time: new Date(), data: { url: window.location.search.substr(1) } });
             if (id) {
                 this.stageId = id;
                 DataUtil.setPkStageId(id);
@@ -48,7 +47,6 @@ cc.Class({
                 cc.director.loadScene('Home');
             }
         } else {
-            DataUtil.setRecords({ eName: "正常进入的", time: new Date(), data: null });
             this.loadPKStatus();
         }
 
@@ -86,7 +84,6 @@ cc.Class({
     loadPKStatus() {
         Http.getInstance().httpGet("pk/stage/" + this.stageId + "/prepare", (json) => {
             cc.log("JSON11111:", json);
-            DataUtil.setRecords({ eName: "拿到prepare接口数据", time: new Date(), data: json });
             if (json && json.code == 0) {
                 let data = json.data || {};
                 DataUtil.setPkRoom(data);
@@ -202,7 +199,6 @@ cc.Class({
         });
         Http.getInstance().httpGet("pk/stage/" + this.stageId + "/join", (json) => {
             cc.log("比赛正在进行：", json);
-            DataUtil.setRecords({ eName: "比赛正在进行，需要拿一下join接口数据", time: new Date(), data: json });
             if (json && json.code == 0) {
                 let data = json.data || {};
                 DataUtil.setPkJoin(data);
