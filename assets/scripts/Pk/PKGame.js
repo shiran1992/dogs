@@ -521,11 +521,5 @@ cc.Class({
 
     onDestroy() {
         this.timer && clearTimeout(this.timer);
-    },
-
-    renderRecord() {
-        WebIMManager.setCallback(null);
-        this.timer && clearTimeout(this.timer);
-        cc.director.loadScene("Debug", () => { });
     }
 });

@@ -358,11 +358,5 @@ cc.Class({
         } else {
             window.history.go(-1)
         }
-    },
-
-
-    //调试日志
-    onclickRecord() {
-        cc.director.loadScene("Debug");
-    },
+    }
 })

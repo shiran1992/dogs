@@ -18,7 +18,6 @@ cc.Class({
 
     //点击确定
     onClickOK() {
-        DataUtil.setRecords({ eName: "退出观众模式", time: new Date(), data: null });
         this._callback && this._callback();
     },
 });
