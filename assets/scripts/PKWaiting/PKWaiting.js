@@ -1,6 +1,7 @@
 const Http = require('Http');
 const DataUtil = require("DataUtil");
 const Helper = require("Helper");
+const WebIMManager = require("WebIMManager");
 
 const MAX_LIMIT_NUM = 500;//限制最多五百人
 
@@ -257,6 +258,7 @@ cc.Class({
         let scp = loadingPre.getComponent("HomeLoading");
         scp.setPreLoadScene("Home");
         loadingPre.parent = this.node;
+        WebIMManager.setCallback(null);
     },
 
     onDestroy() {

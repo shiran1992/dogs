@@ -56,7 +56,7 @@ function initWebIM(callback) {
                 let stageId = DataUtil.getPkStageId();
                 if (message.ext && message.ext.stageId == stageId) {
                     if (message.ext.msgType != 5) {
-                        console.log("试题：", message);
+                        console.log("收到通知：", message);
                     }
                     mid = message.id;
                     cb && cb(message);

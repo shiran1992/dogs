@@ -88,10 +88,13 @@ cc.Class({
 
             this.renderReadyView();
         }
-
-        //初始化
-        WebIMManager.initWebIM((message) => { this.onReceive(message); });
-        this.startWebIM();
+        if (!WebIM.conn) {
+            //初始化
+            WebIMManager.initWebIM((message) => { this.onReceive(message); });
+            this.startWebIM();
+        } else {
+            WebIMManager.setCallback((message) => { this.onReceive(message); });
+        }
     },
 
     //比赛已经开始，到等待界面(这个时候有可能PK已经开始了，但是管理员没有发题)
@@ -333,6 +336,7 @@ cc.Class({
         let scp = loadingPre.getComponent("HomeLoading");
         scp.setPreLoadScene("Home");
         loadingPre.parent = this.node;
+        WebIMManager.setCallback(null);
     },
 
     //显示图片预览
