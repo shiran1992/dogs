@@ -25,7 +25,7 @@
     "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait"
   },
-  "renderMode": "0",
+  "renderMode": "1",
   "startScene": "b1493a89-7741-4342-a70d-2b4affbf49ac",
   "title": "1001",
   "webOrientation": "auto",

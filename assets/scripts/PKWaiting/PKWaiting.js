@@ -60,7 +60,7 @@ cc.Class({
         DataUtil.setLastQuestion(false);
         DataUtil.clearErrQuestions();
         //保证app中不息屏
-        if (window.isApp) {
+        if (window.yxt && window.yxt.client === 'yxtapp') {
             window.yxt.ui.message.post({
                 param: {
                     name: 'keepLight'

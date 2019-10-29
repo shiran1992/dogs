@@ -63,7 +63,7 @@ cc.Class({
 
         Helper.loadErrorPop();
         //保证app中不息屏
-        if (window.isApp) {
+        if (window.yxt && window.yxt.client === 'yxtapp') {
             window.yxt.ui.message.post({
                 param: {
                     name: 'keepLight'
@@ -342,7 +342,7 @@ cc.Class({
     homeBack() {
         Helper.playButtonMusic();
 
-        if (yxt.client === 'yxtapp') {
+        if (window.yxt && window.yxt.client === 'yxtapp') {
             window.yxt.ui.navigation.back({
                 onSuccess: function (data) {
                     if (data.isback) {
