@@ -91,38 +91,36 @@ function loadHttpImg(sprite, url, config) {
     if (!url) {
         return;
     }
-    try {
-        cc.loader.load({ url: url, type: "png" || "jpg" || "jpeg" }, (err, texture) => {
-            if (!err) {
-                if (config && config.type == 'zoom') {
-                    let sw = sprite.node.width;
+    cc.loader.load({ url: url, type: "png" || "jpg" || "jpeg" }, (err, texture) => {
+        if (!err) {
+            if (config && config.type == 'zoom') {
+                let sw = sprite.node.width;
 
-                    let iw = texture.width;
-                    let ih = texture.height;
-                    let il = ih / iw;
+                let iw = texture.width;
+                let ih = texture.height;
+                let il = ih / iw;
 
-                    sprite.node.height = il * sw;
-                } else if (config && config.type == 'display') {
-                    let sw = sprite.node.width;
+                sprite.node.height = il * sw;
+            } else if (config && config.type == 'display') {
+                let sw = sprite.node.width;
 
-                    let iw = texture.width;
-                    let ih = texture.height;
-                    let il = ih / iw;
+                let iw = texture.width;
+                let ih = texture.height;
+                let il = ih / iw;
 
-                    texture.width = sw;
-                    texture.height = il * sw;
-                    sprite.node.height = il * sw;
-                } else if (config && config.type == 'limit') {
-                    sprite.node.width = config.width;
-                    sprite.node.height = config.width / texture.width * texture.height;
-                }
-
-                sprite.spriteFrame = new cc.SpriteFrame(texture);
+                texture.width = sw;
+                texture.height = il * sw;
+                sprite.node.height = il * sw;
+            } else if (config && config.type == 'limit') {
+                sprite.node.width = config.width;
+                sprite.node.height = config.width / texture.width * texture.height;
             }
-        });
-    } catch (e) {
 
-    }
+            sprite.spriteFrame = new cc.SpriteFrame(texture);
+        } else {
+            console.error("题目图片下载失败");
+        }
+    });
 }
 
 //播放背景音乐
