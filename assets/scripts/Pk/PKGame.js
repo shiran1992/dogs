@@ -310,8 +310,8 @@ cc.Class({
             barScript.setEndCallback(() => {
                 //隐藏进度条，显示统计数据字样
                 this.greyBar.active = false;
-                this.managerData.active = true;
                 if (this.managerData) {
+                    this.managerData.active = true;
                     let script = this.managerData.getComponent("ManageDataAnimation");
                     script && script.startAnimation();
                 }
@@ -369,6 +369,7 @@ cc.Class({
             let scp = loadingPre.getComponent("HomeLoading");
             scp.setPreLoadScene("Home");
             loadingPre.parent = this.node;
+            WebIMManager.setCallback(null);
         });
     },
 
