@@ -43,7 +43,7 @@ cc.Class({
         this.option = obj;
         let orderIndex = obj.orderIndex || 1;
         this.delay = (orderIndex - 1) * 0.1;
-        let itemText = obj.content || 0;
+        let itemText = obj.content || "";
         this.type = obj.type;
         this.pkLetter.string = Letter[orderIndex];
 

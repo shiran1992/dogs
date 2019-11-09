@@ -290,6 +290,10 @@ cc.Class({
 
         let model = DataUtil.getModel();
         if (model == 0) {//正常答题模式
+            if (this.bar) {
+                this.bar.getComponent("PkProgressBar").doDestroy();
+                this.bar = null;
+            }
             //创建进度条
             this.bar = cc.instantiate(this.barPrefab);
             this.barContain.addChild(this.bar);
@@ -302,6 +306,10 @@ cc.Class({
             this.qNum.node.active = false;
             this.questionScript.setSelectable(false);
 
+            if (this.bar) {
+                this.greyBar.getComponent("GreyProgressBar").doDestroy();
+                this.greyBar = null;
+            }
             //创建进度条
             this.greyBar = cc.instantiate(this.greyBarPrefab);
             this.barContain.addChild(this.greyBar);
