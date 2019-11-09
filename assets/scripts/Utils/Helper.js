@@ -121,7 +121,7 @@ function loadHttpImg(sprite, url, config, num = 0) {
                 sprite.spriteFrame = new cc.SpriteFrame(texture);
             } else {
                 if (times < 3) {
-                    console.error("题目图片下载失败" + times);
+                    console.error("题目图片下载失败" + times, url);
                     times++;
                     this.loadHttpImg(sprite, url, config, times);
                 }

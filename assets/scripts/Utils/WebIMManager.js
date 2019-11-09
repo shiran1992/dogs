@@ -48,6 +48,7 @@ function initWebIM(callback) {
         //连接关闭回调
         onClosed: function (message) {
             cc.log("###############################onClosed:", message);
+            console.error("环信onClosed", message);
         },
         //收到文本消息
         onTextMessage: function (message) {
@@ -90,6 +91,7 @@ function initWebIM(callback) {
             cc.log("#########################onOnline:连接成功");
             let node = cc.find("Canvas");
             node.removeChildByTag("ERROR");
+            console.error("环信online成功", message);
         },
         //本机网络掉线
         onOffline: function () {
@@ -110,7 +112,7 @@ function initWebIM(callback) {
         //失败回调
         onError: function (message) {
             cc.log("#########################onErr:", message);
-            console.error("网络不稳定，环信断开");
+            console.error("网络不稳定，环信断开", message);
         },
         //黑名单变动，查询黑名单，将好友拉黑，将好友从黑名单移除都会回调这个函数，list则是黑名单现有的所有好友信息
         onBlacklistUpdate: function (list) {
