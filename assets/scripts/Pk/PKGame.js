@@ -26,6 +26,7 @@ cc.Class({
         scrollView: cc.ScrollView,
         content: cc.Node,
         rankCon: cc.Node,//排行榜容器
+        netNode: cc.Node,//网络不稳定提示
 
         pkReady: cc.Prefab,//准备页
         waitQuestion: cc.Prefab,//等待管理员下发题目
@@ -134,6 +135,7 @@ cc.Class({
     //消息接受
     onReceive(message) {
         if (message && message.ext) {
+            this.netNode.active = false;
             this.message = message || {};
             let ext = message.ext;
             //0-试题信息   1-答题统计信息   2-排行榜信息   3-全军覆没   4-比赛开始   5-更新等待页
@@ -477,7 +479,7 @@ cc.Class({
         this.questionScript && this.questionScript.setSelectable(false);
         //说明之前答过题
         if (!curQuestionResult) {
-            curQuestionResult = { type: 0, text: '哎呦~答错了' };
+            curQuestionResult = { type: 0, flag: 3, text: '哎呦~答错了' };
         }
 
         //答题正确/错误

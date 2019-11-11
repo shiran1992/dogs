@@ -91,7 +91,12 @@ function initWebIM(callback) {
             cc.log("#########################onOnline:连接成功");
             let node = cc.find("Canvas");
             node.removeChildByTag("ERROR");
-            console.error("环信online成功", message);
+
+            let noetNode = cc.find("Canvas/net");
+            if (noetNode) {
+                noetNode.active = false;
+            }
+            console.error("环信online成功");
         },
         //本机网络掉线
         onOffline: function () {
@@ -113,6 +118,10 @@ function initWebIM(callback) {
         onError: function (message) {
             cc.log("#########################onErr:", message);
             console.error("网络不稳定，环信断开", message);
+            let noetNode = cc.find("Canvas/net");
+            if (noetNode) {
+                noetNode.active = true;
+            }
         },
         //黑名单变动，查询黑名单，将好友拉黑，将好友从黑名单移除都会回调这个函数，list则是黑名单现有的所有好友信息
         onBlacklistUpdate: function (list) {

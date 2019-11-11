@@ -99,6 +99,9 @@ cc.Class({
                 let gameStatus = data.gameStatus; //游戏状态0:未开始   1:进行中    2已结束
                 let systemTime = data.systemTime; //服务器当前系统时间
                 let startTime = data.startTime; //服务器指定的比赛开始时间
+
+                DataUtil.setLeftWrongNum(3);//设置剩余可答错数量
+
                 if (gameStatus == 0) {//PK还没有开始
                     let offTime = startTime - systemTime;
                     if (offTime > 0) {

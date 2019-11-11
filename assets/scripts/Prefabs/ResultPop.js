@@ -1,3 +1,5 @@
+const DataUtil = require("DataUtil");
+
 cc.Class({
     extends: cc.Component,
 
@@ -40,6 +42,17 @@ cc.Class({
             this.rText.node.y -= 40;
             this.rText.string = '<size=66><color=#FFF95E>+30</color><color=#ffffff> 脑力值</color></size>';
             text = '答对啦！三连击';
+            this.node.height = 580;
+        } else if (flag == 3) {
+            this.node.height = 620;
+            this.icons[0].node.y += 40;
+            this.icons[1].node.y += 40;
+            this.text.node.y += 40;
+            this.rText.node.y -= 40;
+            let leftWrongNum = DataUtil.getLeftWrongNum();
+            DataUtil.setLeftWrongNum(leftWrongNum - 1);
+            this.rText.string = '<size=66>剩<color=#D64A00>' + (leftWrongNum - 1) + '</color><color=#ffffff> 次机会</color></size>';
+            text = '哎呦~答错了';
             this.node.height = 580;
         }
         if (type) {

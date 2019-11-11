@@ -114,7 +114,7 @@ cc.Class({
     //选择答案之后，显示正确还是错误
     doSubmit() {
         cc.log("提交答案喽~");
-        
+
         let arr = [];
         this.selects.forEach((element, i) => {
             element && element.letter && arr.push(element.letter);
@@ -138,13 +138,13 @@ cc.Class({
         }
 
         //答题情况对象
-        let obj = { type: 0, text: '哎呦~答错了' };
+        let obj = { type: 0, flag: 3, text: '哎呦~答错了' };
         if (selectsStr == answersStr) {//答对
             //Helper.playRightMusic();
             obj = { type: 1, text: '恭喜你！答对啦' };
         } else {//答错
             //Helper.playErrorMusic();
-            obj = { type: 0, text: '哎呦~答错了' };
+            obj = { type: 0, flag: 3, text: '哎呦~答错了' };
             //记录错题
             DataUtil.setErrQuestions(this.question);
         }

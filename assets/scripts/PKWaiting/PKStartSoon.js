@@ -9,6 +9,7 @@ cc.Class({
         title: cc.Label,
         count: cc.Label,
         time: cc.Label,
+        chance: cc.Label,
         wait: cc.Label,
         rule: cc.Prefab,
     },
@@ -34,6 +35,7 @@ cc.Class({
         this.wait.string = this._pkRoom.waitUserCount + "人等你来战";
         this.count.string = this._pkRoom.pondQuestionCount || 0;
         this.time.string = this._pkRoom.singleSeconds || 0;
+        this.chance.string = this._pkRoom.singleSeconds || 3;//-------------------------------------------------
     },
 
     //查看奖励规则
