@@ -51,7 +51,7 @@ cc.Class({
             this.rText.node.y -= 40;
             let leftWrongNum = DataUtil.getLeftWrongNum();
             DataUtil.setLeftWrongNum(leftWrongNum - 1);
-            this.rText.string = '<size=66>剩<color=#D64A00>' + (leftWrongNum - 1) + '</color><color=#ffffff> 次机会</color></size>';
+            this.rText.string = '<size=66>剩<color=#D64A00> ' + (leftWrongNum - 1) + '</color><color=#ffffff> 次机会</color></size>';
             text = '哎呦~答错了';
             this.node.height = 580;
         }

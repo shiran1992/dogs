@@ -99,9 +99,6 @@ cc.Class({
                 let gameStatus = data.gameStatus; //游戏状态0:未开始   1:进行中    2已结束
                 let systemTime = data.systemTime; //服务器当前系统时间
                 let startTime = data.startTime; //服务器指定的比赛开始时间
-
-                DataUtil.setLeftWrongNum(3);//设置剩余可答错数量
-
                 if (gameStatus == 0) {//PK还没有开始
                     let offTime = startTime - systemTime;
                     if (offTime > 0) {
@@ -165,6 +162,7 @@ cc.Class({
             if (json && json.code == 0) {
                 let data = json.data || {};
                 DataUtil.setPkJoin(data);
+                DataUtil.setLeftWrongNum(data.errorTimes - data.userErrorTimes);//设置剩余可答错数量
                 this._pkJoin = data;
 
                 let userStatusType = data.userStatusType;//用户参与状态（0正常参加;1之前未参加过.目前正在进行中.直接进观战;2之前参加过,目前正在进行中,且超过了错误次数）
@@ -206,6 +204,7 @@ cc.Class({
             if (json && json.code == 0) {
                 let data = json.data || {};
                 DataUtil.setPkJoin(data);
+                DataUtil.setLeftWrongNum(data.errorTimes - data.userErrorTimes);//设置剩余可答错数量
                 this._pkJoin = data;
 
                 let userStatusType = data.userStatusType;//用户参与状态（0正常参加;1之前未参加过.目前正在进行中.直接进观战;2之前参加过,目前正在进行中,且超过了错误次数）

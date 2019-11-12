@@ -35,7 +35,7 @@ cc.Class({
         this.wait.string = this._pkRoom.waitUserCount + "人等你来战";
         this.count.string = this._pkRoom.pondQuestionCount || 0;
         this.time.string = this._pkRoom.singleSeconds || 0;
-        this.chance.string = this._pkRoom.singleSeconds || 3;//-------------------------------------------------
+        this.chance.string = this._pkRoom.errorTimes || 3;//-------------------------------------------------
     },
 
     //查看奖励规则

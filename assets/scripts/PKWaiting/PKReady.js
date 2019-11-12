@@ -85,6 +85,8 @@ cc.Class({
             if (json && json.code == 0) {
                 let data = json.data || {};
                 DataUtil.setPkJoin(data);
+                DataUtil.setLeftWrongNum(data.errorTimes - data.userErrorTimes);//设置剩余可答错数量
+
                 this._pkJoin = data;
                 this._users = data.userList || [];
                 this._users.reverse();
