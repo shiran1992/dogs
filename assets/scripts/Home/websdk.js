@@ -7947,7 +7947,7 @@ return /******/ (function(modules) { // webpackBootstrap
                         if(msgBody.action === 'em_retrieve_dns'){
                             isCmdMsg = true;
                         }
-                        if(msgBody.action.indexOf("em_") !== 0){
+                        if(msgBody.action && msgBody.action.indexOf("em_") !== 0){
                             self.onCmdMessage(msg);
                         }
                         else{

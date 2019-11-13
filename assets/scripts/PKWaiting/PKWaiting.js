@@ -88,6 +88,7 @@ cc.Class({
             if (json && json.code == 0) {
                 let data = json.data || {};
                 DataUtil.setPkRoom(data);
+                DataUtil.setLeftWrongNum(data.errorTimes - data.userErrorTimes);//设置剩余可答错数量
                 this._pkRoom = data;
 
                 let userCount = data.userCount || 0; //当前进来多少人
@@ -162,7 +163,6 @@ cc.Class({
             if (json && json.code == 0) {
                 let data = json.data || {};
                 DataUtil.setPkJoin(data);
-                DataUtil.setLeftWrongNum(data.errorTimes - data.userErrorTimes);//设置剩余可答错数量
                 this._pkJoin = data;
 
                 let userStatusType = data.userStatusType;//用户参与状态（0正常参加;1之前未参加过.目前正在进行中.直接进观战;2之前参加过,目前正在进行中,且超过了错误次数）
@@ -204,7 +204,6 @@ cc.Class({
             if (json && json.code == 0) {
                 let data = json.data || {};
                 DataUtil.setPkJoin(data);
-                DataUtil.setLeftWrongNum(data.errorTimes - data.userErrorTimes);//设置剩余可答错数量
                 this._pkJoin = data;
 
                 let userStatusType = data.userStatusType;//用户参与状态（0正常参加;1之前未参加过.目前正在进行中.直接进观战;2之前参加过,目前正在进行中,且超过了错误次数）
