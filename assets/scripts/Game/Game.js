@@ -201,16 +201,16 @@ cc.Class({
         if (correctCount >= parseInt(curSubStage.passStageNum, 10)) {
             isPass = 1;
             allGold = 5;
-            //第一次闯关成功
+            //之前没有通过过
             if (passed == 0) {
                 //第一次闯关及成功
                 if (num == 1) {
                     allBrain += 100;
                     allGold = 20;
                 }
+                allScore = (2 * questions.length * singleSeconds - (allTime / 1000)) / num;
+                allPoint = curSubStage.point || 0;
             }
-            allScore = (2 * questions.length * singleSeconds - (allTime / 1000)) / num;
-            allPoint = curSubStage.point || 0;
 
             DataUtil.switchLog && console.log('questions.length:' + questions.length + '------------' + 'singleSeconds:' + singleSeconds + '------------' +
                 'allTime:' + allTime + '----------' + 'num:' + num + '--------------' + 'allScore:' + allScore)
