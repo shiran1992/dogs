@@ -208,9 +208,9 @@ cc.Class({
                     allBrain += 100;
                     allGold = 20;
                 }
-                allScore = (2 * questions.length * singleSeconds - (allTime / 1000)) / num;
-                allPoint = curSubStage.point || 0;
             }
+            allScore = (2 * questions.length * singleSeconds - (allTime / 1000)) / num;
+            allPoint = curSubStage.point || 0;
 
             DataUtil.switchLog && console.log('questions.length:' + questions.length + '------------' + 'singleSeconds:' + singleSeconds + '------------' +
                 'allTime:' + allTime + '----------' + 'num:' + num + '--------------' + 'allScore:' + allScore)
