@@ -63,7 +63,7 @@ cc.Class({
 
         Helper.loadErrorPop();
         //保证app中不息屏
-        if (window.yxt && window.yxt.client === 'yxtapp') {
+        if (window.yxt && window.yxt.client === 'yxtapp') {
             window.yxt.ui.message.post({
                 param: {
                     name: 'keepLight'
@@ -74,6 +74,15 @@ cc.Class({
                 }
             })
         }
+
+
+        let o = { a: 1, b: 2 };
+        let pString = JSON.stringify(o);
+        let s = Helper.doEncryption(pString);
+        console.log("加密：", s);
+
+        //let s = "SoArLhDGcQCagsSDP4u7VwfBerchIZg0+ZQ6EcPIpdZvBQ6kTMWvXzcnrYbPOr3qk/LUe0R+GvXn8G6gRpSDhj4nLizMc3KBcrmll1H/jVN2TJhG5DtsXZDQBf0xChkBRqAf/UrZ5PQUzKEpz1NlzYSGpWL+oCwDTlFXn592pgpODqDZXsMr6AsP0JOeEgGpwhLGX0EDOYQXUntjlAN0F/jrbDhKwjk22NSMiPFoWNs=";
+        console.log("解密：", Helper.deEncryption(s));
     },
 
     sendRequst() {
@@ -342,7 +351,7 @@ cc.Class({
     homeBack() {
         Helper.playButtonMusic();
 
-        if (window.yxt && window.yxt.client === 'yxtapp') {
+        if (window.yxt && window.yxt.client === 'yxtapp') {
             window.yxt.ui.navigation.back({
                 onSuccess: function (data) {
                     if (data.isback) {

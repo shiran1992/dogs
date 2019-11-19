@@ -14,7 +14,7 @@ let httpUtils = cc.Class({
 
     //获取缓存Token
     getLocalToken: function () {
-        //return "ucloud--cluster--AAAAAPz2X3FT0_8BhQbHLPxQve6SxkwwOkenDS948vWAOgGVPRbSU2hpbz1grfDkb3DYvG1PfTv_OO6WJIMPR1mFXZ0dBcj2AKSCXbpmerGgZwqKwvIYPm143jSX850SIq_GytGbXi6NUqOiJPg7NLiXZds";
+        return "ucloud--cluster--AAAAAOocIqHlrVNvC7g-nUXiX_VYTCS_sfctYq1wAGNQfRRSWJ6qrzbA5YGRT_6ugE5Rv6h5fNx6EzNTq4t0TKF6vKuOnTxlvv4xI_ujXcaUtPZLmE7X73CJDwRIz9MCG4A-LmQ2IZw1PF9MVpeognYBqD8";
         let t = cc.sys.localStorage.getItem("token");
         if (!t) {
             this.goBackLogin();
@@ -122,23 +122,7 @@ let httpUtils = cc.Class({
         xhr.setRequestHeader("content-Type", "application/json");
         xhr.timeout = 10000;
         let pString = JSON.stringify(param);
-        xhr.send(config.encryt ? this.doEncryption(pString) : pString);
-    },
-
-    //加密
-    doEncryption(word) {
-        let key1 = 'OWSFPAHHTNOZHLXC';
-        let key2 = '#C9C9C9;#FF9900;';
-        let cKey1 = CryptoJS.enc.Utf8.parse(key1);
-        let cKey2 = CryptoJS.enc.Utf8.parse(key2);
-        let srcs = CryptoJS.enc.Utf8.parse(word);
-        //第一轮加密
-        let encrypted1 = CryptoJS.AES.encrypt(srcs, cKey1, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7 });
-        let word1 = encrypted1.toString();
-        //第二轮加密
-        let srcs1 = CryptoJS.enc.Utf8.parse(word1);
-        let encrypted2 = CryptoJS.AES.encrypt(srcs1, cKey2, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7 });
-        return encrypted2.toString();
+        xhr.send(config.encryt ? Helper.doEncryption(pString) : pString);
     },
 });
 
