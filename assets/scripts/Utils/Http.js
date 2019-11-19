@@ -1,6 +1,4 @@
 const Helper = require("Helper");
-const DataUtil = require("DataUtil");
-const Debugger = require('Debugger');
 
 let httpUtils = cc.Class({
     extends: cc.Component,

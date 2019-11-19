@@ -130,7 +130,22 @@ function loadHttpImg(sprite, url, config, num = 0) {
     } catch (e) {
 
     }
+}
 
+//加密
+function enEncryption(word) {
+    let key1 = 'OWSFPAHHTNOZHLXC';
+    let key2 = '#C9C9C9;#FF9900;';
+    let cKey1 = CryptoJS.enc.Utf8.parse(key1);
+    let cKey2 = CryptoJS.enc.Utf8.parse(key2);
+    let srcs = CryptoJS.enc.Utf8.parse(word);
+    //第一轮解密
+    let encrypted1 = CryptoJS.AES.decrypt(srcs, cKey2, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7 });
+    let word1 = encrypted1.toString();
+    //第二轮解密
+    let srcs1 = CryptoJS.enc.Utf8.parse(word1);
+    let encrypted2 = CryptoJS.AES.decrypt(srcs1, cKey1, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7 });
+    return encrypted2.toString();
 }
 
 //播放背景音乐
