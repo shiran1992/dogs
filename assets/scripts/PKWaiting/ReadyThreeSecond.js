@@ -23,8 +23,12 @@ cc.Class({
                 this.callback && this.callback();
                 this.timer && clearInterval(this.timer);
                 this.timer = null;
+            } else if (this._num == 0) {
+                this.num.string = "GO";
+                this.startAnimation();
+                this._num--;
             } else {
-                this.num.string = this._num > 0 ? this._num : "GO";
+                this.num.string = this._num;
                 this.startAnimation();
                 this._num--;
             }
@@ -48,5 +52,6 @@ cc.Class({
     onDestroy() {
         this.timer && clearInterval(this.timer);
         this.timer = null;
+        this.node.destroy();
     }
 });
