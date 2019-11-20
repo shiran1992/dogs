@@ -1,7 +1,6 @@
-let DataUtil = require("DataUtil");
-let PkDataUtil = require("PkDataUtil");
-let Helper = require("Helper");
-let Http = require("Http");
+const DataUtil = require("DataUtil");
+const Helper = require("Helper");
+const Http = require("Http");
 
 cc.Class({
     extends: cc.Component,
@@ -74,15 +73,6 @@ cc.Class({
                 }
             })
         }
-
-
-        let o = { a: 1, b: 2 };
-        let pString = JSON.stringify(o);
-        let s = Helper.doEncryption(pString);
-        console.log("加密：", s);
-
-        //let s = "SoArLhDGcQCagsSDP4u7VwfBerchIZg0+ZQ6EcPIpdZvBQ6kTMWvXzcnrYbPOr3qk/LUe0R+GvXn8G6gRpSDhj4nLizMc3KBcrmll1H/jVN2TJhG5DtsXZDQBf0xChkBRqAf/UrZ5PQUzKEpz1NlzYSGpWL+oCwDTlFXn592pgpODqDZXsMr6AsP0JOeEgGpwhLGX0EDOYQXUntjlAN0F/jrbDhKwjk22NSMiPFoWNs=";
-        console.log("解密：", Helper.deEncryption(s));
     },
 
     sendRequst() {

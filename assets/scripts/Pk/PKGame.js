@@ -141,9 +141,7 @@ cc.Class({
             //0-试题信息   1-答题统计信息   2-排行榜信息   3-全军覆没   4-比赛开始   5-更新等待页
             if (ext.msgType == 0) {
                 cc.log("试题：", message);
-                let question = Helper.enEncryption(message.data)
-                this.question = JSON.parse(question);
-                cc.log("试题-------：", this.question);
+                this.question = JSON.parse(message.data);
                 this.initView();
             } else if (ext.msgType == 1) {
                 cc.log("统计试题：", message);
@@ -182,11 +180,10 @@ cc.Class({
                     });
                 }
             } else if (ext.msgType == 5) {
+                cc.log("更新等待人数：", message);
                 //更新聊天室等待人数
                 if (this.scriptReady) {
-                    let data = Helper.deEncryption(message.data);
-                    cc.log("更新等待人数：", data);
-                    data = JSON.parse(data);
+                    let data = JSON.parse(message.data);
                     this.scriptReady.addChatRoom(data);
                 }
             }

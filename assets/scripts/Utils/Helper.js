@@ -146,13 +146,11 @@ function doEncryption(text) {
     return encrypted2.toString();
 }
 
+const cKey3 = CryptoJS.enc.Utf8.parse('ONCLICK:DISABLED');
 //解密
 function deEncryption(text) {
-    let decrypted = CryptoJS.AES.decrypt(text, cKey2, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7 });
-
-    let decrypted1 = decrypted.toString(CryptoJS.enc.Utf8);
-    let decrypted2 = CryptoJS.AES.decrypt(decrypted1, cKey1, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7 });
-    return decrypted2.toString(CryptoJS.enc.Utf8);
+    let decrypted = CryptoJS.AES.decrypt(text, cKey3, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7 });
+    return decrypted.toString(CryptoJS.enc.Utf8);
 }
 
 //播放背景音乐

@@ -52,6 +52,5 @@ cc.Class({
     onDestroy() {
         this.timer && clearInterval(this.timer);
         this.timer = null;
-        this.node.destroy();
     }
 });

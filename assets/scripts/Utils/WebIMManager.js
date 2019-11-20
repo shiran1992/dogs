@@ -1,4 +1,5 @@
 const DataUtil = require("DataUtil");
+const Helper = require("Helper");
 
 let mid = "";
 let cb = null;
@@ -60,6 +61,7 @@ function initWebIM(callback) {
                         console.log("收到通知：", message);
                     }
                     mid = message.id;
+                    message.data = Helper.deEncryption(message.data);
                     cb && cb(message);
                 }
             }
