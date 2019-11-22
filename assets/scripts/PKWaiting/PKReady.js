@@ -65,8 +65,8 @@ cc.Class({
         this.delay.active = false;
         let threeNode = cc.instantiate(this.threeSecond);
         this.timeDown.addChild(threeNode);
-        let script = threeNode.getComponent("ReadyThreeSecond");
-        script.startNumDown(() => {
+        this.script = threeNode.getComponent("ReadyThreeSecond");
+        this.script.startNumDown(() => {
             this.timeDowning = false;
             callback && callback();
         });
@@ -201,6 +201,10 @@ cc.Class({
 
     doDestroy() {
         this.clear();
+        if (this.script) {
+            this.script.doDestroy();
+            this.script = null;
+        }
         this.node && this.node.destroy();
     },
 

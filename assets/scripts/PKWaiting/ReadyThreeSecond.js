@@ -49,8 +49,12 @@ cc.Class({
         }), fadeTo));
     },
 
-    onDestroy() {
+    doDestroy() {
         this.timer && clearInterval(this.timer);
         this.timer = null;
+    },
+
+    onDestroy() {
+        this.doDestroy();
     }
 });

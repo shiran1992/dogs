@@ -177,6 +177,7 @@ cc.Class({
                     this.scriptReady.startAnimation(() => {
                         this.scriptReady.doDestroy();
                         this.renderDisplayQuestion(1);
+                        this.scriptReady = null;
                     });
                 }
             } else if (ext.msgType == 5) {
@@ -248,6 +249,10 @@ cc.Class({
     //初始化界面
     initView() {
         if (this.question) {
+            if (this.scriptReady) {
+                this.scriptReady.doDestroy();
+                this.scriptReady = null;
+            }
             //清除之前的题目
             this.removeLastQuestion();
             //头部数据
@@ -385,6 +390,11 @@ cc.Class({
 
     //数据统计的结果
     renderPKResult() {
+        //如果发题前的提示存在
+        if (this.numQuestionNode) {
+            this.numQuestionNode.getComponent("NumQuestion").doDestroy();
+            this.numQuestionNode = null;
+        }
         //判断是否是最后一题
         let isLast = DataUtil.getLastQuestion();
         let model = DataUtil.getModel();
