@@ -210,9 +210,9 @@ cc.Class({
         this.managerData.active = false;
         this.qNum.node.active = false;
         this.rightView.active = false;
-        if (this.readyNode) {
+        if (this.scriptReady) {
             this.scriptReady.doDestroy();
-            this.readyNode = null;
+            this.scriptReady = null;
         }
         //中途进入显示的等待发题存在
         if (this.waitQuestionNode) {
