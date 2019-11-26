@@ -411,9 +411,11 @@ cc.Class({
                         //淘汰名单中有当前用户
                         if (outList[i] == userId) {
                             DataUtil.setModel(1);
-                            let outPop = cc.instantiate(this.outPrefab);
-                            this.node.addChild(outPop);
-                            outPop.setLocalZOrder(100);
+                            if (!isLast) {
+                                let outPop = cc.instantiate(this.outPrefab);
+                                this.node.addChild(outPop);
+                                outPop.setLocalZOrder(100);
+                            }
                             return;
                         }
                     }
