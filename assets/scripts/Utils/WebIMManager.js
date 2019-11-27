@@ -58,7 +58,7 @@ function initWebIM(callback) {
                 let stageId = DataUtil.getPkStageId();
                 if (message.ext && message.ext.stageId == stageId) {
                     if (message.ext.msgType != 5) {
-                        console.log("收到通知：", message);
+                        cc.log("收到通知：", message.ext.msgType);
                     }
                     mid = message.id;
                     message.data = Helper.deEncryption(message.data);
