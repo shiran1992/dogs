@@ -2,7 +2,6 @@ const Http = require('Http');
 const DataUtil = require("DataUtil");
 const Helper = require("Helper");
 
-const MAX_LIMIT_NUM = 500;//限制最多五百人
 const MAX_LIMIT_STRING = 21;
 const USER_HEAD_NUM = 30;//人物头像
 

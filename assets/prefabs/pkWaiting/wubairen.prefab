@@ -223,7 +223,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 557,
+      "width": 558,
       "height": 70
     },
     "_rotationX": 0,
@@ -260,7 +260,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "500人在线PK比赛",
+    "_N$string": "000人在线PK比赛",
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 0,
     "_N$fontFamily": "Arial",
@@ -405,6 +405,9 @@
     "_enabled": true,
     "title": {
       "__id__": 10
+    },
+    "limitNumber": {
+      "__id__": 7
     }
   },
   {

@@ -2,7 +2,6 @@ const Http = require('Http');
 const DataUtil = require("DataUtil");
 
 const MAX_LIMIT_STRING = 17;
-const MAX_LIMIT_NUM = 500;//限制最多五百人
 
 cc.Class({
     extends: cc.Component,
@@ -48,7 +47,7 @@ cc.Class({
                 DataUtil.setLeftWrongNum(data.errorTimes - data.userErrorTimes);//设置剩余可答错数量
 
                 let userCount = data.userCount || 0; //当前进来多少人
-                if (userCount > MAX_LIMIT_NUM) { //超出500人
+                if (userCount > data.limitNumber) { //最大数量
                     scene = "PKWaiting";
                 }
 

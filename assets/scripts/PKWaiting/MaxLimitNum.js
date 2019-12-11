@@ -7,6 +7,7 @@ cc.Class({
 
     properties: {
         title: cc.Label,//标题
+        limitNumber: cc.Label
     },
 
     ctor() {
@@ -23,5 +24,6 @@ cc.Class({
     initView() {
         let name = this._pkRoom.name || "";
         this.title.string = name.length > MAX_LIMIT_STRING ? (name.substr(0, MAX_LIMIT_STRING) + "...") : name;
+        this.limitNumber.string = this._pkRoom.limitNumber + "人在线PK比赛";
     }
 });

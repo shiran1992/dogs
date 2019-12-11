@@ -3,8 +3,6 @@ const DataUtil = require("DataUtil");
 const Helper = require("Helper");
 const WebIMManager = require("WebIMManager");
 
-const MAX_LIMIT_NUM = 500;//限制最多五百人
-
 cc.Class({
     extends: cc.Component,
 
@@ -92,7 +90,7 @@ cc.Class({
                 this._pkRoom = data;
 
                 let userCount = data.userCount || 0; //当前进来多少人
-                if (userCount > MAX_LIMIT_NUM) { //超出500人
+                if (userCount > data.limitNumber) { //超出500人
                     this.renderMaxLimitView();
                     return;
                 }
